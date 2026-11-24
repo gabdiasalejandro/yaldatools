@@ -18,12 +18,23 @@ class Segmenter(Protocol):
         ...
 
 
+def session_options(threads: int, memory_arena: bool):
+    import onnxruntime as ort
+
+    options = ort.SessionOptions()
+    if threads > 0:
+        options.intra_op_num_threads = threads
+    options.enable_cpu_mem_arena = memory_arena
+    return options
+
+
 class OnnxSegmenter:
     """BiRefNet on ONNX Runtime CPU. The session is created on first use, not at startup."""
 
-    def __init__(self, path: Path, threads: int = 0, side: int = MODEL_SIDE) -> None:
+    def __init__(self, path: Path, threads: int = 0, side: int = MODEL_SIDE, memory_arena: bool = False) -> None:
         self.path = Path(path)
         self.threads = threads
+        self.memory_arena = memory_arena
         self.side = side
         self._session = None
         self._lock = threading.Lock()
@@ -38,9 +49,7 @@ class OnnxSegmenter:
                 if self._session is None:
                     import onnxruntime as ort
 
-                    options = ort.SessionOptions()
-                    if self.threads > 0:
-                        options.intra_op_num_threads = self.threads
+                    options = session_options(self.threads, self.memory_arena)
                     self._session = ort.InferenceSession(
                         str(self.path), sess_options=options, providers=["CPUExecutionProvider"]
                     )

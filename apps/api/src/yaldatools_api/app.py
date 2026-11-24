@@ -54,7 +54,7 @@ def default_segmenters(settings: Settings) -> dict[str, Segmenter]:
             filename, side = lite_filename(settings.lite_side), settings.lite_side
         path = settings.models_dir / filename
         if path.exists():
-            segmenters[key] = OnnxSegmenter(path, threads=settings.threads, side=side)
+            segmenters[key] = OnnxSegmenter(path, threads=settings.threads, side=side, memory_arena=settings.memory_arena)
     return segmenters
 
 

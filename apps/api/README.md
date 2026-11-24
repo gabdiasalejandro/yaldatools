@@ -45,6 +45,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 | `YALDA_CONCURRENCY` | `1` | Inferencias simultáneas. |
 | `YALDA_MAX_WAITING` | `4` | Peticiones en espera; por encima se responde 503. |
 | `YALDA_THREADS` | `0` | Hilos intra-op de ONNX Runtime; `0` usa el valor por defecto de ONNX Runtime. |
+| `YALDA_MEMORY_ARENA` | `false` | `true` activa el *arena* de memoria de ONNX Runtime: algo más rápido (10–20 %), pero no devuelve la memoria entre peticiones. |
 | `YALDA_RATE_PER_MINUTE` | `4` | Peticiones por minuto y cliente; `0` lo desactiva. |
 | `YALDA_RATE_PER_DAY` | `40` | Peticiones por día y cliente; `0` lo desactiva. |
 
@@ -84,7 +85,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
    | Solo completo | unos 9 GB |
    | Lite y completo a la vez (`YALDA_CONCURRENCY=2`) | unos 16 GB |
 
-   El gasto viene de procesar a 1024×1024, no del archivo del modelo; desactivar el *arena* de memoria de ONNX Runtime apenas baja el pico (7,4 → 6,9 GB a 1024), pero en una prueba aparte (fuera de la API, que aún no ofrece esa opción) evitó el salto de la segunda petición y devolvió la memoria entre peticiones: unos 0,5–1 GB en reposo, con picos de 6,9 GB a 1024, 4 GB a 768 y 2,1 GB a 512. Un VPS de 8 GB solo da para el lite a menor resolución (`YALDA_LITE_SIDE`); para ofrecer el completo hacen falta unos 12 GB con `YALDA_CONCURRENCY=1`. Con el completo desactivado, la API responde `400 model_unavailable` a `model=full`.
+   El gasto viene de procesar a 1024×1024, no del archivo del modelo; con el *arena* de memoria de ONNX Runtime activado, el proceso no devuelve la memoria y además vuelve a crecer en la segunda petición. Por eso está desactivado por defecto (`YALDA_MEMORY_ARENA=false`): la memoria vuelve a unos 0,5–1 GB entre peticiones, con picos de unos 6,9 GB a 1024, 4 GB a 768 y 1,8–2,1 GB a 512. Un VPS de 8 GB solo da para el lite a menor resolución (`YALDA_LITE_SIDE`); para ofrecer el completo hacen falta unos 12 GB con `YALDA_CONCURRENCY=1`. Con el completo desactivado, la API responde `400 model_unavailable` a `model=full`.
 
 ## Lite a menor resolución
 
@@ -123,7 +124,13 @@ YALDA_LITE_SIDE=512 uv run uvicorn yaldatools_api.app:app --port 8000
 
 ## Servidor compartido
 
-Con solo el lite a 1024, el proceso llega a unos 12 GB tras la segunda petición y no los libera. En un VPS de 8 GB con otras aplicaciones, eso no cabe: usa `YALDA_LITE_SIDE=512` (unos 3,4 GB estables) o, si sobra memoria, `768` (unos 7 GB). En cualquier caso, conviene limitar la API para que el sistema la detenga a ella y no a las demás aplicaciones (por ejemplo `MemoryMax=` en systemd o `mem_limit` en Docker), con `YALDA_ENABLE_FULL=false` y `YALDA_CONCURRENCY=1`.
+Configuración recomendada para un VPS de 8 GB compartido con otras aplicaciones:
+
+```sh
+YALDA_LITE_SIDE=512 YALDA_ENABLE_FULL=false YALDA_CONCURRENCY=1
+```
+
+Medido con la API real (imágenes de 3000×2000, *arena* desactivado por defecto): unos 0,5 GB entre peticiones, un pico de unos 1,8 GB mientras recorta y 1,7–1,8 s por imagen. Con el *arena* activado o a 1024 px, el proceso llega a 3,4 GB (512) o a 12 GB (1024) y no los libera. En cualquier caso, conviene limitar la API para que el sistema la detenga a ella y no a las demás aplicaciones (por ejemplo `MemoryMax=` en systemd o `mem_limit` en Docker), con `YALDA_ENABLE_FULL=false` y `YALDA_CONCURRENCY=1`.
 
 ## Privacidad
 

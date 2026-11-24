@@ -31,6 +31,9 @@ class Settings:
     rate_per_minute: int = 4  # per client (IPv4 address or IPv6 /64); 0 disables
     rate_per_day: int = 40
     lite_side: int = 1024  # input side of the lite model; smaller uses less RAM
+    # ONNX Runtime's CPU arena keeps memory after each request (lite 1024 settles at ~12 GB);
+    # off returns it between requests at ~10–20 % more time. Matters on a shared server.
+    memory_arena: bool = False
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "models_dir", Path(self.models_dir).expanduser())
@@ -53,4 +56,5 @@ class Settings:
             rate_per_minute=int(env.get("YALDA_RATE_PER_MINUTE", "4")),
             rate_per_day=int(env.get("YALDA_RATE_PER_DAY", "40")),
             lite_side=_lite_side(env.get("YALDA_LITE_SIDE", "1024")),
+            memory_arena=_bool(env.get("YALDA_MEMORY_ARENA", "false")),
         )
