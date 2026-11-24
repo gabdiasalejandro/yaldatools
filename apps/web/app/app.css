@@ -367,19 +367,31 @@ textarea.field {
   text-align: right;
 }
 
-/* ---------- Mascot placeholder ---------- */
+/* ---------- Mascot ---------- */
 
-.mascot-slot {
+.mascot {
   flex: 0 0 auto;
-  border: 2px dashed var(--sakura-link);
-  background: repeating-linear-gradient(45deg, var(--soft-pink) 0 10px, #fbeaf3 10px 20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 8px;
-  font-size: 11px;
-  color: #6a0d4f;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+/* Two-frame steps keep the pixel-art feel instead of a smooth glide. */
+.mascot--idle {
+  animation: mascot-bob 1.6s steps(2, jump-none) infinite;
+}
+
+.mascot--busy {
+  animation: mascot-wiggle 0.5s steps(2, jump-none) infinite;
+}
+
+@keyframes mascot-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+
+@keyframes mascot-wiggle {
+  from { transform: rotate(-6deg); }
+  to { transform: rotate(6deg); }
 }
 
 /* ---------- Text pages ---------- */

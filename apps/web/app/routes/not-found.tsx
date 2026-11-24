@@ -3,7 +3,7 @@ import { pageMeta } from "~/i18n/meta";
 import { useLocale, useMessages } from "~/i18n/messages";
 import { pathFor } from "~/i18n/pages";
 import { Desktop } from "~/shared/ui/Desktop";
-import { MascotSlot } from "~/shared/ui/MascotSlot";
+import { Mascot } from "~/shared/ui/Mascot";
 import { Window } from "~/shared/ui/Window";
 import type { Route } from "./+types/not-found";
 
@@ -16,7 +16,7 @@ export function NotFoundPage() {
     <Desktop task={t.notFound.windowTitle} centered>
       <Window title={t.notFound.windowTitle} style={{ width: "100%", maxWidth: 520, marginTop: 24 }}>
         <div className="window-body" style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
-          <MascotSlot label={t.notFound.mascotAlt} size={120} />
+          <Mascot label={t.notFound.mascotAlt} size={120} />
           <div style={{ flex: "1 1 220px", display: "flex", flexDirection: "column", gap: 10 }}>
             <p className="headline" style={{ fontSize: 22 }}>
               {t.notFound.headline}

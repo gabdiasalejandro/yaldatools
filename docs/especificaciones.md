@@ -90,6 +90,8 @@ El estilo es un escritorio retro con ventanas biseladas, iconos pixel art por pr
 
 La recomendación es tener una mascota original propia y no usar GIFs de series anime. Los GIFs de Giphy o Tenor sacados de series son material con copyright de los estudios: en un sitio público que pide donaciones se arriesga una retirada del contenido, y además no construyen marca.
 
+**Mascota actual:** una rata pixel art original de 32×32 en SVG, con un guiño a la web de los 90 (estilo Neocities). Se genera con `design/mascot/generate-rat.mjs` y se usa la misma imagen en todas las páginas, con un balanceo suave en reposo y un meneo mientras se procesa. Las animaciones de la tabla siguiente parten de ella.
+
 ### Animaciones necesarias
 
 | Animación | Dónde aparece | Tamaño en pantalla |

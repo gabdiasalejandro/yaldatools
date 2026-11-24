@@ -2,7 +2,7 @@ import { SUPPORT_URL } from "~/config";
 import { pageMeta } from "~/i18n/meta";
 import { useMessages } from "~/i18n/messages";
 import { Desktop } from "~/shared/ui/Desktop";
-import { MascotSlot } from "~/shared/ui/MascotSlot";
+import { Mascot } from "~/shared/ui/Mascot";
 import { Window } from "~/shared/ui/Window";
 import type { Route } from "./+types/support";
 
@@ -39,7 +39,7 @@ export default function Support() {
               <p className="sunken tooltip">{t.support.notYet}</p>
             )}
           </div>
-          <MascotSlot label={t.support.mascotAlt} size={96} />
+          <Mascot label={t.support.mascotAlt} size={96} />
         </div>
       </Window>
     </Desktop>

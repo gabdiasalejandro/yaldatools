@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { format, useMessages } from "~/i18n/messages";
-import { MascotSlot } from "~/shared/ui/MascotSlot";
+import { Mascot } from "~/shared/ui/Mascot";
 import { Window } from "~/shared/ui/Window";
 import { EMPTY_CONTENTS, QR_TYPES, type ContentOf, type QrContents } from "./contents";
 import { hasScanRisk } from "./contrast";
@@ -120,7 +120,7 @@ export function QrTool() {
             {notice?.text ?? ""}
           </p>
           <div style={{ display: "flex", gap: 10, alignItems: "flex-end" }}>
-            <MascotSlot label={t.qr.mascotAlt} size={96} />
+            <Mascot label={t.qr.mascotAlt} size={96} />
             <div className="sunken tooltip" style={{ maxWidth: 190 }}>
               {t.qr.tip}
             </div>

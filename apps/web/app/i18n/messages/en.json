@@ -84,7 +84,7 @@
     "searchButton": "Search",
     "noResults": "No program matches that name.",
     "mascotSays": "Hi! What are we doing today?",
-    "mascotAlt": "Placeholder for the mascot waving",
+    "mascotAlt": "The rat mascot waving",
     "status": "{ready} of {total} programs ready · more on the way",
     "noAds": "No ads"
   },
@@ -164,7 +164,7 @@
     "copyFailed": "Your browser does not allow copying images. Download the PNG instead.",
     "contrastWarning": "Low contrast: some phones will not be able to scan it. Use dark dots on a light background.",
     "tip": "This QR code is static: it never expires and never touches a server.",
-    "mascotAlt": "Placeholder for the mascot pointing",
+    "mascotAlt": "The rat mascot pointing",
     "statusLocal": "Generated on your device · 0 bytes sent",
     "statusEcc": "Correction {level}"
   },
@@ -226,8 +226,8 @@
     "statusLocal": "Processed on your device · 0 bytes sent",
     "statusSize": "{width}×{height} px",
     "tip": "Your image never leaves your device: it is cut out right here.",
-    "mascotWorkingAlt": "Placeholder for the mascot cutting with scissors",
-    "mascotDoneAlt": "Placeholder for the mascot celebrating"
+    "mascotWorkingAlt": "The rat mascot cutting with scissors",
+    "mascotDoneAlt": "The rat mascot celebrating"
   },
   "support": {
     "windowTitle": "Support.txt",
@@ -248,7 +248,7 @@
     ],
     "donate": "Donate",
     "notYet": "The donation platform is coming soon. Thanks for the thought!",
-    "mascotAlt": "Placeholder for the mascot holding a coffee cup"
+    "mascotAlt": "The rat mascot holding a coffee cup"
   },
   "readme": {
     "windowTitle": "Readme.txt",
@@ -267,7 +267,7 @@
     "headline": "We could not find this page",
     "body": "The link may be mistyped, or the program may no longer exist.",
     "back": "Back to the desktop",
-    "mascotAlt": "Placeholder for the confused mascot"
+    "mascotAlt": "The confused rat mascot"
   },
   "redirect": {
     "choose": "Choose a language"

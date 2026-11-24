@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { format, useMessages } from "~/i18n/messages";
-import { MascotSlot } from "~/shared/ui/MascotSlot";
+import { Mascot } from "~/shared/ui/Mascot";
 import { Window } from "~/shared/ui/Window";
 
 type WelcomeWindowProps = {
@@ -57,7 +57,7 @@ export function WelcomeWindow({ query, onQueryChange, onSubmit, resultCount, sta
         </div>
         <div style={{ flex: "1 1 140px", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
           <div className="sunken tooltip">{t.home.mascotSays}</div>
-          <MascotSlot label={t.home.mascotAlt} size={140} />
+          <Mascot label={t.home.mascotAlt} size={140} />
         </div>
       </div>
     </Window>
