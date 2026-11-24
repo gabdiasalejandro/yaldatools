@@ -1,0 +1,31 @@
+[project]
+name = "yaldatools-api"
+version = "0.1.0"
+description = "YaldaTools background-removal API (FastAPI + BiRefNet on ONNX Runtime CPU)."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "onnxruntime>=1.20",
+    "numpy>=2",
+    "pillow>=11",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "httpx>=0.27",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/yaldatools_api"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not slow'"
+markers = ["slow: runs the real ONNX model from the local cache (deselected by default)"]
