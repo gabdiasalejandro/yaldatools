@@ -2,21 +2,29 @@
 import { concat, fromAscii, writeU32be, writeU32le } from "./bytes";
 import { crc32 } from "./crc32";
 
-type TiffOptions = { orientation?: number; make?: string; gps?: boolean };
+type TiffOptions = {
+  orientation?: number;
+  make?: string;
+  gps?: boolean;
+  /** Extra IFD0 ASCII entries given as raw bytes (a trailing NUL is added), e.g. UTF-8 text. */
+  text?: { tag: number; bytes: Uint8Array }[];
+};
 
 /** Little-endian TIFF with Make, Orientation and a GPS IFD (40° 26' 46" N, 3° 42' W), as needed. */
-export function makeTiff({ orientation, make, gps }: TiffOptions = {}): Uint8Array {
+export function makeTiff({ orientation, make, gps, text = [] }: TiffOptions = {}): Uint8Array {
   type Entry = { tag: number; type: number; count: number; value: Uint8Array | number };
   const entries: Entry[] = [];
   if (make) entries.push({ tag: 0x010f, type: 2, count: make.length + 1, value: fromAscii(`${make}\0`) });
   if (orientation !== undefined) entries.push({ tag: 0x0112, type: 3, count: 1, value: orientation });
+  for (const { tag, bytes } of text) entries.push({ tag, type: 2, count: bytes.length + 1, value: concat([bytes, Uint8Array.of(0)]) });
   if (gps) entries.push({ tag: 0x8825, type: 4, count: 1, value: 0 /* patched below */ });
 
   const ifd0Size = 2 + entries.length * 12 + 4;
   const out: number[] = [0x49, 0x49, 0x2a, 0x00, 8, 0, 0, 0];
   const data: number[] = [];
   const dataStart = 8 + ifd0Size;
-  const gpsStart = dataStart + (make && make.length + 1 > 4 ? make.length + 1 : 0);
+  const outOfLine = entries.reduce((sum, e) => sum + (e.value instanceof Uint8Array && e.value.length > 4 ? e.value.length : 0), 0);
+  const gpsStart = dataStart + outOfLine;
   const le16 = (n: number) => [n & 0xff, (n >>> 8) & 0xff];
   const le32 = (n: number) => [n & 0xff, (n >>> 8) & 0xff, (n >>> 16) & 0xff, (n >>> 24) & 0xff];
 

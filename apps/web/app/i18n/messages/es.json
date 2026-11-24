@@ -308,7 +308,66 @@
     },
     "gpsWarning": "Esta foto revela dónde se tomó.",
     "gpsNoCoordinates": "Lleva datos de ubicación GPS.",
-    "otherTags": "Y {count} datos técnicos más (exposición, objetivo, tamaño…).",
+    "details": {
+      "toggle": "Ver todos los datos ({count})",
+      "groups": {
+        "shooting": "Disparo",
+        "image": "Imagen",
+        "dates": "Fechas",
+        "location": "Ubicación (GPS)",
+        "identity": "Números de serie",
+        "all": "Todos los datos"
+      },
+      "fields": {
+        "exposure": "Exposición",
+        "aperture": "Diafragma",
+        "iso": "ISO",
+        "focalLength": "Distancia focal",
+        "lens": "Objetivo",
+        "flash": "Flash",
+        "whiteBalance": "Balance de blancos",
+        "exposureMode": "Modo de exposición",
+        "dimensions": "Dimensiones",
+        "orientation": "Orientación",
+        "dateOriginal": "Fecha original",
+        "dateDigitized": "Fecha de digitalización",
+        "dateModified": "Fecha de modificación",
+        "latitude": "Latitud",
+        "longitude": "Longitud",
+        "altitude": "Altitud",
+        "gpsTime": "Fecha y hora GPS",
+        "direction": "Dirección",
+        "cameraSerial": "Número de serie de la cámara",
+        "lensSerial": "Número de serie del objetivo"
+      },
+      "identityNote": "Identifica tu cámara: estos números permiten relacionar tus fotos entre sí.",
+      "focal35": "{value} mm en formato 35 mm",
+      "flash": {
+        "fired": "Se disparó",
+        "notFired": "No se disparó"
+      },
+      "whiteBalance": {
+        "0": "Automático",
+        "1": "Manual"
+      },
+      "exposureMode": {
+        "0": "Automático",
+        "1": "Manual",
+        "2": "Horquillado automático"
+      },
+      "orientation": {
+        "1": "Normal",
+        "2": "Reflejada en horizontal",
+        "3": "Girada 180°",
+        "4": "Reflejada en vertical",
+        "5": "Reflejada y girada 90° a la izquierda",
+        "6": "Girada 90° a la derecha",
+        "7": "Reflejada y girada 90° a la derecha",
+        "8": "Girada 90° a la izquierda"
+      },
+      "binary": "(datos binarios, {size})"
+    },
+    "readError": "No se pudieron leer los datos de esta foto, pero se quitarán igualmente.",
     "blocks": "También lleva: {list}.",
     "blockNames": {
       "xmp": "XMP",

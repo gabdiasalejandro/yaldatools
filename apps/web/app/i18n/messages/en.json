@@ -308,7 +308,66 @@
     },
     "gpsWarning": "This photo reveals where it was taken.",
     "gpsNoCoordinates": "It carries GPS location data.",
-    "otherTags": "And {count} more technical details (exposure, lens, size…).",
+    "details": {
+      "toggle": "Show all data ({count})",
+      "groups": {
+        "shooting": "Shooting",
+        "image": "Image",
+        "dates": "Dates",
+        "location": "Location (GPS)",
+        "identity": "Serial numbers",
+        "all": "All data"
+      },
+      "fields": {
+        "exposure": "Exposure",
+        "aperture": "Aperture",
+        "iso": "ISO",
+        "focalLength": "Focal length",
+        "lens": "Lens",
+        "flash": "Flash",
+        "whiteBalance": "White balance",
+        "exposureMode": "Exposure mode",
+        "dimensions": "Dimensions",
+        "orientation": "Orientation",
+        "dateOriginal": "Original date",
+        "dateDigitized": "Digitized date",
+        "dateModified": "Modified date",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "altitude": "Altitude",
+        "gpsTime": "GPS date and time",
+        "direction": "Direction",
+        "cameraSerial": "Camera serial number",
+        "lensSerial": "Lens serial number"
+      },
+      "identityNote": "Identifies your camera: these numbers can link your photos to each other.",
+      "focal35": "{value} mm in 35 mm format",
+      "flash": {
+        "fired": "Fired",
+        "notFired": "Did not fire"
+      },
+      "whiteBalance": {
+        "0": "Auto",
+        "1": "Manual"
+      },
+      "exposureMode": {
+        "0": "Auto",
+        "1": "Manual",
+        "2": "Auto bracket"
+      },
+      "orientation": {
+        "1": "Normal",
+        "2": "Mirrored horizontally",
+        "3": "Rotated 180°",
+        "4": "Mirrored vertically",
+        "5": "Mirrored and rotated 90° left",
+        "6": "Rotated 90° right",
+        "7": "Mirrored and rotated 90° right",
+        "8": "Rotated 90° left"
+      },
+      "binary": "(binary data, {size})"
+    },
+    "readError": "The data in this photo could not be read, but it will be removed anyway.",
     "blocks": "It also carries: {list}.",
     "blockNames": {
       "xmp": "XMP",

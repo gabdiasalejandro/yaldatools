@@ -793,6 +793,74 @@ textarea.field {
   overflow-wrap: anywhere;
 }
 
+.exif-read-error {
+  font-weight: 700;
+}
+
+.exif-details {
+  min-width: 0;
+}
+
+.exif-details > summary {
+  list-style: none;
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--tap);
+  font-size: 13px;
+  user-select: none;
+}
+
+.exif-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.exif-details > summary::before {
+  content: "▸";
+}
+
+.exif-details[open] > summary::before {
+  content: "▾";
+}
+
+.exif-details[open] > summary {
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  box-shadow:
+    inset 1px 1px var(--dark),
+    inset -1px -1px var(--highlight);
+}
+
+.exif-details-body {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid var(--shadow);
+}
+
+.exif-details-group {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.exif-details-group h3 {
+  margin: 0;
+  font-size: 13px;
+  color: var(--navy);
+}
+
+.exif-identity {
+  padding: 6px 8px;
+  background: #fff6d8;
+  border-left: 4px solid #b07800;
+}
+
+.exif-raw dt {
+  font-family: monospace;
+  font-weight: 400;
+}
+
 .exif-help-title {
   margin: 0;
   font-size: 15px;
