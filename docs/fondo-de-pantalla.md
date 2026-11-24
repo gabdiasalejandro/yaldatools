@@ -27,8 +27,8 @@ Las condiciones se copiaron de la página de reglas de uso el 24 de noviembre de
 | Usarla para entrenar o alimentar IA (享受目的のAI学習・使用) | No se usa como imagen de ejemplo ni de prueba en el quitafondos ni en ningún modelo |
 | Decir que es obra propia (自作発言) | Crédito visible en el escritorio y en "Léeme.txt / Acerca de" |
 | Contenido sexual, spam o contrario a la moral | No aplica |
-| Obras por encargo, obras con autoría marcada o con el aviso 「フリーイラストではありません」 | **Comprobar** que la página de esta ilustración no lleva ese aviso |
-| Fanart de terceros (por ejemplo Hatsune Miku) | Comprobar que la ilustración es un personaje original |
+| Obras por encargo, obras con autoría marcada o con el aviso 「フリーイラストではありません」 | Comprobado: no lleva ese aviso |
+| Fanart de terceros (por ejemplo Hatsune Miku) | Comprobado: es la chica propia de NCG |
 
 ### Pendiente
 
