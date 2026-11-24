@@ -9,3 +9,6 @@
 # Wallpaper: its license forbids redistribution, keep it local only
 /public/wallpaper.*
 /public/wallpaper-mobile.*
+
+# Segmentation models: large binaries, fetched with scripts/fetch-model.sh
+/public/models/
