@@ -19,7 +19,7 @@ export const DESKTOP_APPS: readonly DesktopApp[] = [
   { id: "removeBg", icon: "bg", kind: "tool", page: "removeBg" },
   { id: "qr", icon: "qr", kind: "tool", page: "qr" },
   { id: "compress", icon: "img", kind: "tool", soon: true },
-  { id: "mergePdf", icon: "pdf", kind: "tool", soon: true },
+  { id: "mergePdf", icon: "pdf", kind: "tool", page: "mergePdf" },
   { id: "passwords", icon: "lock", kind: "tool", soon: true },
   { id: "exif", icon: "exif", kind: "tool", page: "exif" },
   { id: "readme", icon: "note", kind: "file", page: "readme" },

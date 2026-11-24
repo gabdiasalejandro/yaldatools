@@ -6,6 +6,8 @@ La primera versión incluye:
 
 - **Quitar fondo:** estima la dificultad de la imagen y elige el método. Lo fácil y lo medio se procesa en el navegador; lo difícil, en un servidor propio.
 - **Código QR:** códigos estáticos que nunca caducan, para URL, WiFi, contacto, WhatsApp y email.
+- **Quitar EXIF:** muestra y quita los metadatos de las fotos (sobre todo el GPS) sin volver a comprimirlas.
+- **Unir PDF:** une y reordena varios PDF en el navegador.
 
 Hechas: fase 1 (base del sitio, ES/EN, portada y Código QR) y fase 2 (Quitar fondo en el navegador, con triage y diagnóstico).
 

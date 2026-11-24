@@ -16,6 +16,10 @@
       "title": "Quitar EXIF y GPS de tus fotos gratis, sin subirlas — YaldaTools",
       "description": "Mira qué datos esconde tu foto (cámara, fecha, ubicación GPS) y bórralos sin perder calidad. JPG, PNG y WebP, varias a la vez, en tu navegador y sin registro."
     },
+    "mergePdf": {
+      "title": "Unir PDF gratis, sin subirlos — YaldaTools",
+      "description": "Une varios PDF en uno y ordena los archivos como quieras. Gratis, sin registro y en tu navegador: tus documentos no se suben a ningún servidor."
+    },
     "support": {
       "title": "Apoyar el proyecto — YaldaTools",
       "description": "YaldaTools es gratis y sin anuncios. Las donaciones pagan el servidor y el tiempo para crear más herramientas."
@@ -352,6 +356,75 @@
       }
     ]
   },
+  "mergePdf": {
+    "windowTitle": "Unir PDF — YaldaTools",
+    "taskLabel": "Unir PDF",
+    "dropTitle": "Suelta tus PDF aquí",
+    "dropHint": "o pégalos con Ctrl+V · hasta 100 MB cada uno y 300 MB en total; se unen en la memoria de tu dispositivo",
+    "choose": "Elegir PDF…",
+    "addMore": "Añadir PDF…",
+    "dropLabel": "Zona para soltar o elegir archivos PDF",
+    "reading": "Leyendo… · {size}",
+    "onePage": "1 página",
+    "pages": "{count} páginas",
+    "excluded": "No se incluirá al unir.",
+    "errors": {
+      "notPdf": "Este archivo no es un PDF.",
+      "tooLarge": "El archivo pesa más de 100 MB.",
+      "totalTooLarge": "Con este archivo la lista superaría los 300 MB en total.",
+      "encrypted": "El PDF está protegido con contraseña. Quítasela primero.",
+      "broken": "El PDF está dañado y no se puede leer.",
+      "unreadable": "No se pudo leer el archivo."
+    },
+    "results": "Archivos PDF en el orden en que se unirán",
+    "moveUp": "Subir",
+    "moveDown": "Bajar",
+    "moveUpLabel": "Subir {name}",
+    "moveDownLabel": "Bajar {name}",
+    "remove": "Quitar",
+    "removeLabel": "Quitar {name} de la lista",
+    "clearAll": "Vaciar lista",
+    "merge": "Unir PDF",
+    "needTwo": "Añade al menos dos PDF válidos para unirlos.",
+    "waitReading": "Espera a que terminen de leerse los archivos.",
+    "willMerge": "Se unirán {files} archivos ({pages} páginas) en este orden.",
+    "progress": "Uniendo… {done} de {total} archivos",
+    "merging": "Uniendo los PDF…",
+    "mergedAnnounce": "Listo: {pages} páginas de {files} archivos unidas en {name}.",
+    "mergeFailed": "No se pudieron unir los PDF. Revisa que no estén dañados e inténtalo de nuevo.",
+    "movedAnnounce": "{name} ahora está en la posición {position} de {total}.",
+    "removedAnnounce": "{name} se quitó de la lista.",
+    "outputName": "unido.pdf",
+    "mascotWorkingAlt": "La rata mascota uniendo los PDF",
+    "mascotIdleAlt": "La rata mascota esperando tus PDF",
+    "statusLocal": "Procesado en tu dispositivo · 0 bytes enviados",
+    "statusFile": "1 archivo · {pages} · {size}",
+    "statusFiles": "{count} archivos · {pages} · {size}",
+    "tip": "Tus PDF no salen de tu dispositivo: se leen y se unen aquí mismo, en el navegador.",
+    "helpTitle": "Léeme.txt",
+    "help": [
+      {
+        "q": "¿Qué hace?",
+        "a": "Junta varios PDF en uno solo, con las páginas en el orden de la lista. Usa Subir y Bajar para cambiar el orden y Quitar para dejar fuera un archivo."
+      },
+      {
+        "q": "¿Se sube algo?",
+        "a": "No. Todo ocurre en tu navegador y la barra de estado lo muestra: 0 bytes enviados."
+      },
+      {
+        "q": "¿Funcionan los PDF protegidos?",
+        "a": "No: quítales la contraseña primero. Los PDF protegidos o dañados se señalan en la lista y no se incluyen al unir."
+      },
+      {
+        "q": "¿Hay algún límite?",
+        "a": "Hasta 100 MB por archivo y 300 MB en total, porque la unión se hace en la memoria de tu dispositivo. Si tienes muchos archivos grandes, únelos en varias tandas."
+      },
+      {
+        "q": "¿Cambia la calidad?",
+        "a": "No. Las páginas se copian tal cual, sin volver a comprimir textos ni imágenes."
+      }
+    ]
+  },
   "support": {
     "windowTitle": "Apoyar.txt",
     "taskLabel": "Apoyar",
@@ -382,7 +455,7 @@
     "privacy": "Las herramientas locales no envían nada: tus archivos se quedan en tu dispositivo. No usamos cookies.",
     "creditsTitle": "Créditos",
     "creditWallpaper": "Ilustración del escritorio: ノーコピーライトガール (No Copyright Girl).",
-    "creditLibraries": "Librerías: React, React Router, qr-code-styling, exifr y fflate (licencia MIT).",
+    "creditLibraries": "Librerías: React, React Router, qr-code-styling, exifr, fflate y pdf-lib (licencia MIT).",
     "creditFonts": "Fuentes: Pixelify Sans y VT323 (Google Fonts, licencia OFL)."
   },
   "notFound": {

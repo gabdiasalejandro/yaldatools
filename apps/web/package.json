@@ -16,6 +16,7 @@
     "fflate": "^0.8.3",
     "isbot": "^5.1.36",
     "onnxruntime-web": "^1.31.1",
+    "pdf-lib": "^1.17.1",
     "qr-code-styling": "^1.9.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

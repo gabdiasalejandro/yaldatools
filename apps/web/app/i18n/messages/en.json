@@ -16,6 +16,10 @@
       "title": "Remove EXIF and GPS from photos for free, without uploading — YaldaTools",
       "description": "See what your photo reveals (camera, date, GPS location) and remove it without losing quality. JPG, PNG and WebP, several at once, in your browser with no sign-up."
     },
+    "mergePdf": {
+      "title": "Merge PDF files for free, without uploading them — YaldaTools",
+      "description": "Combine several PDFs into one and put the files in any order. Free, no sign-up and in your browser: your documents are never uploaded to a server."
+    },
     "support": {
       "title": "Support the project — YaldaTools",
       "description": "YaldaTools is free and ad-free. Donations pay for the server and the time to build more tools."
@@ -352,6 +356,75 @@
       }
     ]
   },
+  "mergePdf": {
+    "windowTitle": "Merge PDF — YaldaTools",
+    "taskLabel": "Merge PDF",
+    "dropTitle": "Drop your PDFs here",
+    "dropHint": "or paste them with Ctrl+V · up to 100 MB each and 300 MB in total; they are merged in your device's memory",
+    "choose": "Choose PDFs…",
+    "addMore": "Add PDFs…",
+    "dropLabel": "Area to drop or choose PDF files",
+    "reading": "Reading… · {size}",
+    "onePage": "1 page",
+    "pages": "{count} pages",
+    "excluded": "It will be left out of the merge.",
+    "errors": {
+      "notPdf": "This file is not a PDF.",
+      "tooLarge": "The file is larger than 100 MB.",
+      "totalTooLarge": "With this file the list would exceed 300 MB in total.",
+      "encrypted": "The PDF is password-protected. Remove the password first.",
+      "broken": "The PDF is damaged and cannot be read.",
+      "unreadable": "The file could not be read."
+    },
+    "results": "PDF files in the order they will be merged",
+    "moveUp": "Up",
+    "moveDown": "Down",
+    "moveUpLabel": "Move {name} up",
+    "moveDownLabel": "Move {name} down",
+    "remove": "Remove",
+    "removeLabel": "Remove {name} from the list",
+    "clearAll": "Clear list",
+    "merge": "Merge PDF",
+    "needTwo": "Add at least two valid PDFs to merge them.",
+    "waitReading": "Wait until the files have been read.",
+    "willMerge": "{files} files ({pages} pages) will be merged in this order.",
+    "progress": "Merging… {done} of {total} files",
+    "merging": "Merging the PDFs…",
+    "mergedAnnounce": "Done: {pages} pages from {files} files merged into {name}.",
+    "mergeFailed": "The PDFs could not be merged. Check that none is damaged and try again.",
+    "movedAnnounce": "{name} is now in position {position} of {total}.",
+    "removedAnnounce": "{name} was removed from the list.",
+    "outputName": "merged.pdf",
+    "mascotWorkingAlt": "The rat mascot merging the PDFs",
+    "mascotIdleAlt": "The rat mascot waiting for your PDFs",
+    "statusLocal": "Processed on your device · 0 bytes sent",
+    "statusFile": "1 file · {pages} · {size}",
+    "statusFiles": "{count} files · {pages} · {size}",
+    "tip": "Your PDFs never leave your device: they are read and merged right here, in the browser.",
+    "helpTitle": "Readme.txt",
+    "help": [
+      {
+        "q": "What does it do?",
+        "a": "It joins several PDFs into one, with the pages in the order of the list. Use Up and Down to change the order and Remove to leave a file out."
+      },
+      {
+        "q": "Is anything uploaded?",
+        "a": "No. Everything happens in your browser and the status bar shows it: 0 bytes sent."
+      },
+      {
+        "q": "Do protected PDFs work?",
+        "a": "No: remove the password first. Protected or damaged PDFs are flagged in the list and left out of the merge."
+      },
+      {
+        "q": "Are there any limits?",
+        "a": "Up to 100 MB per file and 300 MB in total, because the merge happens in your device's memory. If you have many large files, merge them in batches."
+      },
+      {
+        "q": "Does the quality change?",
+        "a": "No. Pages are copied as they are, without compressing text or images again."
+      }
+    ]
+  },
   "support": {
     "windowTitle": "Support.txt",
     "taskLabel": "Support",
@@ -382,7 +455,7 @@
     "privacy": "Local tools send nothing: your files stay on your device. We do not use cookies.",
     "creditsTitle": "Credits",
     "creditWallpaper": "Desktop illustration: No Copyright Girl (ノーコピーライトガール).",
-    "creditLibraries": "Libraries: React, React Router, qr-code-styling, exifr and fflate (MIT license).",
+    "creditLibraries": "Libraries: React, React Router, qr-code-styling, exifr, fflate and pdf-lib (MIT license).",
     "creditFonts": "Fonts: Pixelify Sans and VT323 (Google Fonts, OFL license)."
   },
   "notFound": {

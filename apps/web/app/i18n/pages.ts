@@ -1,6 +1,6 @@
 import { DEFAULT_LOCALE, LOCALES, isLocale, type Locale } from "./locales";
 
-export const PAGE_IDS = ["home", "qr", "removeBg", "exif", "support", "readme"] as const;
+export const PAGE_IDS = ["home", "qr", "removeBg", "exif", "mergePdf", "support", "readme"] as const;
 export type PageId = (typeof PAGE_IDS)[number];
 
 // Slugs are translated because they are what people search for.
@@ -9,6 +9,7 @@ const PATHS: Record<PageId, Record<Locale, string>> = {
   qr: { es: "/es/qr", en: "/en/qr-code" },
   removeBg: { es: "/es/quitar-fondo", en: "/en/remove-background" },
   exif: { es: "/es/quitar-exif", en: "/en/remove-exif" },
+  mergePdf: { es: "/es/unir-pdf", en: "/en/merge-pdf" },
   support: { es: "/es/apoyar", en: "/en/support" },
   readme: { es: "/es/leeme", en: "/en/readme" },
 };

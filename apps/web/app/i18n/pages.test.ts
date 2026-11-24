@@ -9,6 +9,8 @@ describe("pathFor", () => {
     expect(pathFor("removeBg", "en")).toBe("/en/remove-background");
     expect(pathFor("exif", "es")).toBe("/es/quitar-exif");
     expect(pathFor("exif", "en")).toBe("/en/remove-exif");
+    expect(pathFor("mergePdf", "es")).toBe("/es/unir-pdf");
+    expect(pathFor("mergePdf", "en")).toBe("/en/merge-pdf");
     expect(pathFor("support", "es")).toBe("/es/apoyar");
     expect(pathFor("support", "en")).toBe("/en/support");
   });
@@ -31,6 +33,7 @@ describe("alternatePath", () => {
     expect(alternatePath("/es/qr", "en")).toBe("/en/qr-code");
     expect(alternatePath("/en/remove-background", "es")).toBe("/es/quitar-fondo");
     expect(alternatePath("/es/quitar-exif", "en")).toBe("/en/remove-exif");
+    expect(alternatePath("/en/merge-pdf", "es")).toBe("/es/unir-pdf");
   });
 
   it("falls back to the home page of the target language", () => {
@@ -54,6 +57,8 @@ describe("prerenderPaths", () => {
     expect(paths).toContain("/en/qr-code");
     expect(paths).toContain("/es/quitar-exif");
     expect(paths).toContain("/en/remove-exif");
+    expect(paths).toContain("/es/unir-pdf");
+    expect(paths).toContain("/en/merge-pdf");
     expect(new Set(paths).size).toBe(paths.length);
   });
 });

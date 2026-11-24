@@ -8,6 +8,7 @@ const MODULES: Record<PageId, string> = {
   qr: "routes/qr.tsx",
   removeBg: "routes/remove-background.tsx",
   exif: "routes/remove-exif.tsx",
+  mergePdf: "routes/merge-pdf.tsx",
   support: "routes/support.tsx",
   readme: "routes/readme.tsx",
 };

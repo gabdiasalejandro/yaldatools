@@ -11,8 +11,8 @@ Branch: feat/exif-pdf-tools (from feat/phase-3-refine) · Delivery: ask-on-risk 
 
 | ID | Specs | Route | Status | Commit |
 | --- | --- | --- | --- | --- |
-| T1 | S1, S2 | delegated (context backstop) | done | (this commit) |
-| T2 | S1, S3 | delegated (context backstop), after T1 | pending | — |
+| T1 | S1, S2 | delegated (context backstop) | done | b5a7d20 |
+| T2 | S1, S3 | delegated (context backstop), after T1 | done | (this commit) |
 
 Route evidence: long-session backstop — the parent context is far past ~150k tokens; units run one after the other as the user asked ("primero exif, luego pdf"), so no shared-file conflicts.
 
@@ -21,3 +21,4 @@ Route evidence: long-session backstop — the parent context is far past ~150k t
 - L1 (2026-11-23, user): "puedes ir haciendo la del exif y luego la de los pdf's?"
 - L2: Scope comes from the estimate the user accepted: EXIF "Mostrar qué datos lleva la foto (sobre todo el GPS) y quitarlos sin volver a comprimir"; PDF "Unir y reordenar con pdf-lib (MIT); las miniaturas de las páginas con pdf.js (Apache-2.0), que pesa más" — thumbnails deferred.
 - L3: T1 writer report: 129 tests (RED per pure module), typecheck, build with prerendered /es/quitar-exif + /en/remove-exif in sitemap; exifr 7.1.3 + fflate 0.8.3 (MIT) lazy chunks. Deviations accepted: trailing data after EOI/IEND/RIFF dropped (can hide previews; strips motion-photo video), PNG keeps Orientation-only eXIf, readme credits list exifr/fflate. Parent check: 129 tests pass; dev server restarted (stuck 500 after routes.ts referenced a missing module); browser: GPS warning + camera shown, download gps-sin-exif.jpg has EXIF {274: 6} only, no GPS, pixels identical, 0 non-GET, no errors. Scratch /tmp/tmp.j2W2nuYbwZ and /tmp/tmp.IfmgsnqxYq removed.
+- L4: T2 writer report: 148 tests, typecheck, build; pdf-lib 1.17.1 (MIT) lazy chunk ~420 KB; encrypted PDFs detected via ignoreEncryption + isEncrypted; keyboard reorder with focus management and aria-live; no drag-and-drop (optional). Parent check: 148 tests; browser: a.pdf (1 p) + b.pdf (2 p), "Subir b.pdf", merged unido.pdf page widths [221, 222, 111] = new order, 0 non-GET, no errors. Parent fix: formatBytes moved to app/shared/format/bytes.ts so the PDF tool no longer imports from features/exif (exif-* CSS classes are still shared; a shared drop zone is a follow-up). Scratch /tmp/tmp.IPkikvUdoZ removed.
