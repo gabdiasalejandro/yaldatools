@@ -1,0 +1,189 @@
+{
+  "pages": {
+    "home": {
+      "title": "YaldaTools — Herramientas gratis que funcionan en tu navegador",
+      "description": "Herramientas pequeñas y gratuitas con estética retro: código QR, quitar fondo y más. Sin registro, sin anuncios y procesadas en tu dispositivo."
+    },
+    "qr": {
+      "title": "Generador de código QR gratis: WiFi, URL, contacto y WhatsApp — YaldaTools",
+      "description": "Crea códigos QR estáticos que nunca caducan para WiFi, enlaces, contactos, WhatsApp y email. Colores, logo y descarga en PNG o SVG, gratis y sin registro."
+    },
+    "removeBg": {
+      "title": "Quitar fondo de una imagen gratis — YaldaTools",
+      "description": "Quita el fondo de tus fotos en el navegador, sin subirlas a ningún servidor. Muy pronto en YaldaTools."
+    },
+    "support": {
+      "title": "Apoyar el proyecto — YaldaTools",
+      "description": "YaldaTools es gratis y sin anuncios. Las donaciones pagan el servidor y el tiempo para crear más herramientas."
+    },
+    "readme": {
+      "title": "Léeme.txt: acerca de YaldaTools",
+      "description": "Qué es YaldaTools, cómo cuida tu privacidad y los créditos de la ilustración y las librerías."
+    },
+    "notFound": {
+      "title": "Página no encontrada — YaldaTools",
+      "description": "Esta página no existe."
+    }
+  },
+  "taskbar": {
+    "start": "Yalda",
+    "startLabel": "Yalda: volver al escritorio",
+    "support": "Apoyar el proyecto",
+    "language": "Idioma",
+    "toolbar": "Barra de tareas"
+  },
+  "window": {
+    "minimize": "Minimizar",
+    "close": "Cerrar y volver al escritorio"
+  },
+  "desktop": {
+    "programs": "Programas",
+    "soon": "pronto",
+    "credit": "Ilustración / ノーコピーライトガール",
+    "apps": {
+      "removeBg": { "label": "Quitar fondo", "keywords": "fondo recortar foto imagen transparente png background" },
+      "qr": { "label": "Código QR", "keywords": "qr codigo wifi url enlace contacto vcard whatsapp email" },
+      "compress": { "label": "Comprimir imagen", "keywords": "comprimir reducir peso imagen foto jpg webp" },
+      "mergePdf": { "label": "Unir PDF", "keywords": "pdf unir juntar combinar documentos" },
+      "passwords": { "label": "Contraseñas", "keywords": "contraseña clave password generar segura" },
+      "exif": { "label": "Quitar EXIF", "keywords": "exif metadatos gps privacidad foto" },
+      "readme": { "label": "Léeme.txt", "keywords": "leeme acerca info privacidad creditos" },
+      "support": { "label": "Apoyar", "keywords": "apoyar donar donacion cafe ayudar" }
+    }
+  },
+  "home": {
+    "windowTitle": "Bienvenid@.txt",
+    "headline": "Herramientas pequeñas que de verdad usas.",
+    "intro": "Abre un programa del escritorio. Todo es gratis, sin registro y se procesa en tu dispositivo.",
+    "searchLabel": "Buscar programa:",
+    "searchPlaceholder": "ej. qr wifi",
+    "searchButton": "Buscar",
+    "noResults": "No hay ningún programa con ese nombre.",
+    "mascotSays": "¡Hola! ¿Qué hacemos hoy?",
+    "mascotAlt": "Hueco para la mascota saludando",
+    "status": "{ready} de {total} programas listos · más en camino",
+    "noAds": "Sin anuncios"
+  },
+  "qr": {
+    "windowTitle": "Código QR — YaldaTools",
+    "taskLabel": "Código QR",
+    "typeTabs": "Tipo de QR",
+    "types": {
+      "url": "URL",
+      "text": "Texto",
+      "wifi": "WiFi",
+      "contact": "Contacto",
+      "whatsapp": "WhatsApp",
+      "email": "Email"
+    },
+    "content": "Contenido",
+    "fields": {
+      "url": "Dirección web",
+      "text": "Texto",
+      "ssid": "Nombre de la red (SSID)",
+      "password": "Contraseña",
+      "security": "Seguridad",
+      "hidden": "Red oculta",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "org": "Empresa (opcional)",
+      "website": "Web (opcional)",
+      "whatsappPhone": "Número con prefijo de país",
+      "message": "Mensaje (opcional)",
+      "to": "Correo de destino",
+      "subject": "Asunto (opcional)",
+      "body": "Mensaje (opcional)"
+    },
+    "security": {
+      "WPA": "WPA/WPA2/WPA3",
+      "WEP": "WEP",
+      "nopass": "Sin contraseña"
+    },
+    "appearance": "Apariencia",
+    "dotsColor": "Color de los puntos",
+    "bgColor": "Color de fondo",
+    "customColor": "Otro color",
+    "colors": {
+      "navy": "Azul marino",
+      "black": "Negro",
+      "sakura": "Magenta",
+      "teal": "Verde azulado",
+      "white": "Blanco",
+      "cream": "Crema",
+      "pink": "Rosa suave"
+    },
+    "shape": "Forma de los puntos",
+    "shapes": {
+      "square": "Cuadrado",
+      "rounded": "Redondo",
+      "dots": "Puntos"
+    },
+    "logo": "Logo en el centro",
+    "chooseLogo": "Elegir imagen…",
+    "removeLogo": "Quitar logo",
+    "ecc": "Corrección de errores",
+    "eccLevels": {
+      "M": "Media (M)",
+      "H": "Alta (H)"
+    },
+    "eccWithLogo": "Con logo se usa siempre la alta (H).",
+    "pngSize": "Tamaño del PNG",
+    "preview": "Vista previa del código QR",
+    "empty": "Escribe el contenido para ver el código.",
+    "downloadPng": "Descargar PNG",
+    "downloadSvg": "Descargar SVG",
+    "copy": "Copiar",
+    "copied": "¡Copiado al portapapeles!",
+    "copyFailed": "Tu navegador no deja copiar imágenes. Descarga el PNG.",
+    "contrastWarning": "Poco contraste: algunos móviles no podrán leerlo. Usa puntos oscuros sobre un fondo claro.",
+    "tip": "Este QR es estático: nunca caduca y no pasa por ningún servidor.",
+    "mascotAlt": "Hueco para la mascota señalando",
+    "statusLocal": "Generado en tu dispositivo · 0 bytes enviados",
+    "statusEcc": "Corrección {level}"
+  },
+  "removeBg": {
+    "windowTitle": "Quitar fondo — YaldaTools",
+    "taskLabel": "Quitar fondo",
+    "headline": "Muy pronto",
+    "body": "Estamos preparando el quitafondos: analizará tu imagen y la recortará en el navegador, sin subirla a ningún sitio.",
+    "back": "Volver al escritorio",
+    "mascotAlt": "Hueco para la mascota recortando con tijeras"
+  },
+  "support": {
+    "windowTitle": "Apoyar.txt",
+    "taskLabel": "Apoyar",
+    "headline": "Gracias por pasarte",
+    "body": "YaldaTools es gratis, sin anuncios y sin registro. Las donaciones cubren el servidor y el tiempo para crear más herramientas.",
+    "spendTitle": "En qué se gasta",
+    "spend": ["El servidor (VPS) para los recortes difíciles.", "Tiempo para crear una herramienta nueva cada pocas semanas."],
+    "nextTitle": "Próximas herramientas",
+    "next": ["Comprimir imagen", "Unir PDF", "Generador de contraseñas", "Quitar EXIF"],
+    "donate": "Donar",
+    "notYet": "La plataforma de donaciones llegará pronto. ¡Gracias por la intención!",
+    "mascotAlt": "Hueco para la mascota con una taza de café"
+  },
+  "readme": {
+    "windowTitle": "Léeme.txt",
+    "taskLabel": "Léeme.txt",
+    "aboutTitle": "Qué es esto",
+    "about": "YaldaTools es una colección de herramientas pequeñas y gratuitas que funcionan en tu navegador.",
+    "privacyTitle": "Privacidad",
+    "privacy": "Las herramientas locales no envían nada: tus archivos se quedan en tu dispositivo. No usamos cookies.",
+    "creditsTitle": "Créditos",
+    "creditWallpaper": "Ilustración del escritorio: ノーコピーライトガール (No Copyright Girl).",
+    "creditLibraries": "Librerías: React, React Router y qr-code-styling (licencia MIT).",
+    "creditFonts": "Fuentes: Pixelify Sans y VT323 (Google Fonts, licencia OFL)."
+  },
+  "notFound": {
+    "windowTitle": "Error.txt",
+    "headline": "No encontramos esta página",
+    "body": "Puede que el enlace esté mal escrito o que el programa ya no exista.",
+    "back": "Volver al escritorio",
+    "mascotAlt": "Hueco para la mascota confundida"
+  },
+  "redirect": {
+    "choose": "Elige idioma"
+  }
+}

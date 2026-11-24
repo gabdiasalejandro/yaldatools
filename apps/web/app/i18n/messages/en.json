@@ -1,0 +1,189 @@
+{
+  "pages": {
+    "home": {
+      "title": "YaldaTools — Free tools that run in your browser",
+      "description": "Small, free tools with a retro look: QR codes, background removal and more. No sign-up, no ads, processed on your device."
+    },
+    "qr": {
+      "title": "Free QR code generator: WiFi, URL, contact and WhatsApp — YaldaTools",
+      "description": "Create static QR codes that never expire for WiFi, links, contacts, WhatsApp and email. Colors, logo and PNG or SVG download, free and without sign-up."
+    },
+    "removeBg": {
+      "title": "Remove image background for free — YaldaTools",
+      "description": "Remove the background of your photos in the browser, without uploading them anywhere. Coming soon to YaldaTools."
+    },
+    "support": {
+      "title": "Support the project — YaldaTools",
+      "description": "YaldaTools is free and ad-free. Donations pay for the server and the time to build more tools."
+    },
+    "readme": {
+      "title": "Readme.txt: about YaldaTools",
+      "description": "What YaldaTools is, how it protects your privacy, and credits for the illustration and libraries."
+    },
+    "notFound": {
+      "title": "Page not found — YaldaTools",
+      "description": "This page does not exist."
+    }
+  },
+  "taskbar": {
+    "start": "Yalda",
+    "startLabel": "Yalda: back to the desktop",
+    "support": "Support the project",
+    "language": "Language",
+    "toolbar": "Taskbar"
+  },
+  "window": {
+    "minimize": "Minimize",
+    "close": "Close and go back to the desktop"
+  },
+  "desktop": {
+    "programs": "Programs",
+    "soon": "soon",
+    "credit": "Illustration / No Copyright Girl",
+    "apps": {
+      "removeBg": { "label": "Remove background", "keywords": "background remove cut photo image transparent png" },
+      "qr": { "label": "QR Code", "keywords": "qr code wifi url link contact vcard whatsapp email" },
+      "compress": { "label": "Compress image", "keywords": "compress reduce size image photo jpg webp" },
+      "mergePdf": { "label": "Merge PDF", "keywords": "pdf merge join combine documents" },
+      "passwords": { "label": "Passwords", "keywords": "password generator secure strong" },
+      "exif": { "label": "Remove EXIF", "keywords": "exif metadata gps privacy photo" },
+      "readme": { "label": "Readme.txt", "keywords": "readme about info privacy credits" },
+      "support": { "label": "Support", "keywords": "support donate donation coffee help" }
+    }
+  },
+  "home": {
+    "windowTitle": "Welcome.txt",
+    "headline": "Small tools you actually use.",
+    "intro": "Open a program on the desktop. Everything is free, needs no sign-up and runs on your device.",
+    "searchLabel": "Find a program:",
+    "searchPlaceholder": "e.g. qr wifi",
+    "searchButton": "Search",
+    "noResults": "No program matches that name.",
+    "mascotSays": "Hi! What are we doing today?",
+    "mascotAlt": "Placeholder for the mascot waving",
+    "status": "{ready} of {total} programs ready · more on the way",
+    "noAds": "No ads"
+  },
+  "qr": {
+    "windowTitle": "QR Code — YaldaTools",
+    "taskLabel": "QR Code",
+    "typeTabs": "QR type",
+    "types": {
+      "url": "URL",
+      "text": "Text",
+      "wifi": "WiFi",
+      "contact": "Contact",
+      "whatsapp": "WhatsApp",
+      "email": "Email"
+    },
+    "content": "Content",
+    "fields": {
+      "url": "Web address",
+      "text": "Text",
+      "ssid": "Network name (SSID)",
+      "password": "Password",
+      "security": "Security",
+      "hidden": "Hidden network",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "org": "Company (optional)",
+      "website": "Website (optional)",
+      "whatsappPhone": "Number with country code",
+      "message": "Message (optional)",
+      "to": "Recipient email",
+      "subject": "Subject (optional)",
+      "body": "Message (optional)"
+    },
+    "security": {
+      "WPA": "WPA/WPA2/WPA3",
+      "WEP": "WEP",
+      "nopass": "No password"
+    },
+    "appearance": "Appearance",
+    "dotsColor": "Dot color",
+    "bgColor": "Background color",
+    "customColor": "Other color",
+    "colors": {
+      "navy": "Navy blue",
+      "black": "Black",
+      "sakura": "Magenta",
+      "teal": "Teal",
+      "white": "White",
+      "cream": "Cream",
+      "pink": "Soft pink"
+    },
+    "shape": "Dot shape",
+    "shapes": {
+      "square": "Square",
+      "rounded": "Rounded",
+      "dots": "Dots"
+    },
+    "logo": "Center logo",
+    "chooseLogo": "Choose image…",
+    "removeLogo": "Remove logo",
+    "ecc": "Error correction",
+    "eccLevels": {
+      "M": "Medium (M)",
+      "H": "High (H)"
+    },
+    "eccWithLogo": "With a logo, high (H) is always used.",
+    "pngSize": "PNG size",
+    "preview": "QR code preview",
+    "empty": "Type the content to see the code.",
+    "downloadPng": "Download PNG",
+    "downloadSvg": "Download SVG",
+    "copy": "Copy",
+    "copied": "Copied to the clipboard!",
+    "copyFailed": "Your browser does not allow copying images. Download the PNG instead.",
+    "contrastWarning": "Low contrast: some phones will not be able to scan it. Use dark dots on a light background.",
+    "tip": "This QR code is static: it never expires and never touches a server.",
+    "mascotAlt": "Placeholder for the mascot pointing",
+    "statusLocal": "Generated on your device · 0 bytes sent",
+    "statusEcc": "Correction {level}"
+  },
+  "removeBg": {
+    "windowTitle": "Remove background — YaldaTools",
+    "taskLabel": "Remove background",
+    "headline": "Coming soon",
+    "body": "We are building the background remover: it will analyze your image and cut it out in the browser, without uploading it anywhere.",
+    "back": "Back to the desktop",
+    "mascotAlt": "Placeholder for the mascot cutting with scissors"
+  },
+  "support": {
+    "windowTitle": "Support.txt",
+    "taskLabel": "Support",
+    "headline": "Thanks for stopping by",
+    "body": "YaldaTools is free, ad-free and needs no sign-up. Donations cover the server and the time to build more tools.",
+    "spendTitle": "Where the money goes",
+    "spend": ["The server (VPS) for hard background cut-outs.", "Time to build a new tool every few weeks."],
+    "nextTitle": "Upcoming tools",
+    "next": ["Compress image", "Merge PDF", "Password generator", "Remove EXIF"],
+    "donate": "Donate",
+    "notYet": "The donation platform is coming soon. Thanks for the thought!",
+    "mascotAlt": "Placeholder for the mascot holding a coffee cup"
+  },
+  "readme": {
+    "windowTitle": "Readme.txt",
+    "taskLabel": "Readme.txt",
+    "aboutTitle": "What is this",
+    "about": "YaldaTools is a collection of small, free tools that run in your browser.",
+    "privacyTitle": "Privacy",
+    "privacy": "Local tools send nothing: your files stay on your device. We do not use cookies.",
+    "creditsTitle": "Credits",
+    "creditWallpaper": "Desktop illustration: No Copyright Girl (ノーコピーライトガール).",
+    "creditLibraries": "Libraries: React, React Router and qr-code-styling (MIT license).",
+    "creditFonts": "Fonts: Pixelify Sans and VT323 (Google Fonts, OFL license)."
+  },
+  "notFound": {
+    "windowTitle": "Error.txt",
+    "headline": "We could not find this page",
+    "body": "The link may be mistyped, or the program may no longer exist.",
+    "back": "Back to the desktop",
+    "mascotAlt": "Placeholder for the confused mascot"
+  },
+  "redirect": {
+    "choose": "Choose a language"
+  }
+}
