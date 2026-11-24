@@ -4,6 +4,7 @@ import { nextServerModel, refineErrorFor } from "./serverRefine";
 describe("refineErrorFor", () => {
   it("maps API answers to what the user can do about them", () => {
     expect(refineErrorFor(503, { error: "busy" })).toBe("busy");
+    expect(refineErrorFor(503, { error: "unavailable" })).toBe("unavailable");
     expect(refineErrorFor(429, { error: "rate_limited" })).toBe("rateLimited");
     expect(refineErrorFor(400, { error: "model_unavailable" })).toBe("modelUnavailable");
     expect(refineErrorFor(413, null)).toBe("tooLarge");

@@ -53,6 +53,7 @@ def make_settings(**overrides) -> Settings:
         # Rate limiting has its own tests; off by default so other tests can repeat requests.
         "rate_per_minute": 0,
         "rate_per_day": 0,
+        "global_per_hour": 0,
     }
     values.update(overrides)
     return Settings(**values)

@@ -48,6 +48,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 | `YALDA_MEMORY_ARENA` | `false` | `true` activa el *arena* de memoria de ONNX Runtime: algo más rápido (10–20 %), pero no devuelve la memoria entre peticiones. |
 | `YALDA_RATE_PER_MINUTE` | `4` | Peticiones por minuto y cliente; `0` lo desactiva. |
 | `YALDA_RATE_PER_DAY` | `40` | Peticiones por día y cliente; `0` lo desactiva. |
+| `YALDA_GLOBAL_PER_HOUR` | `25` | Imágenes procesadas por hora entre todos los clientes; `0` lo desactiva. |
 
 ## Endpoints
 
@@ -66,6 +67,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 | 422 | `{"error":"invalid_image"}` | Bytes que no se pueden decodificar, o más de 50 megapíxeles. |
 | 503 | `{"error":"busy"}` + `Retry-After` | Cola llena. |
 | 429 | `{"error":"rate_limited"}` + `Retry-After` | El cliente superó su límite por minuto o por día. |
+| 503 | `{"error":"unavailable"}` + `Retry-After` | Se alcanzó el tope global de imágenes por hora. |
 
 ### `GET /api/health`
 
@@ -117,6 +119,7 @@ YALDA_LITE_SIDE=512 uv run uvicorn yaldatools_api.app:app --port 8000
 ## Límite de peticiones
 
 - Cada cliente tiene un límite por minuto (ráfagas) y otro por día (abuso sostenido), en una ventana deslizante en memoria. Se comprueba antes de leer la imagen, igual que la cola llena, así que una petición rechazada no gasta memoria ni CPU.
+- Además hay un tope global: como mucho `YALDA_GLOBAL_PER_HOUR` imágenes procesadas por hora entre todos los clientes, pase lo que pase. Solo cuenta lo que llega a procesarse (una subida inválida no gasta cupo), y se comprueba antes de leer la imagen y otra vez justo antes de procesarla.
 - Solo cuentan las peticiones aceptadas: reintentar mientras se está limitado no alarga la espera.
 - Un cliente es una dirección IPv4 o un bloque IPv6 /64, porque una conexión doméstica suele tener un /64 entero.
 - Detrás de Caddy en la misma máquina, uvicorn toma la IP real de `X-Forwarded-For`: por defecto solo confía en `127.0.0.1` y `::1` (`FORWARDED_ALLOW_IPS`). No hay que exponer el puerto de la API fuera de esa máquina, o cualquiera podría falsear su IP.

@@ -260,7 +260,8 @@
       "tooLarge": "The image is too large for the server.",
       "unreachable": "Could not reach the server. Your cut-out is still here.",
       "failed": "The server could not cut out the image.",
-      "rateLimited": "You have used the server many times in a row. Wait a little and try again; meanwhile you can retouch with the brush."
+      "rateLimited": "You have used the server many times in a row. Wait a little and try again; meanwhile you can retouch with the brush.",
+      "unavailable": "The server is not available right now. Your cut-out is still here; you can improve it with “Tap to select” and “Restore”."
     },
     "serverPlace": "Server (deleted when done)",
     "serverModels": {
@@ -287,7 +288,7 @@
       "Password generator",
       "Remove EXIF"
     ],
-    "donate": "Donate",
+    "donate": "Support on Ko-fi",
     "notYet": "The donation platform is coming soon. Thanks for the thought!",
     "mascotAlt": "The rat mascot holding a coffee cup"
   },

@@ -71,3 +71,33 @@ class RateLimiter:
         while len(self._hits) > self.max_clients:
             self._hits.popitem(last=False)
         return None
+
+
+class GlobalCap:
+    """Server-wide ceiling: at most `per_hour` processed images in any sliding hour.
+
+    Protects a small shared server whatever the traffic looks like. Only images
+    that reach inference are recorded, so invalid uploads do not use it up.
+    """
+
+    HOUR = 3_600.0
+
+    def __init__(self, per_hour: int, clock: Callable[[], float] = time.monotonic) -> None:
+        self.per_hour = per_hour
+        self.clock = clock
+        self._processed: deque[float] = deque()
+
+    def wait(self) -> float | None:
+        """Seconds until a slot frees up, or None when processing is allowed now."""
+        if self.per_hour <= 0:
+            return None
+        now = self.clock()
+        while self._processed and now - self._processed[0] >= self.HOUR:
+            self._processed.popleft()
+        if len(self._processed) < self.per_hour:
+            return None
+        return self._processed[0] + self.HOUR - now
+
+    def record(self) -> None:
+        if self.per_hour > 0:
+            self._processed.append(self.clock())

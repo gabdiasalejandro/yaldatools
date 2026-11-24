@@ -4,7 +4,7 @@ import type { AlphaMask, Raster } from "./raster";
 
 export type ServerModel = "lite" | "full";
 export type ServerModelName = "birefnet-lite" | "birefnet";
-export type RefineError = "busy" | "rateLimited" | "modelUnavailable" | "tooLarge" | "unreachable" | "failed";
+export type RefineError = "busy" | "unavailable" | "rateLimited" | "modelUnavailable" | "tooLarge" | "unreachable" | "failed";
 
 export type RefineResult = {
   alpha: AlphaMask;
@@ -26,6 +26,8 @@ export function nextServerModel(current: ServerModelName | null): ServerModel | 
 }
 
 export function refineErrorFor(status: number, body: { error?: string } | null): RefineError {
+  // The hourly server-wide cap was reached: nothing the user can do but wait.
+  if (status === 503 && body?.error === "unavailable") return "unavailable";
   if (status === 503) return "busy";
   if (status === 429) return "rateLimited";
   if (status === 400 && body?.error === "model_unavailable") return "modelUnavailable";

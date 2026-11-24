@@ -30,6 +30,7 @@ class Settings:
     threads: int = 0  # ONNX Runtime intra-op threads; 0 keeps the ORT default
     rate_per_minute: int = 4  # per client (IPv4 address or IPv6 /64); 0 disables
     rate_per_day: int = 40
+    global_per_hour: int = 25  # images processed per hour for everyone together; 0 disables
     lite_side: int = 1024  # input side of the lite model; smaller uses less RAM
     # ONNX Runtime's CPU arena keeps memory after each request (lite 1024 settles at ~12 GB);
     # off returns it between requests at ~10–20 % more time. Matters on a shared server.
@@ -39,7 +40,7 @@ class Settings:
         object.__setattr__(self, "models_dir", Path(self.models_dir).expanduser())
         if self.concurrency < 1:
             raise ValueError("YALDA_CONCURRENCY must be at least 1")
-        if min(self.max_waiting, self.threads, self.rate_per_minute, self.rate_per_day) < 0:
+        if min(self.max_waiting, self.threads, self.rate_per_minute, self.rate_per_day, self.global_per_hour) < 0:
             raise ValueError("YALDA_MAX_WAITING, YALDA_THREADS and YALDA_RATE_* cannot be negative")
         if self.lite_side not in LITE_SIDES:
             raise ValueError(f"YALDA_LITE_SIDE must be one of {', '.join(map(str, LITE_SIDES))}")
@@ -55,6 +56,7 @@ class Settings:
             threads=int(env.get("YALDA_THREADS", "0")),
             rate_per_minute=int(env.get("YALDA_RATE_PER_MINUTE", "4")),
             rate_per_day=int(env.get("YALDA_RATE_PER_DAY", "40")),
+            global_per_hour=int(env.get("YALDA_GLOBAL_PER_HOUR", "25")),
             lite_side=_lite_side(env.get("YALDA_LITE_SIDE", "1024")),
             memory_arena=_bool(env.get("YALDA_MEMORY_ARENA", "false")),
         )

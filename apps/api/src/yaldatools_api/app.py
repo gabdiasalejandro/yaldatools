@@ -23,7 +23,7 @@ from .imaging import (
 )
 from .models import MODELS, lite_filename
 from .queue import AdmissionQueue, Busy
-from .ratelimit import RateLimiter, client_key
+from .ratelimit import GlobalCap, RateLimiter, client_key
 from .segmenter import OnnxSegmenter, Segmenter
 
 # Privacy: only the model, size in px, seconds and status are ever logged.
@@ -78,6 +78,11 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
         segmenters.pop("full", None)
     queue = AdmissionQueue(settings.concurrency, settings.max_waiting)
     limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
+    hourly_cap = GlobalCap(settings.global_per_hour)
+
+    def unavailable(model: str, wait: float) -> JSONResponse:
+        log.info("model=%s status=503 reason=hourly_cap", model)
+        return error(503, "unavailable", {"Retry-After": str(max(1, round(wait)))})
 
     app = FastAPI(title="YaldaTools API", docs_url=None, redoc_url=None, openapi_url=None)
 
@@ -105,6 +110,9 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
         if wait is not None:
             log.info("model=%s status=429", model)
             return error(429, "rate_limited", {"Retry-After": str(max(1, round(wait)))})
+        cap_wait = hourly_cap.wait()
+        if cap_wait is not None:
+            return unavailable(model, cap_wait)
         if queue.is_full():
             log.info("model=%s status=503", model)
             return error(503, "busy", {"Retry-After": str(RETRY_AFTER_SECONDS)})
@@ -125,6 +133,11 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
 
         try:
             async with queue.slot():
+                # Checked again here: other requests may have used the last slots while this one waited.
+                cap_wait = hourly_cap.wait()
+                if cap_wait is not None:
+                    return unavailable(model, cap_wait)
+                hourly_cap.record()
                 started = time.perf_counter()
                 mask = await anyio.to_thread.run_sync(segmenter.segment, image)
                 seconds = time.perf_counter() - started

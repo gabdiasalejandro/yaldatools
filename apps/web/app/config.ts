@@ -1,5 +1,5 @@
-/** Donation link. Empty until the donation platform exists (docs/especificaciones.md). */
-export const SUPPORT_URL: string | null = null;
+/** Donation link (docs/especificaciones.md: one config variable). */
+export const SUPPORT_URL: string | null = "https://ko-fi.com/yaldapika";
 
 /**
  * Background-removal model (ISNet general-use, int8). It is larger than the
