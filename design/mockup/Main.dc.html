@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>YaldaTools — Inicio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#000080}a:hover{color:#b0307a}
+.wall{background:#2a2420 url(./assets/wallpaper.webp) center/cover no-repeat}
+.wall-plain{background:#008080}
+.raised{background:#c0c0c0;border:2px solid;border-color:#ffffff #0a0a0a #0a0a0a #ffffff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf}
+.sunken{border:2px solid;border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #dfdfdf}
+.btn{font:inherit;color:#000;cursor:pointer;min-height:44px;padding:0 16px}
+.ctl{width:22px;height:20px;padding:0;min-height:0;display:flex;align-items:center;justify-content:center;font:700 12px/1 Tahoma,Verdana,sans-serif}
+.dicon:hover .dlabel,.dicon:focus .dlabel{background:#000080;outline:1px dotted #fff}
+</style>
+</helmet>
+<div class="{{wallClass}}" style="width: 100%; min-height: 860px; box-sizing: border-box; font-family: Tahoma, Verdana, 'Segoe UI', sans-serif; font-size: 14px; color: #000; display: flex; flex-direction: column">
+
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 32px; padding: 20px; align-items: flex-start; justify-content: space-between">
+
+    <nav aria-label="Programas" style="display: grid; grid-template-rows: repeat(4, auto); grid-auto-flow: column; gap: 14px 8px; align-content: start">
+      <sc-for list="{{desktop}}" as="d" hint-placeholder-count="8">
+        <a href="{{d.href}}" class="dicon" style="width: 96px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #fff; text-align: center; min-height: 44px; padding: 4px 0">
+          <svg width="48" height="48" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true" style="filter: drop-shadow(1px 1px 0 #000) drop-shadow(-1px -1px 0 rgba(0,0,0,0.5))">
+            <sc-if value="{{d.isBg}}" hint-placeholder-val="{{ false }}">
+              <path d="M5 9h2v1h-2zM6 8h2v1h-2zM7 7h2v1h-2zM8 6h2v1h-2zM9 5h2v1h-2zM10 4h2v1h-2zM11 3h2v1h-2zM12 2h2v1h-2z" fill="#e8e8e8"></path>
+              <path d="M9 9h2v1h-2zM8 8h2v1h-2zM6 6h2v1h-2zM5 5h2v1h-2zM4 4h2v1h-2zM3 3h2v1h-2zM2 2h2v1h-2z" fill="#c0c0c0"></path>
+              <path d="M1 11h1v2h-1zM5 11h1v2h-1zM2 10h3v1h-3zM2 13h3v1h-3zM10 11h1v2h-1zM14 11h1v2h-1zM11 10h3v1h-3zM11 13h3v1h-3z" fill="#e05fa8"></path>
+            </sc-if>
+            <sc-if value="{{d.isQr}}" hint-placeholder-val="{{ false }}">
+              <rect x="1" y="1" width="14" height="14" fill="#ffffff"></rect>
+              <path d="M2 2h5v5h-5zM9 2h5v5h-5zM2 9h5v5h-5zM10 10h1v1h-1zM12 10h2v1h-2zM9 12h2v1h-2zM12 12h1v2h-1zM10 13h1v1h-1z" fill="#000080"></path>
+              <path d="M3 3h3v3h-3zM10 3h3v3h-3zM3 10h3v3h-3z" fill="#ffffff"></path>
+              <path d="M4 4h1v1h-1zM11 4h1v1h-1zM4 11h1v1h-1z" fill="#000080"></path>
+            </sc-if>
+            <sc-if value="{{d.isImg}}" hint-placeholder-val="{{ false }}">
+              <rect x="1" y="3" width="14" height="10" fill="#000080"></rect>
+              <rect x="2" y="4" width="12" height="8" fill="#7ec8f0"></rect>
+              <rect x="11" y="5" width="2" height="2" fill="#ffd23f"></rect>
+              <path d="M2 9h4v-1h2v-1h2v1h2v1h2v3h-12z" fill="#2f7d32"></path>
+            </sc-if>
+            <sc-if value="{{d.isPdf}}" hint-placeholder-val="{{ false }}">
+              <path d="M3 1h8l3 3v11h-11z" fill="#ffffff"></path>
+              <path d="M11 1v3h3z" fill="#a0a0a0"></path>
+              <rect x="3" y="7" width="11" height="4" fill="#c0272d"></rect>
+              <path d="M5 12h7v1h-7zM5 3h4v1h-4zM5 5h6v1h-6z" fill="#808080"></path>
+            </sc-if>
+            <sc-if value="{{d.isLock}}" hint-placeholder-val="{{ false }}">
+              <path d="M5 2h6v1h-6zM4 3h1v4h-1zM11 3h1v4h-1z" fill="#d0d0d0"></path>
+              <rect x="3" y="7" width="10" height="8" fill="#e0b020"></rect>
+              <rect x="3" y="7" width="10" height="1" fill="#ffe27a"></rect>
+              <rect x="7" y="9" width="2" height="4" fill="#3a2a00"></rect>
+            </sc-if>
+            <sc-if value="{{d.isExif}}" hint-placeholder-val="{{ false }}">
+              <rect x="5" y="3" width="5" height="2" fill="#505050"></rect>
+              <rect x="1" y="5" width="14" height="9" fill="#505050"></rect>
+              <rect x="5" y="7" width="6" height="5" fill="#d0d0d0"></rect>
+              <rect x="7" y="8" width="2" height="3" fill="#000080"></rect>
+              <line x1="1" y1="15" x2="15" y2="1" stroke="#ff3b3b" stroke-width="2"></line>
+            </sc-if>
+            <sc-if value="{{d.isNote}}" hint-placeholder-val="{{ false }}">
+              <rect x="3" y="2" width="10" height="13" fill="#ffffff"></rect>
+              <rect x="3" y="1" width="10" height="2" fill="#000080"></rect>
+              <path d="M5 6h6v1h-6zM5 8h6v1h-6zM5 10h6v1h-6zM5 12h4v1h-4z" fill="#7ea0d0"></path>
+            </sc-if>
+            <sc-if value="{{d.isHeart}}" hint-placeholder-val="{{ false }}">
+              <path d="M3 3h3v1h-3zM10 3h3v1h-3zM2 4h5v1h-5zM9 4h5v1h-5zM2 5h12v3h-12zM3 8h10v1h-10zM4 9h8v1h-8zM5 10h6v1h-6zM6 11h4v1h-4zM7 12h2v1h-2z" fill="#e05fa8"></path>
+              <rect x="4" y="5" width="1" height="1" fill="#ffffff"></rect>
+            </sc-if>
+          </svg>
+          <span class="dlabel" style="font-size: 13px; line-height: 1.25; padding: 1px 3px; text-shadow: 1px 1px 0 #000">{{d.label}}</span>
+          <sc-if value="{{d.soon}}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 11px; color: #ffe27a; text-shadow: 1px 1px 0 #000">pronto</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </nav>
+
+    <section class="raised" aria-labelledby="w-title" style="flex: 0 1 560px; min-width: 0; padding: 3px; display: flex; flex-direction: column; margin-top: 24px">
+      <div style="background: {{titleBg}}; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 3px 4px 3px 8px; gap: 8px">
+        <h1 id="w-title" style="margin: 0; font: 600 15px/1.2 'Pixelify Sans', Tahoma, sans-serif; letter-spacing: 0.3px">Bienvenid@.txt</h1>
+        <div style="display: flex; gap: 2px">
+          <button class="raised btn ctl" aria-label="Minimizar">_</button>
+          <button class="raised btn ctl" aria-label="Cerrar">×</button>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; padding: 16px">
+        <div style="flex: 999 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+          <p style="margin: 0; font: 600 26px/1.15 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Herramientas pequeñas que de verdad usas.</p>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5">Haz doble clic en un programa del escritorio. Todo es gratis, sin registro y se procesa <b>en tu dispositivo</b>.</p>
+          <label for="search" style="font-size: 13px">Buscar programa:</label>
+          <div style="display: flex; gap: 8px">
+            <input id="search" class="sunken" type="search" placeholder="ej. qr wifi" style="flex: 1 1 auto; min-width: 0; height: 40px; box-sizing: border-box; padding: 0 10px; font: inherit; background: #fff">
+            <button class="raised btn">Buscar</button>
+          </div>
+        </div>
+        <div style="flex: 1 1 140px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+          <div class="sunken" style="background: #ffffe1; padding: 8px 10px; font-size: 12px; line-height: 1.4">¡Hola! ¿Qué hacemos hoy?</div>
+          <div role="img" aria-label="Hueco para GIF de la mascota anime saludando" style="width: 140px; height: 140px; box-sizing: border-box; border: 2px dashed #b0307a; background: repeating-linear-gradient(45deg,#f3d6e7 0 10px,#fbeaf3 10px 20px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; font-size: 11px; color: #6a0d4f">[GIF MASCOTA] saludando · 140×140</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 4px; padding: 0 2px 2px; font-size: 12px">
+        <div class="sunken" style="flex: 1 1 auto; padding: 4px 8px">8 programas · 2 listos · más en camino</div>
+        <div class="sunken" style="padding: 4px 8px">Sin anuncios</div>
+      </div>
+    </section>
+  </div>
+
+  <div style="align-self: flex-end; margin: 0 12px 6px; padding: 2px 6px; font-size: 11px; color: #fff; background: rgba(0,0,0,0.55)">Fondo provisional: «Supra», Seafh (2011) · sin licencia de uso</div>
+
+  <footer class="raised" style="display: flex; align-items: center; gap: 6px; padding: 4px; border-left: 0; border-right: 0; border-bottom: 0; flex-wrap: wrap">
+    <button class="raised btn" style="display: flex; align-items: center; gap: 6px; font-weight: 700">
+      <svg width="20" height="20" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true"><rect x="4" y="0" width="2" height="10" fill="#b0307a"></rect><rect x="0" y="4" width="10" height="2" fill="#b0307a"></rect><rect x="3" y="3" width="4" height="4" fill="#000080"></rect></svg>
+      Yalda
+    </button>
+    <div class="sunken" style="padding: 0 12px; min-height: 40px; display: flex; align-items: center; font-weight: 700; background: #dcdcdc">Bienvenid@.txt</div>
+    <div style="flex: 1 1 auto"></div>
+    <a href="#" class="raised" style="min-height: 44px; display: flex; align-items: center; gap: 6px; padding: 0 14px; text-decoration: none; color: #000; font-weight: 700">
+      <svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="1" y="1" width="2" height="1" fill="#b0307a"></rect><rect x="5" y="1" width="2" height="1" fill="#b0307a"></rect><rect x="0" y="2" width="8" height="2" fill="#b0307a"></rect><rect x="1" y="4" width="6" height="1" fill="#b0307a"></rect><rect x="2" y="5" width="4" height="1" fill="#b0307a"></rect><rect x="3" y="6" width="2" height="1" fill="#b0307a"></rect></svg>
+      Apoyar el proyecto
+    </a>
+    <div class="sunken" style="display: flex; align-items: center; gap: 10px; padding: 0 10px; min-height: 40px">
+      <span role="group" aria-label="Idioma" style="display: flex; gap: 2px">
+        <button class="sunken btn" aria-pressed="true" style="min-height: 30px; padding: 0 8px; background: #fff; font-weight: 700">ES</button>
+        <button class="raised btn" aria-pressed="false" style="min-height: 30px; padding: 0 8px">EN</button>
+      </span>
+      <span style="font: 20px/1 VT323, monospace">12:00</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"titleBar":{"editor":"enum","options":["clásico","sakura"],"default":"sakura"},"wallpaper":{"editor":"enum","options":["anime","turquesa"],"default":"anime"},"$preview":{"width":1280,"height":860}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tb = this.props.titleBar ?? 'sakura';
+    const titleBg = tb === 'clásico'
+      ? 'linear-gradient(90deg,#000080,#1084d0)'
+      : 'linear-gradient(90deg,#000080,#a4307f)';
+    const wallClass = (this.props.wallpaper ?? 'anime') === 'anime' ? 'wall' : 'wall-plain';
+    const mk = (label, href, kind, soon) => ({
+      label, href, soon,
+      isBg: kind === 'bg', isQr: kind === 'qr', isImg: kind === 'img', isPdf: kind === 'pdf',
+      isLock: kind === 'lock', isExif: kind === 'exif', isNote: kind === 'note', isHeart: kind === 'heart'
+    });
+    return {
+      titleBg,
+      wallClass,
+      desktop: [
+        mk('Quitar fondo', 'BgRemover.dc.html', 'bg', false),
+        mk('Código QR', 'QR.dc.html', 'qr', false),
+        mk('Comprimir imagen', '#', 'img', true),
+        mk('Unir PDF', '#', 'pdf', true),
+        mk('Contraseñas', '#', 'lock', true),
+        mk('Quitar EXIF', '#', 'exif', true),
+        mk('Léeme.txt', '#', 'note', false),
+        mk('Apoyar', '#', 'heart', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

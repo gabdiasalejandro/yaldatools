@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>YaldaTools — Guía de estilo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#000080}a:hover{color:#b0307a}
+.raised{background:#c0c0c0;border:2px solid;border-color:#ffffff #0a0a0a #0a0a0a #ffffff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf}
+.sunken{border:2px solid;border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #dfdfdf}
+.btn{font:inherit;color:#000;min-height:44px;padding:0 16px}
+</style>
+</helmet>
+<div style="width: 1200px; height: 900px; box-sizing: border-box; background: #c0c0c0; font-family: Tahoma, Verdana, 'Segoe UI', sans-serif; font-size: 14px; color: #000; padding: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-content: start">
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font: 600 22px/1.2 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Colores</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{swatches}}" as="s" hint-placeholder-count="8">
+        <div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px">
+          <div class="sunken" style="{{s.style}}"></div>
+          <b>{{s.name}}</b>
+          <span>{{s.hex}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font: 600 22px/1.2 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Tipografía</h2>
+    <p style="margin: 0; font: 600 30px/1.15 'Pixelify Sans', Tahoma, sans-serif">Pixelify Sans · títulos</p>
+    <p style="margin: 0; font-size: 15px">Tahoma / Verdana (sistema) · texto e interfaz, 14–15 px</p>
+    <p style="margin: 0; font: 26px/1 VT323, monospace">VT323 · reloj, contadores 12:00</p>
+    <p style="margin: 0; font-size: 12px; line-height: 1.4">Sin fuentes de Microsoft: todas son de Google Fonts o del sistema.</p>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font: 600 22px/1.2 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Controles</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+      <button class="raised btn">Normal</button>
+      <button class="sunken btn" style="background: #fff">Presionado</button>
+      <button class="raised btn" style="font-weight: 700; outline: 1px solid #000; outline-offset: -5px">Principal</button>
+      <button class="raised btn" disabled style="color: #6a6a6a; text-shadow: 1px 1px #fff">Deshabilitado</button>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center">
+      <label for="sg-in">Campo</label>
+      <input id="sg-in" class="sunken" value="Texto de ejemplo" style="height: 40px; box-sizing: border-box; padding: 0 10px; font: inherit; background: #fff; flex: 1 1 auto">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <div style="background: linear-gradient(90deg,#000080,#1084d0); color: #fff; padding: 5px 8px; font: 600 14px/1.2 'Pixelify Sans', Tahoma, sans-serif">Barra de título · clásica</div>
+      <div style="background: linear-gradient(90deg,#000080,#a4307f); color: #fff; padding: 5px 8px; font: 600 14px/1.2 'Pixelify Sans', Tahoma, sans-serif">Barra de título · sakura (marca)</div>
+      <div style="background: #808080; color: #dfdfdf; padding: 5px 8px; font: 600 14px/1.2 'Pixelify Sans', Tahoma, sans-serif">Barra de título · ventana inactiva</div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font: 600 22px/1.2 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Huecos de GIF (mascota)</h2>
+    <div style="display: flex; gap: 12px; align-items: flex-end">
+      <div role="img" aria-label="Ejemplo de hueco de GIF" style="width: 120px; height: 120px; flex: 0 0 auto; box-sizing: border-box; border: 2px dashed #b0307a; background: repeating-linear-gradient(45deg,#f3d6e7 0 8px,#fbeaf3 8px 16px); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; color: #6a0d4f; padding: 6px">[GIF] así se marca un hueco</div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.45">Pixel art, fondo transparente, loop suave. Hay que dibujarlos a 1× y escalarlos a 2× o 3× con <code>image-rendering: pixelated</code>.</p>
+    </div>
+    <table style="border-collapse: collapse; font-size: 13px; background: #fff" class="sunken">
+      <thead><tr style="background: #000080; color: #fff"><th style="text-align: left; padding: 6px">Animación</th><th style="text-align: left; padding: 6px">Dónde</th><th style="text-align: left; padding: 6px">Tamaño</th></tr></thead>
+      <tbody>
+        <sc-for list="{{gifs}}" as="g" hint-placeholder-count="6">
+          <tr><td style="padding: 5px 6px; border-top: 1px solid #c0c0c0">{{g.what}}</td><td style="padding: 5px 6px; border-top: 1px solid #c0c0c0">{{g.where}}</td><td style="padding: 5px 6px; border-top: 1px solid #c0c0c0">{{g.size}}</td></tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sw = [
+      ['Escritorio', '#008080'], ['Ventana', '#c0c0c0'], ['Marino', '#000080'], ['Sakura', '#a4307f'],
+      ['Sombra', '#808080'], ['Luz', '#ffffff'], ['Tooltip', '#ffffe1'], ['Rosa suave', '#f3d6e7']
+    ];
+    return {
+      swatches: sw.map(([name, hex]) => ({ name, hex, style: 'height: 56px; background: ' + hex })),
+      gifs: [
+        { what: 'Saludando (idle)', where: 'Inicio', size: '180×180' },
+        { what: 'Señalando / dando un tip', where: 'Herramientas', size: '96×96' },
+        { what: 'Recortando con tijeras', where: 'Quitar fondo (procesando)', size: '110×110' },
+        { what: 'Celebrando', where: 'Descarga lista', size: '96×96' },
+        { what: 'Confundida', where: 'Errores / 404', size: '120×120' },
+        { what: 'Taza de café', where: 'Apoyar el proyecto', size: '96×96' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

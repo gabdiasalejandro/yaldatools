@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>YaldaTools — Mobile home (EN)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.wall{background:#2a2420 url(./assets/wallpaper.webp) 22% center/cover no-repeat}
+a{color:#000080}a:hover{color:#b0307a}
+.raised{background:#c0c0c0;border:2px solid;border-color:#ffffff #0a0a0a #0a0a0a #ffffff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf}
+.sunken{border:2px solid;border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #dfdfdf}
+.btn{font:inherit;color:#000;cursor:pointer;min-height:44px;padding:0 14px}
+</style>
+</helmet>
+<div class="wall" style="width: 390px; height: 844px; box-sizing: border-box; font-family: Tahoma, Verdana, 'Segoe UI', sans-serif; font-size: 15px; color: #000; display: flex; flex-direction: column">
+  <div style="flex: 1 1 auto; padding: 14px 12px; overflow: hidden">
+    <section class="raised" aria-labelledby="m-title" style="padding: 3px; display: flex; flex-direction: column">
+      <div style="background: linear-gradient(90deg,#000080,#a4307f); color: #fff; padding: 6px 8px">
+        <h1 id="m-title" style="margin: 0; font: 600 16px/1.2 'Pixelify Sans', Tahoma, sans-serif">YaldaTools.exe</h1>
+      </div>
+      <div style="padding: 14px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <div role="img" aria-label="Slot for mascot GIF waving" style="width: 96px; height: 96px; flex: 0 0 auto; box-sizing: border-box; border: 2px dashed #b0307a; background: repeating-linear-gradient(45deg,#f3d6e7 0 8px,#fbeaf3 8px 16px); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; color: #6a0d4f; padding: 4px">[GIF] mascot · 96×96</div>
+          <p style="margin: 0; font: 600 21px/1.15 'Pixelify Sans', Tahoma, sans-serif; color: #000080">Small tools you actually use.</p>
+        </div>
+        <p style="margin: 0; line-height: 1.45">Free, no sign-up. Your files stay on your device.</p>
+        <label for="m-search" style="font-size: 13px">Search a tool:</label>
+        <input id="m-search" class="sunken" type="search" placeholder="e.g. wifi qr" style="height: 44px; box-sizing: border-box; padding: 0 10px; font: inherit; background: #fff">
+        <nav aria-label="Tools" style="display: flex; flex-direction: column; gap: 8px">
+          <a href="BgRemover.dc.html" class="raised" style="min-height: 56px; display: flex; flex-direction: column; justify-content: center; padding: 6px 12px; text-decoration: none; color: #000"><b>Remove background</b><span style="font-size: 13px; color: #3a3a3a">AI picks the method by difficulty</span></a>
+          <a href="QR.dc.html" class="raised" style="min-height: 56px; display: flex; flex-direction: column; justify-content: center; padding: 6px 12px; text-decoration: none; color: #000"><b>QR code</b><span style="font-size: 13px; color: #3a3a3a">URL, WiFi, contact, WhatsApp…</span></a>
+          <div class="raised" style="min-height: 56px; display: flex; flex-direction: column; justify-content: center; padding: 6px 12px; color: #3a3a3a"><b>Compress image</b><span style="font-size: 13px">Coming soon</span></div>
+          <div class="raised" style="min-height: 56px; display: flex; flex-direction: column; justify-content: center; padding: 6px 12px; color: #3a3a3a"><b>Merge PDF</b><span style="font-size: 13px">Coming soon</span></div>
+        </nav>
+      </div>
+    </section>
+  </div>
+  <footer class="raised" style="display: flex; align-items: center; gap: 6px; padding: 4px; border-left: 0; border-right: 0; border-bottom: 0">
+    <button class="raised btn" style="font-weight: 700">Yalda</button>
+    <div style="flex: 1 1 auto"></div>
+    <a href="#" class="raised" style="min-height: 44px; display: flex; align-items: center; padding: 0 12px; text-decoration: none; color: #000; font-weight: 700">Support</a>
+    <div class="sunken" role="group" aria-label="Language" style="display: flex; gap: 2px; padding: 2px">
+      <button class="raised btn" aria-pressed="false" style="padding: 0 10px">ES</button>
+      <button class="sunken btn" aria-pressed="true" style="padding: 0 10px; background: #fff; font-weight: 700">EN</button>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
