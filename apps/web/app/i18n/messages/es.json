@@ -248,7 +248,7 @@
     "improve": "¿No quedó bien? Mejorar en el servidor",
     "improveFull": "¿Aún no? Probar el modelo completo",
     "improving": "Mejorando en el servidor…",
-    "improveSuggested": "Esta imagen parece difícil: en el servidor puede quedar mejor.",
+    "improveSuggested": "Esta imagen parece difícil. Empieza por «Tocar para seleccionar» y «Restaurar»; si aún falta algo, usa el servidor, que de momento es modesto.",
     "improveDone": "Ya se usó el modelo más potente. Puedes retocar con el pincel.",
     "privacyTitle": "Enviar al servidor",
     "privacyBody": "Para mejorar el recorte, la imagen se enviará a nuestro servidor. Se procesa en memoria, no se guarda y se borra al terminar.",
@@ -267,7 +267,8 @@
       "birefnet-lite": "BiRefNet lite en el servidor",
       "birefnet": "BiRefNet completo en el servidor"
     },
-    "statusSent": "{kb} KB enviados al servidor y borrados al terminar"
+    "statusSent": "{kb} KB enviados al servidor y borrados al terminar",
+    "toolsFirst": "Antes de usar el servidor, prueba «Tocar para seleccionar» y luego «Restaurar» para recuperar lo que falte: casi siempre basta. El servidor de momento es modesto y puede tardar o estar ocupado."
   },
   "support": {
     "windowTitle": "Apoyar.txt",

@@ -248,7 +248,7 @@
     "improve": "Not quite right? Improve on the server",
     "improveFull": "Still not? Try the full model",
     "improving": "Improving on the server…",
-    "improveSuggested": "This image looks hard: the server may do better.",
+    "improveSuggested": "This image looks hard. Start with “Tap to select” and “Restore”; if something is still missing, use the server, which is modest for now.",
     "improveDone": "The most powerful model was already used. You can retouch with the brush.",
     "privacyTitle": "Send to the server",
     "privacyBody": "To improve the cut-out, the image will be sent to our server. It is processed in memory, never stored, and deleted when done.",
@@ -267,7 +267,8 @@
       "birefnet-lite": "BiRefNet lite on the server",
       "birefnet": "Full BiRefNet on the server"
     },
-    "statusSent": "{kb} KB sent to the server and deleted when done"
+    "statusSent": "{kb} KB sent to the server and deleted when done",
+    "toolsFirst": "Before using the server, try “Tap to select” and then “Restore” to bring back anything missing: it is usually enough. The server is modest for now and may be slow or busy."
   },
   "support": {
     "windowTitle": "Support.txt",

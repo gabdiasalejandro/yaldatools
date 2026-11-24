@@ -209,7 +209,19 @@ export function CutoutSession({ image, result, onAnother, onBytesSent }: CutoutS
         <DiagnosticsPanel result={result} refinement={refinement} selected={selected} />
         <fieldset className="fieldset" style={{ display: "flex", flexDirection: "column", gap: 8, alignSelf: "stretch" }}>
           <legend>{t.server}</legend>
-          {looksHard && !refinement && <p style={{ margin: 0 }}>{t.improveSuggested}</p>}
+          {!refinement && (
+            <div className="sunken tooltip" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <p style={{ margin: 0 }}>{looksHard ? t.improveSuggested : t.toolsFirst}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                <button type="button" className="raised btn" onClick={() => pickTool("select")}>
+                  {t.toolNames.select}
+                </button>
+                <button type="button" className="raised btn" onClick={() => pickTool("restore")}>
+                  {t.toolNames.restore}
+                </button>
+              </div>
+            </div>
+          )}
           {nextModel ? (
             <button type="button" className="raised btn" disabled={sending} onClick={() => setAsking(true)}>
               {sending ? t.improving : nextModel === "lite" ? t.improve : t.improveFull}
