@@ -259,7 +259,8 @@
       "modelUnavailable": "Ese modelo no está disponible en el servidor ahora mismo.",
       "tooLarge": "La imagen es demasiado grande para el servidor.",
       "unreachable": "No se pudo conectar con el servidor. Tu recorte sigue aquí.",
-      "failed": "El servidor no pudo recortar la imagen."
+      "failed": "El servidor no pudo recortar la imagen.",
+      "rateLimited": "Has usado el servidor muchas veces seguidas. Espera un poco y vuelve a intentarlo; mientras, puedes retocar con el pincel."
     },
     "serverPlace": "Servidor (borrada al terminar)",
     "serverModels": {

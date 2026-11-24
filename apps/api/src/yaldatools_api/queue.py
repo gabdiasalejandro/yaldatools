@@ -24,10 +24,13 @@ class AdmissionQueue:
     def capacity(self) -> int:
         return self.concurrency + self.max_waiting
 
+    def is_full(self) -> bool:
+        return self.running + self.waiting >= self.capacity
+
     @asynccontextmanager
     async def slot(self) -> AsyncIterator[None]:
         # Runs on the single event loop, so these checks and updates are not interleaved.
-        if self.running + self.waiting >= self.capacity:
+        if self.is_full():
             raise Busy
         if self._semaphore is None:
             self._semaphore = anyio.Semaphore(self.concurrency)

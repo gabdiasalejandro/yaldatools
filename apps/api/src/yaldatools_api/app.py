@@ -22,6 +22,7 @@ from .imaging import (
 )
 from .models import MODELS
 from .queue import AdmissionQueue, Busy
+from .ratelimit import RateLimiter, client_key
 from .segmenter import OnnxSegmenter, Segmenter
 
 # Privacy: only the model, size in px, seconds and status are ever logged.
@@ -72,6 +73,7 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
     if not settings.enable_full:
         segmenters.pop("full", None)
     queue = AdmissionQueue(settings.concurrency, settings.max_waiting)
+    limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
 
     app = FastAPI(title="YaldaTools API", docs_url=None, redoc_url=None, openapi_url=None)
 
@@ -93,6 +95,15 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
         content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
         if content_type not in ACCEPTED_CONTENT_TYPES:
             return error(415, "unsupported_media_type")
+        # Cheap checks first, before the upload is read or decoded. Behind Caddy on the
+        # same host, uvicorn's proxy headers give the real client address.
+        wait = limiter.check(client_key(request.client.host if request.client else "unknown"))
+        if wait is not None:
+            log.info("model=%s status=429", model)
+            return error(429, "rate_limited", {"Retry-After": str(max(1, round(wait)))})
+        if queue.is_full():
+            log.info("model=%s status=503", model)
+            return error(503, "busy", {"Retry-After": str(RETRY_AFTER_SECONDS)})
         body = await read_limited(request, MAX_UPLOAD_BYTES)
         if body is None:
             log.info("model=%s status=413", model)

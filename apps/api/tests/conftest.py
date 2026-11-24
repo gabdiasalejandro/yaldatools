@@ -44,7 +44,16 @@ def encode(size: tuple[int, int], fmt: str = "JPEG", color=(180, 40, 40)) -> byt
 
 
 def make_settings(**overrides) -> Settings:
-    values = {"models_dir": "/nonexistent", "enable_full": True, "concurrency": 1, "max_waiting": 4, "threads": 0}
+    values = {
+        "models_dir": "/nonexistent",
+        "enable_full": True,
+        "concurrency": 1,
+        "max_waiting": 4,
+        "threads": 0,
+        # Rate limiting has its own tests; off by default so other tests can repeat requests.
+        "rate_per_minute": 0,
+        "rate_per_day": 0,
+    }
     values.update(overrides)
     return Settings(**values)
 
