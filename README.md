@@ -7,7 +7,7 @@ La primera versión incluye:
 - **Quitar fondo:** estima la dificultad de la imagen y elige el método. Lo fácil y lo medio se procesa en el navegador; lo difícil, en un servidor propio.
 - **Código QR:** códigos estáticos que nunca caducan, para URL, WiFi, contacto, WhatsApp y email.
 
-La fase 1 está en marcha: base del sitio, ES/EN, portada y Código QR.
+Hechas: fase 1 (base del sitio, ES/EN, portada y Código QR) y fase 2 (Quitar fondo en el navegador, con triage y diagnóstico).
 
 ## Desarrollo
 
@@ -21,6 +21,8 @@ pnpm test       # tests (Vitest)
 pnpm typecheck
 pnpm build      # sitio estático en build/client
 ```
+
+El quitafondos necesita el modelo ISNet, que no está en el repo por su tamaño. `pnpm fetch-model` lo descarga de la release de rembg, lo cuantiza a int8 (hace falta `uv`) y lo deja en `public/models/`, que solo usa el servidor de desarrollo. El build no lo incluye: en producción, `VITE_BG_MODEL_URL` apunta a donde esté alojado.
 
 El fondo de pantalla no está en el repo porque su licencia prohíbe redistribuirlo. Para verlo en local, copia el archivo a `apps/web/public/wallpaper.webp`; sin él se usa un color de reserva. Ver [`docs/fondo-de-pantalla.md`](docs/fondo-de-pantalla.md).
 

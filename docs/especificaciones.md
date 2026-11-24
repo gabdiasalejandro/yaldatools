@@ -40,12 +40,18 @@ La v1 sale con dos herramientas, el Código QR y el Quitar fondo, más la portad
 
 1. El usuario sube o pega una imagen (JPG, PNG o WebP; hasta 25 MB, que se reduce a 2048 px de lado mayor).
 2. El triage en el navegador mide la uniformidad del borde, el contraste y la densidad de bordes.
-3. Si el fondo es uniforme, se recorta con *flood fill* (OpenCV.js).
-4. Si no, pasa por un modelo ligero en el navegador (ISNet o MODNet cuantizado), del que se mide la zona de alfa dudosa.
+3. Si el fondo es uniforme, se recorta con *flood fill*. Está escrito en TypeScript en vez de usar OpenCV.js, que pesa unos 8 MB de WASM para un solo algoritmo. Si el relleno deja menos del 1 % o más del 98 % de la imagen, se da por fallido y se pasa al modelo.
+4. Si no, pasa por un modelo ligero en el navegador, del que se mide la zona de alfa dudosa. Se eligió ISNet general (MODNet solo sirve para retratos), cuantizado a int8 (unos 45 MB) y ejecutado con el backend WASM de `onnxruntime-web` dentro de un Web Worker.
 5. Si la zona dudosa supera un umbral a calibrar (punto de partida: 15 %), se ofrece refinar en el servidor con aviso de privacidad. En la v1 este paso queda desactivado.
 6. El resultado tiene fondo transparente, blanco o de color, y se descarga en PNG.
 
 El panel de diagnóstico enseña la dificultad, el método elegido y dónde se procesó. Esa transparencia forma parte del encanto del producto.
+
+Notas de implementación:
+
+- **Dificultad:** fácil si se recorta con flood fill; media o difícil con el modelo, según si la zona dudosa supera el 15 %.
+- **Alojamiento del modelo:** el archivo pasa del límite de 25 MiB por archivo de Cloudflare Pages, así que en producción se sirve desde almacenamiento externo (por ejemplo Cloudflare R2) con la variable `VITE_BG_MODEL_URL`. El navegador lo descarga una vez y lo guarda en caché; la descarga del modelo no envía nada del usuario.
+- **Hilos:** ONNX Runtime usa un solo hilo mientras el sitio no envíe las cabeceras COOP/COEP. Activarlas acelera el modelo, pero hay que comprobar que no rompen las Google Fonts.
 
 ## Internacionalización ES/EN
 
@@ -146,7 +152,7 @@ Si el VPS está saturado o caído, la web avisa y se queda con el resultado del 
 | --- | --- | --- |
 | Web | React + TypeScript, React Router (modo framework, prerender) y Vite; CSS propio | MIT |
 | QR | `qr-code-styling` | MIT |
-| Recorte en el navegador | `onnxruntime-web`, OpenCV.js, ISNet o MODNet | MIT / Apache 2.0 |
+| Recorte en el navegador | `onnxruntime-web` (WASM), ISNet general int8, triage y flood fill propios | MIT / Apache 2.0 |
 | Recorte en el servidor | FastAPI, ONNX Runtime, BiRefNet (Python, gestionado con uv) | MIT |
 | Infraestructura | Cloudflare Pages + Docker Compose en el VPS | — |
 
