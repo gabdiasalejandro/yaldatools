@@ -1,0 +1,472 @@
+/* YaldaTools visual system: Windows 95-style bevels with an anime "sakura" accent.
+   Own CSS instead of 98.css because that package ships Microsoft fonts. */
+
+:root {
+  --desktop: #008080;
+  --wallpaper-fallback: #eceeee;
+  --window: #c0c0c0;
+  --navy: #000080;
+  --sakura: #a4307f;
+  --sakura-link: #b0307a;
+  --tooltip: #ffffe1;
+  --soft-pink: #f3d6e7;
+  --light: #ffffff;
+  --highlight: #dfdfdf;
+  --shadow: #808080;
+  --dark: #0a0a0a;
+  /* Title bar variant: "sakura" (brand). Classic: linear-gradient(90deg, #000080, #1084d0). */
+  --titlebar: linear-gradient(90deg, var(--navy), var(--sakura));
+  --font-ui: Tahoma, Verdana, "Segoe UI", sans-serif;
+  --font-title: "Pixelify Sans", Tahoma, sans-serif;
+  --font-clock: VT323, monospace;
+  --tap: 44px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: #000;
+  background: var(--desktop);
+}
+
+a {
+  color: var(--navy);
+}
+
+a:hover {
+  color: var(--sakura-link);
+}
+
+:focus-visible {
+  outline: 2px dotted #000;
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  font-weight: 600;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Bevels ---------- */
+
+.raised {
+  background: var(--window);
+  border: 2px solid;
+  border-color: var(--light) var(--dark) var(--dark) var(--light);
+  box-shadow:
+    inset -1px -1px var(--shadow),
+    inset 1px 1px var(--highlight);
+}
+
+.sunken {
+  border: 2px solid;
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  box-shadow:
+    inset 1px 1px var(--dark),
+    inset -1px -1px var(--highlight);
+}
+
+/* ---------- Controls ---------- */
+
+.btn {
+  font: inherit;
+  color: #000;
+  cursor: pointer;
+  min-height: var(--tap);
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+a.btn:hover {
+  color: #000;
+}
+
+.btn:active:not(:disabled),
+.btn[aria-pressed="true"],
+.taskbar-languages [aria-current="page"] {
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  box-shadow:
+    inset 1px 1px var(--dark),
+    inset -1px -1px var(--highlight);
+}
+
+.btn[aria-pressed="true"],
+.taskbar-languages [aria-current="page"] {
+  background: var(--light);
+  font-weight: 700;
+}
+
+.btn:disabled {
+  color: #6a6a6a;
+  text-shadow: 1px 1px var(--light);
+  cursor: default;
+}
+
+.btn-primary {
+  font-weight: 700;
+  outline: 1px solid #000;
+  outline-offset: -5px;
+}
+
+.field {
+  font: inherit;
+  min-height: 40px;
+  padding: 0 10px;
+  background: var(--light);
+  color: #000;
+  min-width: 0;
+}
+
+textarea.field {
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.fieldset {
+  border: 2px groove var(--light);
+  margin: 0;
+  padding: 12px;
+  min-width: 0;
+}
+
+.fieldset legend {
+  padding: 0 6px;
+}
+
+.tooltip {
+  background: var(--tooltip);
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ---------- Window ---------- */
+
+.window {
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.titlebar {
+  background: var(--titlebar);
+  color: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 4px 3px 8px;
+}
+
+.titlebar h1 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+
+.titlebar-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.titlebar-control {
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 12px/1 var(--font-ui);
+  color: #000;
+  text-decoration: none;
+}
+
+.window-body {
+  padding: 16px;
+}
+
+.statusbar {
+  display: flex;
+  gap: 4px;
+  padding: 0 2px 2px;
+  font-size: 12px;
+}
+
+.statusbar > * {
+  padding: 4px 8px;
+}
+
+.statusbar > :first-child {
+  flex: 1 1 auto;
+}
+
+/* ---------- Desktop ---------- */
+
+.desktop {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--wallpaper-fallback) url("/wallpaper.webp") left center / cover no-repeat fixed;
+}
+
+.desktop-area {
+  flex: 1 1 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.desktop-area--centered {
+  justify-content: center;
+}
+
+.wallpaper-credit {
+  align-self: flex-end;
+  margin: 0 12px 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: var(--light);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.desktop-icons {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: 14px 8px;
+  align-content: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-icon {
+  width: 96px;
+  min-height: var(--tap);
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--light);
+  text-align: center;
+}
+
+.desktop-icon:hover {
+  color: var(--light);
+}
+
+.desktop-icon svg {
+  filter: drop-shadow(1px 1px 0 #000) drop-shadow(-1px -1px 0 rgba(0, 0, 0, 0.5));
+}
+
+.desktop-icon-label {
+  font-size: 13px;
+  line-height: 1.25;
+  padding: 1px 3px;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.desktop-icon:hover .desktop-icon-label,
+.desktop-icon:focus-visible .desktop-icon-label {
+  background: var(--navy);
+  outline: 1px dotted var(--light);
+}
+
+.desktop-icon-soon {
+  font-size: 11px;
+  color: #ffe27a;
+  background: rgba(0, 0, 0, 0.62);
+  padding: 0 3px;
+}
+
+/* ---------- Taskbar ---------- */
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.taskbar-start {
+  font-weight: 700;
+}
+
+.taskbar-task {
+  padding: 0 12px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  background: #dcdcdc;
+}
+
+.taskbar-spacer {
+  flex: 1 1 auto;
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  min-height: 40px;
+}
+
+.taskbar-languages {
+  display: flex;
+  gap: 2px;
+}
+
+.taskbar-languages .btn {
+  min-height: 30px;
+  padding: 0 8px;
+}
+
+.clock {
+  font: 20px/1 var(--font-clock);
+  min-width: 5ch;
+  text-align: right;
+}
+
+/* ---------- Mascot placeholder ---------- */
+
+.mascot-slot {
+  flex: 0 0 auto;
+  border: 2px dashed var(--sakura-link);
+  background: repeating-linear-gradient(45deg, var(--soft-pink) 0 10px, #fbeaf3 10px 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  color: #6a0d4f;
+}
+
+/* ---------- Text pages ---------- */
+
+.prose {
+  line-height: 1.5;
+}
+
+.prose h2 {
+  margin: 1.2em 0 0.4em;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p,
+.prose ul {
+  margin: 0 0 0.8em;
+}
+
+.headline {
+  margin: 0;
+  font: 600 26px/1.15 var(--font-title);
+  color: var(--navy);
+}
+
+/* ---------- Mobile: one full-screen window, taskbar at the bottom ---------- */
+
+@media (max-width: 720px) {
+  .desktop {
+    background-position: 78% center;
+    background-attachment: scroll;
+  }
+
+  .desktop-area {
+    padding: 10px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .desktop-area > .window {
+    width: 100%;
+  }
+
+  .desktop-icons {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .desktop-icon {
+    width: auto;
+    flex-direction: row;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.45);
+    text-align: left;
+  }
+
+  .desktop-icon svg {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
+  }
+
+  .desktop-icon-label {
+    background: none;
+  }
+
+  .titlebar-control--optional {
+    display: none;
+  }
+
+  .taskbar-task {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
