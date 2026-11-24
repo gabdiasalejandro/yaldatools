@@ -589,7 +589,7 @@ textarea.field {
   background: var(--light);
 }
 
-.result-preview canvas {
+.result-preview canvas:not(.cutout-canvas) {
   display: block;
   max-width: 100%;
   max-height: 60vh;
@@ -631,4 +631,53 @@ textarea.field {
   margin: 0;
   font-weight: 700;
   text-align: right;
+}
+
+/* ---------- Cut-out editor ---------- */
+
+.cutout-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.cutout-option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.cutout-canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 60vh;
+  height: auto;
+  touch-action: none;
+}
+
+.cutout-canvas--erase,
+.cutout-canvas--restore {
+  cursor: crosshair;
+}
+
+.cutout-canvas--select {
+  cursor: pointer;
+}
+
+.privacy-dialog {
+  padding: 3px;
+  border-width: 2px;
+}
+
+/* .window sets display:flex, which would otherwise show the closed dialog. */
+.privacy-dialog:not([open]) {
+  display: none;
+}
+
+.privacy-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
 }

@@ -211,7 +211,8 @@
     "method": "Method",
     "methods": {
       "floodFill": "Color fill (flood fill)",
-      "model": "ISNet model in the browser"
+      "model": "ISNet model in the browser",
+      "select": "SlimSAM selection (tap)"
     },
     "processedOn": "Processed on",
     "device": "Your device",
@@ -221,13 +222,51 @@
     "doubtful": "Doubtful area",
     "time": "Time",
     "timeValue": "{seconds} s",
-    "refine": "Refine on the server",
-    "refineSoon": "This image is hard. Soon you will be able to refine it on our server, with a privacy notice. For now everything stays on your device.",
     "statusLocal": "Processed on your device · 0 bytes sent",
     "statusSize": "{width}×{height} px",
-    "tip": "Your image never leaves your device: it is cut out right here.",
+    "tip": "Your image never leaves your device unless you ask to improve it on the server.",
     "mascotWorkingAlt": "The rat mascot cutting with scissors",
-    "mascotDoneAlt": "The rat mascot celebrating"
+    "mascotDoneAlt": "The rat mascot celebrating",
+    "tools": "Tools",
+    "toolNames": {
+      "view": "View",
+      "erase": "Erase",
+      "restore": "Restore",
+      "select": "Tap to select"
+    },
+    "undo": "Undo",
+    "brushSize": "Brush size",
+    "selectHint": "Tap what you want to keep. With “Exclude” (or right click) you mark what you don't.",
+    "selectMode": "What each tap marks",
+    "include": "Include",
+    "exclude": "Exclude",
+    "clearPoints": "Clear points",
+    "samLoading": "Preparing selection (downloads about 14 MB the first time)…",
+    "samEmbedding": "Analyzing the image for selection…",
+    "samError": "Selection could not be prepared. Please try again.",
+    "server": "Server",
+    "improve": "Not quite right? Improve on the server",
+    "improveFull": "Still not? Try the full model",
+    "improving": "Improving on the server…",
+    "improveSuggested": "This image looks hard: the server may do better.",
+    "improveDone": "The most powerful model was already used. You can retouch with the brush.",
+    "privacyTitle": "Send to the server",
+    "privacyBody": "To improve the cut-out, the image will be sent to our server. It is processed in memory, never stored, and deleted when done.",
+    "privacyKeepLocal": "Stay on my device only",
+    "privacySend": "Send",
+    "serverErrors": {
+      "busy": "The server is busy. Try again in a moment; your cut-out is still here.",
+      "modelUnavailable": "That model is not available on the server right now.",
+      "tooLarge": "The image is too large for the server.",
+      "unreachable": "Could not reach the server. Your cut-out is still here.",
+      "failed": "The server could not cut out the image."
+    },
+    "serverPlace": "Server (deleted when done)",
+    "serverModels": {
+      "birefnet-lite": "BiRefNet lite on the server",
+      "birefnet": "Full BiRefNet on the server"
+    },
+    "statusSent": "{kb} KB sent to the server and deleted when done"
   },
   "support": {
     "windowTitle": "Support.txt",

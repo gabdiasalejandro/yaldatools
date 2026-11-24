@@ -211,7 +211,8 @@
     "method": "Método",
     "methods": {
       "floodFill": "Relleno por color (flood fill)",
-      "model": "Modelo ISNet en el navegador"
+      "model": "Modelo ISNet en el navegador",
+      "select": "Selección con SlimSAM (tocar)"
     },
     "processedOn": "Procesado en",
     "device": "Tu dispositivo",
@@ -221,13 +222,51 @@
     "doubtful": "Zona dudosa",
     "time": "Tiempo",
     "timeValue": "{seconds} s",
-    "refine": "Refinar en el servidor",
-    "refineSoon": "Esta imagen es difícil. Pronto podrás refinarla en nuestro servidor, con aviso de privacidad. Por ahora todo se queda en tu dispositivo.",
     "statusLocal": "Procesado en tu dispositivo · 0 bytes enviados",
     "statusSize": "{width}×{height} px",
-    "tip": "Tu imagen no sale de tu dispositivo: se recorta aquí mismo.",
+    "tip": "Tu imagen no sale de tu dispositivo, salvo que tú pidas mejorarla en el servidor.",
     "mascotWorkingAlt": "La rata mascota recortando con tijeras",
-    "mascotDoneAlt": "La rata mascota celebrando"
+    "mascotDoneAlt": "La rata mascota celebrando",
+    "tools": "Herramientas",
+    "toolNames": {
+      "view": "Ver",
+      "erase": "Borrar",
+      "restore": "Restaurar",
+      "select": "Tocar para seleccionar"
+    },
+    "undo": "Deshacer",
+    "brushSize": "Tamaño del pincel",
+    "selectHint": "Toca lo que quieres conservar. Con «Excluir» (o clic derecho) marcas lo que no.",
+    "selectMode": "Qué marca cada toque",
+    "include": "Incluir",
+    "exclude": "Excluir",
+    "clearPoints": "Borrar puntos",
+    "samLoading": "Preparando la selección (la primera vez descarga unos 14 MB)…",
+    "samEmbedding": "Analizando la imagen para poder seleccionar…",
+    "samError": "No se pudo preparar la selección. Inténtalo de nuevo.",
+    "server": "Servidor",
+    "improve": "¿No quedó bien? Mejorar en el servidor",
+    "improveFull": "¿Aún no? Probar el modelo completo",
+    "improving": "Mejorando en el servidor…",
+    "improveSuggested": "Esta imagen parece difícil: en el servidor puede quedar mejor.",
+    "improveDone": "Ya se usó el modelo más potente. Puedes retocar con el pincel.",
+    "privacyTitle": "Enviar al servidor",
+    "privacyBody": "Para mejorar el recorte, la imagen se enviará a nuestro servidor. Se procesa en memoria, no se guarda y se borra al terminar.",
+    "privacyKeepLocal": "Seguir solo en mi dispositivo",
+    "privacySend": "Enviar",
+    "serverErrors": {
+      "busy": "El servidor está ocupado. Inténtalo en un momento; tu recorte sigue aquí.",
+      "modelUnavailable": "Ese modelo no está disponible en el servidor ahora mismo.",
+      "tooLarge": "La imagen es demasiado grande para el servidor.",
+      "unreachable": "No se pudo conectar con el servidor. Tu recorte sigue aquí.",
+      "failed": "El servidor no pudo recortar la imagen."
+    },
+    "serverPlace": "Servidor (borrada al terminar)",
+    "serverModels": {
+      "birefnet-lite": "BiRefNet lite en el servidor",
+      "birefnet": "BiRefNet completo en el servidor"
+    },
+    "statusSent": "{kb} KB enviados al servidor y borrados al terminar"
   },
   "support": {
     "windowTitle": "Apoyar.txt",
