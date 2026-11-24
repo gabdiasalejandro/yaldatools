@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yaldatools.yaldapika.com/sitemap.xml
+Sitemap: https://tools.yaldapika.com/sitemap.xml

@@ -17,8 +17,13 @@ describe("refineErrorFor", () => {
 
 describe("nextServerModel", () => {
   it("climbs the ladder: lite first, then full, then nothing", () => {
-    expect(nextServerModel(null)).toBe("lite");
-    expect(nextServerModel("birefnet-lite")).toBe("full");
-    expect(nextServerModel("birefnet")).toBeNull();
+    expect(nextServerModel(null, true)).toBe("lite");
+    expect(nextServerModel("birefnet-lite", true)).toBe("full");
+    expect(nextServerModel("birefnet", true)).toBeNull();
+  });
+
+  it("stops after lite when the full model is disabled", () => {
+    expect(nextServerModel(null, false)).toBe("lite");
+    expect(nextServerModel("birefnet-lite", false)).toBeNull();
   });
 });

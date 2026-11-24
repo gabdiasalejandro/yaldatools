@@ -6,13 +6,13 @@ describe("pageMeta", () => {
     const tags = pageMeta("/en/qr-code");
     expect(tags).toContainEqual({ title: expect.stringContaining("QR code generator") });
     expect(tags).toContainEqual({
-      tagName: "link", rel: "alternate", hrefLang: "es", href: "https://yaldatools.yaldapika.com/es/qr",
+      tagName: "link", rel: "alternate", hrefLang: "es", href: "https://tools.yaldapika.com/es/qr",
     });
     expect(tags).toContainEqual({
-      tagName: "link", rel: "alternate", hrefLang: "en", href: "https://yaldatools.yaldapika.com/en/qr-code",
+      tagName: "link", rel: "alternate", hrefLang: "en", href: "https://tools.yaldapika.com/en/qr-code",
     });
     expect(tags).toContainEqual({
-      tagName: "link", rel: "canonical", href: "https://yaldatools.yaldapika.com/en/qr-code",
+      tagName: "link", rel: "canonical", href: "https://tools.yaldapika.com/en/qr-code",
     });
   });
 

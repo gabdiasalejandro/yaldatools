@@ -4,7 +4,7 @@ Versión: 24 de noviembre de 2026. Fuente editable: el documento "YaldaTools —
 
 ## Visión y principios
 
-YaldaTools es un sitio de herramientas pequeñas y gratuitas en `yaldatools.yaldapika.com`, con estética Windows 95 y una mascota anime. Se financia con donaciones que cubren el VPS y el tiempo de desarrollo.
+YaldaTools es un sitio de herramientas pequeñas y gratuitas en `tools.yaldapika.com`, con estética Windows 95 y una mascota anime. Se financia con donaciones que cubren el VPS y el tiempo de desarrollo.
 
 - **Local primero:** todo lo que pueda correr en el navegador corre ahí. El servidor solo se usa cuando aporta calidad real, y se avisa.
 - **Sin fricción:** sin registro, sin marcas de agua, sin anuncios y sin QR que caducan.
@@ -54,7 +54,7 @@ Notas de implementación:
 - **Retoque:** pincel para borrar y restaurar, con deshacer.
 - **Tocar para seleccionar:** el usuario toca lo que quiere conservar (y puede excluir zonas) y SlimSAM (unos 14 MB, en el navegador) recorta eso. Resuelve los casos de intención, como «¿el plato o solo la comida?», que ningún modelo automático puede adivinar.
 - **Límite conocido:** los objetos de cristal (por ejemplo, platos transparentes) siguen saliendo mal con todos los modelos.
-- **Alojamiento del modelo:** el archivo pasa del límite de 25 MiB por archivo de Cloudflare Pages, así que en producción se sirve desde almacenamiento externo (por ejemplo Cloudflare R2) con la variable `VITE_BG_MODEL_URL`. El navegador lo descarga una vez y lo guarda en caché; la descarga del modelo no envía nada del usuario.
+- **Alojamiento del modelo:** Rosemary sirve el modelo junto con la web, bajo `/models/`. La variable `VITE_BG_MODEL_URL` permite usar otro origen. El navegador lo descarga una vez y lo guarda en caché; la descarga del modelo no envía nada del usuario.
 - **Hilos:** ONNX Runtime usa un solo hilo mientras el sitio no envíe las cabeceras COOP/COEP. Activarlas acelera el modelo, pero hay que comprobar que no rompen las Google Fonts.
 
 ## Internacionalización ES/EN
@@ -130,7 +130,7 @@ Plan propuesto: lanzar con huecos de placeholder o con un paquete CC0, y encarga
 
 ## Arquitectura y despliegue
 
-El sitio es estático (React + TypeScript con React Router en modo framework sobre Vite, con todas las páginas prerenderizadas) y se sirve gratis desde Cloudflare Pages en `yaldatools.yaldapika.com`. El VPS solo entra en la fase 3, para los recortes difíciles.
+El sitio es estático (React + TypeScript con React Router en modo framework sobre Vite, con todas las páginas prerenderizadas). Caddy sirve el build y los modelos del navegador desde el VPS de Rosemary en `tools.yaldapika.com`. Caddy reenvía `/api/*` a FastAPI.
 
 ```mermaid
 flowchart TB
@@ -141,18 +141,17 @@ flowchart TB
   end
   subgraph CF["Cloudflare (plan gratuito)"]
     D["DNS y CDN"]
-    E["Pages: web estática"]
-    F["Turnstile: captcha"]
   end
-  subgraph VPS["VPS propio (fase 3)"]
-    G["Caddy"] --> H["FastAPI + cola en memoria"] --> I["BiRefNet (ONNX Runtime en CPU)"]
+  subgraph VPS["VPS de Rosemary"]
+    G["Caddy"] --> W["Web estática y modelos del navegador"]
+    G --> H["FastAPI + cola en memoria"] --> I["BiRefNet (ONNX Runtime en CPU)"]
   end
   Navegador <-- "páginas y modelos ONNX" --> CF
   Navegador <-- "solo imágenes difíciles" --> CF
-  CF <-- "/api/quitar-fondo" --> VPS
+  CF <-- "HTTPS" --> G
 ```
 
-Si el VPS está saturado o caído, la web avisa y se queda con el resultado del navegador. El subdominio se configura con un CNAME `yaldatools` en el DNS de yaldapika.com que apunte a Cloudflare Pages. Si se prefiere servir todo desde el VPS, Caddy puede alojar también la web estática.
+Si el VPS está saturado o caído, la web avisa y se queda con el resultado del navegador. El comodín DNS de `yaldapika.com` lleva el subdominio al VPS.
 
 | Pieza | Tecnología | Licencia |
 | --- | --- | --- |
@@ -160,7 +159,7 @@ Si el VPS está saturado o caído, la web avisa y se queda con el resultado del 
 | QR | `qr-code-styling` | MIT |
 | Recorte en el navegador | `onnxruntime-web` (WASM), ISNet general int8, SlimSAM int8, triage, flood fill y pincel propios | MIT / Apache 2.0 |
 | Recorte en el servidor | FastAPI, ONNX Runtime, BiRefNet (Python, gestionado con uv) | MIT |
-| Infraestructura | Cloudflare Pages + Docker Compose en el VPS | — |
+| Infraestructura | Cloudflare, Caddy, Rosemary y Docker | — |
 
 ### Backend: por qué FastAPI y sin Redis
 
@@ -203,8 +202,6 @@ Si el VPS está saturado o caído, la web avisa y se queda con el resultado del 
 
 Decisiones pendientes:
 
-- [ ] Características del VPS: RAM, núcleos, sistema operativo y si tiene Docker.
-- [ ] Si la web estática se sirve desde Cloudflare Pages o desde el propio VPS.
 - [ ] Nombre y personalidad de la mascota.
 - [ ] Cómo conseguir los GIFs: encargo, paquete o dibujo propio.
 - [x] Wallpaper: ilustración de ノーコピーライトガール, con uso comercial permitido y crédito (ver [`fondo-de-pantalla.md`](fondo-de-pantalla.md)).

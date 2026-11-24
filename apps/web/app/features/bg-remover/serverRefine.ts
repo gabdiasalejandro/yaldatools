@@ -20,9 +20,9 @@ export class RefineFailure extends Error {
 }
 
 /** Lite first; the full model only when the user asks again. */
-export function nextServerModel(current: ServerModelName | null): ServerModel | null {
+export function nextServerModel(current: ServerModelName | null, fullEnabled: boolean): ServerModel | null {
   if (current === null) return "lite";
-  return current === "birefnet-lite" ? "full" : null;
+  return current === "birefnet-lite" && fullEnabled ? "full" : null;
 }
 
 export function refineErrorFor(status: number, body: { error?: string } | null): RefineError {

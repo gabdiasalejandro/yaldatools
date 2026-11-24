@@ -1,0 +1,7 @@
+name = "tools"
+zone = "lab"
+kind = "static"
+
+[static]
+dir = "dist"
+spa = false

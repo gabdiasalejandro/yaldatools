@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { BG_SERVER_FULL } from "~/config";
 import { useMessages } from "~/i18n/messages";
 import { saveFile } from "~/shared/browser/download";
 import { Mascot } from "~/shared/ui/Mascot";
@@ -50,7 +51,7 @@ export function CutoutSession({ image, result, onAnother, onBytesSent }: CutoutS
   const [serverError, setServerError] = useState<RefineError | null>(null);
 
   const background: Rgb | null = choice === "transparent" ? null : choice === "white" ? [255, 255, 255] : hexToRgb(color);
-  const nextModel = nextServerModel(refinement?.model ?? null);
+  const nextModel = nextServerModel(refinement?.model ?? null, BG_SERVER_FULL);
   const looksHard = result.method === "model" && result.doubtful > DOUBTFUL_THRESHOLD;
 
   const pickTool = (next: Tool) => {

@@ -2,7 +2,7 @@ import { LOCALES, type Locale } from "./locales";
 import { getMessages } from "./messages";
 import { alternatePath, findPage, localeFromPath, type PageId } from "./pages";
 
-export const SITE_URL = "https://yaldatools.yaldapika.com";
+export const SITE_URL = "https://tools.yaldapika.com";
 
 type MetaDescriptor = Record<string, string>;
 type MetaPage = PageId | "notFound";

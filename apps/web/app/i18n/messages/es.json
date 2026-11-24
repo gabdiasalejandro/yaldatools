@@ -257,7 +257,7 @@
     "improveFull": "¿Aún no? Probar el modelo completo",
     "improving": "Mejorando en el servidor…",
     "improveSuggested": "Esta imagen parece difícil. Empieza por «Tocar para seleccionar» y «Restaurar»; si aún falta algo, usa el servidor, que de momento es modesto.",
-    "improveDone": "Ya se usó el modelo más potente. Puedes retocar con el pincel.",
+    "improveDone": "Ya se aplicó la mejora del servidor. Puedes retocar con el pincel.",
     "privacyTitle": "Enviar al servidor",
     "privacyBody": "Para mejorar el recorte, la imagen se enviará a nuestro servidor. Se procesa en memoria, no se guarda y se borra al terminar.",
     "privacyKeepLocal": "Seguir solo en mi dispositivo",

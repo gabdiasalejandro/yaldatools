@@ -257,7 +257,7 @@
     "improveFull": "Still not? Try the full model",
     "improving": "Improving on the server…",
     "improveSuggested": "This image looks hard. Start with “Tap to select” and “Restore”; if something is still missing, use the server, which is modest for now.",
-    "improveDone": "The most powerful model was already used. You can retouch with the brush.",
+    "improveDone": "Server refinement is complete. You can retouch with the brush.",
     "privacyTitle": "Send to the server",
     "privacyBody": "To improve the cut-out, the image will be sent to our server. It is processed in memory, never stored, and deleted when done.",
     "privacyKeepLocal": "Stay on my device only",

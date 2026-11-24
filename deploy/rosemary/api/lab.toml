@@ -1,0 +1,8 @@
+name = "tools-api"
+zone = "lab"
+kind = "api"
+
+[run]
+image = "yaldatools-api:release"
+port = 8000
+health = "/api/health"
