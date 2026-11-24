@@ -18,5 +18,5 @@ Estos archivos usan el formato de componentes del lienzo de Claude (plantillas `
 
 - **Fuentes:** Pixelify Sans y VT323 de Google Fonts; la interfaz usa Tahoma o Verdana del sistema.
 - **Iconos:** pixel art propio dibujado en SVG dentro de `Main.dc.html`.
-- **Wallpaper:** se carga desde `assets/wallpaper.webp`, que **no se incluye** porque no tiene licencia. Ver [`docs/fondo-de-pantalla.md`](../../docs/fondo-de-pantalla.md).
+- **Wallpaper:** se carga desde `assets/wallpaper.webp`, que **no se incluye** porque las condiciones de uso prohíben redistribuir el archivo. Ver [`docs/fondo-de-pantalla.md`](../../docs/fondo-de-pantalla.md).
 - **GIFs de la mascota:** de momento son huecos marcados con rayas rosas. Ver la sección de GIFs en [`docs/especificaciones.md`](../../docs/especificaciones.md).

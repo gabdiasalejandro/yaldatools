@@ -189,7 +189,7 @@ Decisiones pendientes:
 - [ ] Si la web estática se sirve desde Cloudflare Pages o desde el propio VPS.
 - [ ] Nombre y personalidad de la mascota.
 - [ ] Cómo conseguir los GIFs: encargo, paquete o dibujo propio.
-- [ ] Wallpaper definitivo: permiso del artista original o encargo (ver [`fondo-de-pantalla.md`](fondo-de-pantalla.md)).
+- [x] Wallpaper: ilustración de ノーコピーライトガール, con uso comercial permitido y crédito (ver [`fondo-de-pantalla.md`](fondo-de-pantalla.md)).
 - [ ] Correo de contacto público.
 - [ ] Plataforma de donaciones (más adelante).
 - [ ] Barra de título: variante "sakura" o "clásica".

@@ -12,5 +12,5 @@ El proyecto está en fase de diseño; todavía no hay código.
 ## Documentación
 
 - [Especificaciones](docs/especificaciones.md): alcance, requisitos, i18n ES/EN, sistema visual, arquitectura y fases.
-- [Fondo de pantalla](docs/fondo-de-pantalla.md): el candidato actual y su situación de derechos.
+- [Fondo de pantalla](docs/fondo-de-pantalla.md): ilustración elegida, condiciones de uso y crédito.
 - [Mockup](design/mockup): fuentes de las pantallas de diseño.

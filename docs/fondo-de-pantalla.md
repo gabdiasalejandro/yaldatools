@@ -1,38 +1,49 @@
 # Fondo de pantalla (wallpaper)
 
-## Candidato actual
+## Elegido: ノーコピーライトガール (No Copyright Girl)
 
 | Campo | Dato |
 | --- | --- |
-| Obra | «Supra» (2011) |
-| Artista | Seafh |
-| Publicación original | Pixiv, ID de obra 23025455, ID de artista 876012 |
-| Estado de la cuenta | Ya no parece estar disponible |
-| Licencia | **Ninguna.** Todos los derechos pertenecen a su autor |
-| Archivo usado en el mockup | WebP de 850×510, unos 95 KB |
+| Obra | Ilustración `kahunntotatakau` |
+| Artista | 春 (Haru) / ノーコピーライトガール |
+| Página de la obra | https://fromtheasia.com/illustration/kahunntotatakau |
+| Condiciones de uso | https://fromtheasia.com/usagerules |
+| Contacto del proyecto | El correo que figura en la página de condiciones |
+| Crédito en el sitio | `Ilustración / ノーコピーライトガール` (ES) e `Illustration / No Copyright Girl` (EN) |
 
-**El archivo de imagen no está en este repositorio a propósito.** El repo es público, y subirlo sería redistribuir una obra sin permiso. El mockup lo carga desde `design/mockup/assets/wallpaper.webp`, que está en `.gitignore`. Si no existe, se ve el color de reserva.
+Las condiciones se copiaron de la página de reglas de uso el 24 de noviembre de 2026; el repo no pudo leer la web directamente.
 
-## Lo que se ha averiguado
+### Qué permiten las condiciones
 
-- La cuenta original de Pixiv ya no está disponible.
-- Una búsqueda web de "Seafh" junto con pixiv y Twitter/X (24 de noviembre de 2026) no encontró ninguna cuenta activa con ese nombre.
+- **Uso comercial y personal gratuito**, siempre dentro de las reglas: 商用、個人利用問わず無料でお使いいただけます。
+- **Crédito:** se pide poner 「ノーコピーライトガール」 en sitios web y vídeos, donde se quiera. Ejemplo oficial: `イラスト/ノーコピーライトガール`. Si no es posible, se puede omitir, pero aquí sí se pondrá.
+- **Modificar la imagen** (recortar, redimensionar, convertir a WebP, oscurecerla) está permitido, siempre que no dañe gravemente la imagen de la ilustración.
 
-## Por qué no se puede usar tal cual en el sitio público
+### Qué prohíben y cómo nos afecta
 
-- Un crédito del tipo "todos los derechos pertenecen a su dueño, contáctame si eres el artista" no es un permiso de uso.
-- Que el autor no se pueda localizar ("obra huérfana") no la libera: el copyright sigue vigente.
-- El riesgo es una reclamación DMCA a Cloudflare o al VPS. Pesa más porque el sitio pide donaciones y porque el fondo es parte de la marca.
+| Prohibición | Consecuencia para YaldaTools |
+| --- | --- |
+| Redistribuir o vender la ilustración, aunque esté modificada | El archivo **no se sube a este repo público**: se descarga de la fuente al desplegar o se guarda fuera de git. En el sitio se usa como fondo, que sí es uso permitido |
+| Usarla para entrenar o alimentar IA (享受目的のAI学習・使用) | No se usa como imagen de ejemplo ni de prueba en el quitafondos ni en ningún modelo |
+| Decir que es obra propia (自作発言) | Crédito visible en el escritorio y en "Léeme.txt / Acerca de" |
+| Contenido sexual, spam o contrario a la moral | No aplica |
+| Obras por encargo, obras con autoría marcada o con el aviso 「フリーイラストではありません」 | **Comprobar** que la página de esta ilustración no lleva ese aviso |
+| Fanart de terceros (por ejemplo Hatsune Miku) | Comprobar que la ilustración es un personaje original |
 
-## Próximos pasos
+### Pendiente
 
-1. **Buscar al artista con otras vías:** búsqueda inversa de imagen (SauceNAO, Google Lens, TinEye), y probar variantes del nombre en X, Bluesky, ArtStation y DeviantArt. Muchos artistas de Pixiv cambian de nombre.
-2. **Si se le encuentra:** pedir permiso por escrito (un correo o un mensaje basta), indicando el uso como fondo del sitio y el crédito propuesto. Guardar la respuesta.
-3. **Si no se le encuentra:** encargar una ilustración con el mismo ambiente: chica anime frente a una pared de ladrillo, sombra de alas, luz cálida y bokeh. Puede ser la propia mascota de YaldaTools en versión ilustración. Coste orientativo de 50–200 USD (de memoria; hay que verificarlo).
-4. **Mientras tanto:** en producción, usar el escritorio turquesa clásico o un fondo con licencia libre (CC0).
+- [ ] Confirmar en la página de la obra que no tiene el aviso 「フリーイラストではありません」 y que es un personaje original.
+- [ ] Guardar una captura de las condiciones de uso con fecha, por si cambian más adelante.
+- [ ] Preparar el archivo: al menos 1920×1080 en WebP o AVIF de menos de 150 KB, más un recorte vertical para móvil.
 
-## Requisitos técnicos del wallpaper definitivo
+## Descartado: «Supra» de Seafh (2011)
 
-- Al menos 1920×1080, con el personaje en el tercio izquierdo para que no lo tape la ventana de bienvenida, que va a la derecha.
-- WebP o AVIF de menos de 150 KB, más una versión recortada en vertical para móvil.
-- Que los textos blancos de los iconos del escritorio se lean encima, o añadir un velo oscuro.
+- Publicada en Pixiv (ID de obra 23025455, ID de artista 876012). La cuenta ya no está disponible.
+- Una búsqueda web de "Seafh" junto con pixiv y Twitter/X no encontró ninguna cuenta activa.
+- **Se descartó por no tener licencia:** dar crédito no es un permiso, y una obra cuyo autor no se puede localizar sigue protegida por copyright. El mockup la usó solo como referencia de ambiente, y el archivo nunca se subió al repo.
+
+## Requisitos técnicos
+
+- El mockup carga el fondo desde `design/mockup/assets/wallpaper.webp`, que está en `.gitignore`. Si no existe, se ve un color de reserva.
+- El personaje debería quedar en la zona izquierda o central, para que no lo tape la ventana de bienvenida, que va a la derecha.
+- Los textos blancos de los iconos del escritorio tienen que leerse encima; si no, se añade un velo oscuro.
