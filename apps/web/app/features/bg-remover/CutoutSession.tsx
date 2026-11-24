@@ -123,6 +123,9 @@ export function CutoutSession({ image, result, onAnother, onBytesSent }: CutoutS
           <button type="button" className="raised btn" onClick={history.undo} disabled={!history.canUndo}>
             {t.undo}
           </button>
+          <button type="button" className="raised btn" onClick={history.redo} disabled={!history.canRedo}>
+            {t.redo}
+          </button>
         </div>
 
         {(tool === "erase" || tool === "restore") && (

@@ -243,6 +243,7 @@
       "select": "Tocar para seleccionar"
     },
     "undo": "Deshacer",
+    "redo": "Rehacer",
     "brushSize": "Tamaño del pincel",
     "selectHint": "Toca lo que quieres conservar. Con «Excluir» (o clic derecho) marcas lo que no.",
     "selectMode": "Qué marca cada toque",

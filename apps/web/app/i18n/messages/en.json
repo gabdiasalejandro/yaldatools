@@ -243,6 +243,7 @@
       "select": "Tap to select"
     },
     "undo": "Undo",
+    "redo": "Redo",
     "brushSize": "Brush size",
     "selectHint": "Tap what you want to keep. With “Exclude” (or right click) you mark what you don't.",
     "selectMode": "What each tap marks",
