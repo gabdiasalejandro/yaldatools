@@ -24,6 +24,14 @@ pnpm build      # sitio estático en build/client
 
 El quitafondos necesita el modelo ISNet, que no está en el repo por su tamaño. `pnpm fetch-model` lo descarga de la release de rembg, lo cuantiza a int8 (hace falta `uv`) y lo deja en `public/models/`, que solo usa el servidor de desarrollo. El build no lo incluye: en producción, `VITE_BG_MODEL_URL` apunta a donde esté alojado.
 
+Para comparar el modelo del navegador con BiRefNet (el que usará el servidor en la fase 3) sobre tus propias fotos:
+
+```sh
+uv run apps/api/scripts/compare_models.py --images ~/fotos --out /tmp/comparacion
+```
+
+Descarga los modelos de BiRefNet una vez a `~/.cache/yaldatools/models` (unos 1,2 GB) y deja un `index.html` con los recortes lado a lado, el tiempo de cada modelo y su zona dudosa.
+
 El fondo de pantalla no está en el repo porque su licencia prohíbe redistribuirlo. Para verlo en local, copia el archivo a `apps/web/public/wallpaper.webp`; sin él se usa un color de reserva. Ver [`docs/fondo-de-pantalla.md`](docs/fondo-de-pantalla.md).
 
 ## Documentación
