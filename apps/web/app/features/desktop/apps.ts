@@ -16,7 +16,7 @@ export type DesktopApp = {
 };
 
 export const DESKTOP_APPS: readonly DesktopApp[] = [
-  { id: "removeBg", icon: "bg", kind: "tool", page: "removeBg", soon: true },
+  { id: "removeBg", icon: "bg", kind: "tool", page: "removeBg" },
   { id: "qr", icon: "qr", kind: "tool", page: "qr" },
   { id: "compress", icon: "img", kind: "tool", soon: true },
   { id: "mergePdf", icon: "pdf", kind: "tool", soon: true },

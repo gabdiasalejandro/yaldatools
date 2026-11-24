@@ -9,8 +9,8 @@
       "description": "Create static QR codes that never expire for WiFi, links, contacts, WhatsApp and email. Colors, logo and PNG or SVG download, free and without sign-up."
     },
     "removeBg": {
-      "title": "Remove image background for free — YaldaTools",
-      "description": "Remove the background of your photos in the browser, without uploading them anywhere. Coming soon to YaldaTools."
+      "title": "Remove image background for free, without uploading — YaldaTools",
+      "description": "Remove the background of your photos for free, in your browser: the image is never uploaded. Download a PNG with a transparent, white or colored background."
     },
     "support": {
       "title": "Support the project — YaldaTools",
@@ -41,14 +41,38 @@
     "soon": "soon",
     "credit": "Illustration / No Copyright Girl",
     "apps": {
-      "removeBg": { "label": "Remove background", "keywords": "background remove cut photo image transparent png" },
-      "qr": { "label": "QR Code", "keywords": "qr code wifi url link contact vcard whatsapp email" },
-      "compress": { "label": "Compress image", "keywords": "compress reduce size image photo jpg webp" },
-      "mergePdf": { "label": "Merge PDF", "keywords": "pdf merge join combine documents" },
-      "passwords": { "label": "Passwords", "keywords": "password generator secure strong" },
-      "exif": { "label": "Remove EXIF", "keywords": "exif metadata gps privacy photo" },
-      "readme": { "label": "Readme.txt", "keywords": "readme about info privacy credits" },
-      "support": { "label": "Support", "keywords": "support donate donation coffee help" }
+      "removeBg": {
+        "label": "Remove background",
+        "keywords": "background remove cut photo image transparent png"
+      },
+      "qr": {
+        "label": "QR Code",
+        "keywords": "qr code wifi url link contact vcard whatsapp email"
+      },
+      "compress": {
+        "label": "Compress image",
+        "keywords": "compress reduce size image photo jpg webp"
+      },
+      "mergePdf": {
+        "label": "Merge PDF",
+        "keywords": "pdf merge join combine documents"
+      },
+      "passwords": {
+        "label": "Passwords",
+        "keywords": "password generator secure strong"
+      },
+      "exif": {
+        "label": "Remove EXIF",
+        "keywords": "exif metadata gps privacy photo"
+      },
+      "readme": {
+        "label": "Readme.txt",
+        "keywords": "readme about info privacy credits"
+      },
+      "support": {
+        "label": "Support",
+        "keywords": "support donate donation coffee help"
+      }
     }
   },
   "home": {
@@ -147,10 +171,63 @@
   "removeBg": {
     "windowTitle": "Remove background — YaldaTools",
     "taskLabel": "Remove background",
-    "headline": "Coming soon",
-    "body": "We are building the background remover: it will analyze your image and cut it out in the browser, without uploading it anywhere.",
-    "back": "Back to the desktop",
-    "mascotAlt": "Placeholder for the mascot cutting with scissors"
+    "dropTitle": "Drop an image here",
+    "dropHint": "or paste it with Ctrl+V · JPG, PNG or WebP up to 25 MB",
+    "choose": "Choose image…",
+    "dropLabel": "Area to drop or choose an image",
+    "stages": {
+      "decoding": "Reading the image…",
+      "triage": "Analyzing the image…",
+      "loadingModel": "Downloading the model (first time only)…",
+      "segmenting": "Cutting out with the model…"
+    },
+    "errors": {
+      "unsupportedType": "That format is not supported. Use JPG, PNG or WebP.",
+      "tooLarge": "The image is larger than 25 MB.",
+      "unreadable": "The image could not be read. Is it damaged?",
+      "modelUnavailable": "The model could not be downloaded. Check your connection and try again.",
+      "failed": "Something went wrong while cutting out. Try another image."
+    },
+    "tryAgain": "Try another image",
+    "original": "Original",
+    "result": "Result",
+    "previewAlt": "Preview of the image without background",
+    "background": "Background",
+    "backgrounds": {
+      "transparent": "Transparent",
+      "white": "White",
+      "color": "Color"
+    },
+    "pickColor": "Background color",
+    "download": "Download PNG",
+    "another": "Another image",
+    "diagnostics": "Diagnostics",
+    "difficulty": "Difficulty",
+    "difficulties": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "method": "Method",
+    "methods": {
+      "floodFill": "Color fill (flood fill)",
+      "model": "ISNet model in the browser"
+    },
+    "processedOn": "Processed on",
+    "device": "Your device",
+    "borderUniformity": "Border uniformity",
+    "contrast": "Contrast",
+    "edgeDensity": "Edge density",
+    "doubtful": "Doubtful area",
+    "time": "Time",
+    "timeValue": "{seconds} s",
+    "refine": "Refine on the server",
+    "refineSoon": "This image is hard. Soon you will be able to refine it on our server, with a privacy notice. For now everything stays on your device.",
+    "statusLocal": "Processed on your device · 0 bytes sent",
+    "statusSize": "{width}×{height} px",
+    "tip": "Your image never leaves your device: it is cut out right here.",
+    "mascotWorkingAlt": "Placeholder for the mascot cutting with scissors",
+    "mascotDoneAlt": "Placeholder for the mascot celebrating"
   },
   "support": {
     "windowTitle": "Support.txt",
@@ -158,9 +235,17 @@
     "headline": "Thanks for stopping by",
     "body": "YaldaTools is free, ad-free and needs no sign-up. Donations cover the server and the time to build more tools.",
     "spendTitle": "Where the money goes",
-    "spend": ["The server (VPS) for hard background cut-outs.", "Time to build a new tool every few weeks."],
+    "spend": [
+      "The server (VPS) for hard background cut-outs.",
+      "Time to build a new tool every few weeks."
+    ],
     "nextTitle": "Upcoming tools",
-    "next": ["Compress image", "Merge PDF", "Password generator", "Remove EXIF"],
+    "next": [
+      "Compress image",
+      "Merge PDF",
+      "Password generator",
+      "Remove EXIF"
+    ],
     "donate": "Donate",
     "notYet": "The donation platform is coming soon. Thanks for the thought!",
     "mascotAlt": "Placeholder for the mascot holding a coffee cup"

@@ -8,7 +8,8 @@ import { buildPayload, type QrType } from "./payload";
 import { QrAppearanceFields } from "./QrAppearanceFields";
 import { QrContentFields } from "./QrContentFields";
 import { QrPreview } from "./QrPreview";
-import { copyImage, renderFile, saveFile } from "./render";
+import { saveFile } from "~/shared/browser/download";
+import { copyImage, renderFile } from "./render";
 import { DEFAULT_APPEARANCE, effectiveEcc, type PngSize, type QrAppearance } from "./styling";
 
 type Notice = { kind: "ok" | "error"; text: string } | null;

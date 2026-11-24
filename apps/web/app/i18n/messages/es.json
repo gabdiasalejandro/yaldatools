@@ -9,8 +9,8 @@
       "description": "Crea códigos QR estáticos que nunca caducan para WiFi, enlaces, contactos, WhatsApp y email. Colores, logo y descarga en PNG o SVG, gratis y sin registro."
     },
     "removeBg": {
-      "title": "Quitar fondo de una imagen gratis — YaldaTools",
-      "description": "Quita el fondo de tus fotos en el navegador, sin subirlas a ningún servidor. Muy pronto en YaldaTools."
+      "title": "Quitar fondo de una imagen gratis, sin subirla — YaldaTools",
+      "description": "Quita el fondo de tus fotos gratis y en tu navegador: la imagen no se sube a ningún servidor. Descarga en PNG con fondo transparente, blanco o de color."
     },
     "support": {
       "title": "Apoyar el proyecto — YaldaTools",
@@ -41,14 +41,38 @@
     "soon": "pronto",
     "credit": "Ilustración / ノーコピーライトガール",
     "apps": {
-      "removeBg": { "label": "Quitar fondo", "keywords": "fondo recortar foto imagen transparente png background" },
-      "qr": { "label": "Código QR", "keywords": "qr codigo wifi url enlace contacto vcard whatsapp email" },
-      "compress": { "label": "Comprimir imagen", "keywords": "comprimir reducir peso imagen foto jpg webp" },
-      "mergePdf": { "label": "Unir PDF", "keywords": "pdf unir juntar combinar documentos" },
-      "passwords": { "label": "Contraseñas", "keywords": "contraseña clave password generar segura" },
-      "exif": { "label": "Quitar EXIF", "keywords": "exif metadatos gps privacidad foto" },
-      "readme": { "label": "Léeme.txt", "keywords": "leeme acerca info privacidad creditos" },
-      "support": { "label": "Apoyar", "keywords": "apoyar donar donacion cafe ayudar" }
+      "removeBg": {
+        "label": "Quitar fondo",
+        "keywords": "fondo recortar foto imagen transparente png background"
+      },
+      "qr": {
+        "label": "Código QR",
+        "keywords": "qr codigo wifi url enlace contacto vcard whatsapp email"
+      },
+      "compress": {
+        "label": "Comprimir imagen",
+        "keywords": "comprimir reducir peso imagen foto jpg webp"
+      },
+      "mergePdf": {
+        "label": "Unir PDF",
+        "keywords": "pdf unir juntar combinar documentos"
+      },
+      "passwords": {
+        "label": "Contraseñas",
+        "keywords": "contraseña clave password generar segura"
+      },
+      "exif": {
+        "label": "Quitar EXIF",
+        "keywords": "exif metadatos gps privacidad foto"
+      },
+      "readme": {
+        "label": "Léeme.txt",
+        "keywords": "leeme acerca info privacidad creditos"
+      },
+      "support": {
+        "label": "Apoyar",
+        "keywords": "apoyar donar donacion cafe ayudar"
+      }
     }
   },
   "home": {
@@ -147,10 +171,63 @@
   "removeBg": {
     "windowTitle": "Quitar fondo — YaldaTools",
     "taskLabel": "Quitar fondo",
-    "headline": "Muy pronto",
-    "body": "Estamos preparando el quitafondos: analizará tu imagen y la recortará en el navegador, sin subirla a ningún sitio.",
-    "back": "Volver al escritorio",
-    "mascotAlt": "Hueco para la mascota recortando con tijeras"
+    "dropTitle": "Suelta una imagen aquí",
+    "dropHint": "o pégala con Ctrl+V · JPG, PNG o WebP de hasta 25 MB",
+    "choose": "Elegir imagen…",
+    "dropLabel": "Zona para soltar o elegir una imagen",
+    "stages": {
+      "decoding": "Leyendo la imagen…",
+      "triage": "Analizando la imagen…",
+      "loadingModel": "Descargando el modelo (solo la primera vez)…",
+      "segmenting": "Recortando con el modelo…"
+    },
+    "errors": {
+      "unsupportedType": "Ese formato no está soportado. Usa JPG, PNG o WebP.",
+      "tooLarge": "La imagen pesa más de 25 MB.",
+      "unreadable": "No se pudo leer la imagen. ¿Está dañada?",
+      "modelUnavailable": "No se pudo descargar el modelo. Revisa tu conexión e inténtalo de nuevo.",
+      "failed": "Algo salió mal al recortar. Prueba con otra imagen."
+    },
+    "tryAgain": "Probar otra imagen",
+    "original": "Original",
+    "result": "Resultado",
+    "previewAlt": "Vista previa de la imagen sin fondo",
+    "background": "Fondo",
+    "backgrounds": {
+      "transparent": "Transparente",
+      "white": "Blanco",
+      "color": "Color"
+    },
+    "pickColor": "Color de fondo",
+    "download": "Descargar PNG",
+    "another": "Otra imagen",
+    "diagnostics": "Diagnóstico",
+    "difficulty": "Dificultad",
+    "difficulties": {
+      "easy": "Fácil",
+      "medium": "Media",
+      "hard": "Difícil"
+    },
+    "method": "Método",
+    "methods": {
+      "floodFill": "Relleno por color (flood fill)",
+      "model": "Modelo ISNet en el navegador"
+    },
+    "processedOn": "Procesado en",
+    "device": "Tu dispositivo",
+    "borderUniformity": "Uniformidad del borde",
+    "contrast": "Contraste",
+    "edgeDensity": "Densidad de bordes",
+    "doubtful": "Zona dudosa",
+    "time": "Tiempo",
+    "timeValue": "{seconds} s",
+    "refine": "Refinar en el servidor",
+    "refineSoon": "Esta imagen es difícil. Pronto podrás refinarla en nuestro servidor, con aviso de privacidad. Por ahora todo se queda en tu dispositivo.",
+    "statusLocal": "Procesado en tu dispositivo · 0 bytes enviados",
+    "statusSize": "{width}×{height} px",
+    "tip": "Tu imagen no sale de tu dispositivo: se recorta aquí mismo.",
+    "mascotWorkingAlt": "Hueco para la mascota recortando con tijeras",
+    "mascotDoneAlt": "Hueco para la mascota celebrando"
   },
   "support": {
     "windowTitle": "Apoyar.txt",
@@ -158,9 +235,17 @@
     "headline": "Gracias por pasarte",
     "body": "YaldaTools es gratis, sin anuncios y sin registro. Las donaciones cubren el servidor y el tiempo para crear más herramientas.",
     "spendTitle": "En qué se gasta",
-    "spend": ["El servidor (VPS) para los recortes difíciles.", "Tiempo para crear una herramienta nueva cada pocas semanas."],
+    "spend": [
+      "El servidor (VPS) para los recortes difíciles.",
+      "Tiempo para crear una herramienta nueva cada pocas semanas."
+    ],
     "nextTitle": "Próximas herramientas",
-    "next": ["Comprimir imagen", "Unir PDF", "Generador de contraseñas", "Quitar EXIF"],
+    "next": [
+      "Comprimir imagen",
+      "Unir PDF",
+      "Generador de contraseñas",
+      "Quitar EXIF"
+    ],
     "donate": "Donar",
     "notYet": "La plataforma de donaciones llegará pronto. ¡Gracias por la intención!",
     "mascotAlt": "Hueco para la mascota con una taza de café"

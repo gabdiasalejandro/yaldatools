@@ -520,3 +520,103 @@ textarea.field {
     padding: 10px;
   }
 }
+
+/* ---------- Background remover ---------- */
+
+.bg-remover {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.bg-remover-main {
+  flex: 999 1 460px;
+  min-width: 0;
+}
+
+.bg-remover-side {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.bg-remover-side > .fieldset {
+  align-self: stretch;
+}
+
+.dropzone {
+  min-height: 320px;
+  padding: 24px;
+  background: var(--light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.dropzone--active {
+  background: var(--soft-pink);
+  outline: 2px dashed var(--sakura);
+  outline-offset: -8px;
+}
+
+.progress {
+  width: min(320px, 100%);
+  height: 20px;
+  accent-color: var(--navy);
+}
+
+.result-preview {
+  max-width: 100%;
+  padding: 8px;
+  background: var(--light);
+}
+
+.result-preview canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 60vh;
+  height: auto;
+}
+
+/* Gray-and-white squares show where the image is transparent. */
+.checkerboard {
+  background-color: var(--light);
+  background-image:
+    linear-gradient(45deg, #d0d0d0 25%, transparent 25%),
+    linear-gradient(-45deg, #d0d0d0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d0d0d0 75%),
+    linear-gradient(-45deg, transparent 75%, #d0d0d0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.diagnostics {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.diagnostics > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+  border-bottom: 1px dotted var(--shadow);
+}
+
+.diagnostics dt {
+  color: #333;
+}
+
+.diagnostics dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+}
