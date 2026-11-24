@@ -24,25 +24,28 @@
 # torch = { index = "pytorch-cpu" }
 # torchvision = { index = "pytorch-cpu" }
 # ///
-"""Export BiRefNet lite (general, Swin-tiny) to ONNX at smaller fixed input sizes.
+"""Export BiRefNet (general) lite (Swin-tiny) or full (Swin-large) to ONNX at smaller fixed sizes.
 
-The rembg ONNX file of BiRefNet lite takes a fixed 1x3x1024x1024 input, which keeps
-~7 GB of RSS on CPU. Exporting the same weights at 768 or 512 px lowers that.
+The rembg ONNX files of BiRefNet take a fixed 1x3x1024x1024 input, which keeps
+~7 GB (lite) or ~9 GB (full) of RSS on CPU. Exporting the same weights at 768 or
+512 px lowers that.
 
 Sources (both MIT, https://github.com/ZhengPeng7/BiRefNet):
   - model code: the official repository at a pinned commit;
-  - weights: release v1 `BiRefNet-general-bb_swin_v1_tiny-epoch_232.pth`, the same
-    checkpoint rembg ships as `BiRefNet-general-bb_swin_v1_tiny-epoch_232.onnx`.
+  - weights: release v1 `BiRefNet-general-bb_swin_v1_tiny-epoch_232.pth` (lite) and
+    `BiRefNet-general-epoch_244.pth` (full), the same checkpoints rembg ships as
+    `BiRefNet-general-bb_swin_v1_tiny-epoch_232.onnx` and `BiRefNet-general-epoch_244.onnx`.
 
 torchvision's `deform_conv2d` has no ONNX symbolic; it is registered with the
 `deform_conv2d_onnx_exporter` package (MIT), as the official BiRefNet
 `tutorials/BiRefNet_pth2onnx.ipynb` does, and exported with the TorchScript exporter.
 
-Usage (downloads ~1 GB of CPU wheels and 178 MB of weights once):
-    uv run apps/api/scripts/export_birefnet.py                    # 768 and 512
+Usage (downloads ~1 GB of CPU wheels once, plus 178 MB of lite or 885 MB of full weights):
+    uv run apps/api/scripts/export_birefnet.py                    # lite at 768 and 512
+    uv run apps/api/scripts/export_birefnet.py --model full --sides 512
     uv run apps/api/scripts/export_birefnet.py --sides 1024 --out /tmp/x   # control export
 
-Outputs go to ~/.cache/yaldatools/models/BiRefNet-lite-<side>.onnx (never the repository).
+Outputs go to ~/.cache/yaldatools/models/BiRefNet-<model>-<side>.onnx (never the repository).
 """
 
 from __future__ import annotations
@@ -59,9 +62,22 @@ CACHE = Path.home() / ".cache" / "yaldatools"
 MODELS_DIR = CACHE / "models"
 REPO_COMMIT = "f7079632d681ecf12161fcea8905682934e59e51"
 REPO_TARBALL = f"https://github.com/ZhengPeng7/BiRefNet/archive/{REPO_COMMIT}.tar.gz"
-WEIGHTS_NAME = "BiRefNet-general-bb_swin_v1_tiny-epoch_232.pth"
-WEIGHTS_URL = f"https://github.com/ZhengPeng7/BiRefNet/releases/download/v1/{WEIGHTS_NAME}"
-WEIGHTS_SHA256 = "6a1e050c6ec2697e5ed268455df544782b023acf8643ab771250979094875ab1"
+RELEASE_URL = "https://github.com/ZhengPeng7/BiRefNet/releases/download/v1"
+# model -> (weights file, sha256, backbone, lateral channels of that backbone)
+VARIANTS = {
+    "lite": (
+        "BiRefNet-general-bb_swin_v1_tiny-epoch_232.pth",
+        "6a1e050c6ec2697e5ed268455df544782b023acf8643ab771250979094875ab1",
+        "swin_v1_t",
+        [768, 384, 192, 96],
+    ),
+    "full": (
+        "BiRefNet-general-epoch_244.pth",
+        "11341a6a1c12646627e8d28da025bfec8aad027929d377cbe8fd4759636cc77c",
+        "swin_v1_l",
+        [1536, 768, 384, 192],
+    ),
+}
 OPSET = 17
 
 
@@ -83,9 +99,10 @@ def download(url: str, path: Path) -> Path:
     return path
 
 
-def fetch_weights() -> Path:
-    path = download(WEIGHTS_URL, CACHE / "weights" / WEIGHTS_NAME)
-    if (digest := sha256_of(path)) != WEIGHTS_SHA256:
+def fetch_weights(variant: str) -> Path:
+    name, expected, _, _ = VARIANTS[variant]
+    path = download(f"{RELEASE_URL}/{name}", CACHE / "weights" / name)
+    if (digest := sha256_of(path)) != expected:
         raise SystemExit(f"sha256 mismatch for {path}: {digest}")
     return path
 
@@ -100,8 +117,8 @@ def fetch_source() -> Path:
     return source
 
 
-def load_model(source: Path, weights: Path):
-    """Build the official BiRefNet with a Swin-tiny backbone and load the checkpoint strictly."""
+def load_model(source: Path, weights: Path, variant: str):
+    """Build the official BiRefNet with the variant's backbone and load the checkpoint strictly."""
     import torch
 
     os.chdir(source)  # config.py lists the working directory
@@ -109,18 +126,19 @@ def load_model(source: Path, weights: Path):
     import config as birefnet_config
 
     original_init = birefnet_config.Config.__init__
+    _, _, backbone, lateral = VARIANTS[variant]
 
-    def lite_init(self) -> None:
+    def variant_init(self) -> None:
         original_init(self)
-        self.bb = "swin_v1_t"
-        self.SDPA_enabled = False  # plain attention, as the checkpoint's original code
-        channels = [768, 384, 192, 96]
+        self.bb = backbone
+        self.SDPA_enabled = False  # plain attention, as the checkpoints' original code
+        channels = list(lateral)
         if self.mul_scl_ipt == "cat":
             channels = [channel * 2 for channel in channels]
         self.lateral_channels_in_collection = channels
         self.cxt = channels[1:][::-1][-self.cxt_num:] if self.cxt_num else []
 
-    birefnet_config.Config.__init__ = lite_init
+    birefnet_config.Config.__init__ = variant_init
 
     from models.birefnet import BiRefNet
     from utils import check_state_dict
@@ -184,6 +202,7 @@ def export(model, side: int, path: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--model", choices=sorted(VARIANTS), default="lite", help="model to export (default: lite)")
     parser.add_argument("--sides", default="768,512", help="comma-separated input sides (default: 768,512)")
     parser.add_argument("--out", type=Path, default=MODELS_DIR, help=f"output folder (default: {MODELS_DIR})")
     args = parser.parse_args()
@@ -195,12 +214,12 @@ def main() -> None:
     import torch
 
     torch.set_num_threads(os.cpu_count() or 1)
-    weights = fetch_weights()
-    model = load_model(fetch_source(), weights)
+    weights = fetch_weights(args.model)
+    model = load_model(fetch_source(), weights, args.model)
     register_deform_conv2d()
     for side in sides:
         print(f"Exporting {side}x{side} ...", flush=True)
-        export(model, side, out / f"BiRefNet-lite-{side}.onnx")
+        export(model, side, out / f"BiRefNet-{args.model}-{side}.onnx")
 
 
 if __name__ == "__main__":

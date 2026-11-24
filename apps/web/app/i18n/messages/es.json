@@ -270,6 +270,7 @@
       "unreachable": "No se pudo conectar con el servidor. Tu recorte sigue aquí.",
       "failed": "El servidor no pudo recortar la imagen.",
       "rateLimited": "Has usado el servidor muchas veces seguidas. Espera un poco y vuelve a intentarlo; mientras, puedes retocar con el pincel.",
+      "fullUnavailable": "El modelo grande no está disponible, puedes intentar más tarde.",
       "unavailable": "El servidor ahora no está disponible. Tu recorte sigue aquí; puedes mejorarlo con «Tocar para seleccionar» y «Restaurar»."
     },
     "serverPlace": "Servidor (borrada al terminar)",

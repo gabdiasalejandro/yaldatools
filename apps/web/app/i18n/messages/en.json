@@ -270,6 +270,7 @@
       "unreachable": "Could not reach the server. Your cut-out is still here.",
       "failed": "The server could not cut out the image.",
       "rateLimited": "You have used the server many times in a row. Wait a little and try again; meanwhile you can retouch with the brush.",
+      "fullUnavailable": "The large model is not available; you can try again later.",
       "unavailable": "The server is not available right now. Your cut-out is still here; you can improve it with “Tap to select” and “Restore”."
     },
     "serverPlace": "Server (deleted when done)",

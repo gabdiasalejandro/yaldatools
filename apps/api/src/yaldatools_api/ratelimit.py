@@ -74,7 +74,7 @@ class RateLimiter:
 
 
 class GlobalCap:
-    """Server-wide ceiling: at most `per_hour` processed images in any sliding hour.
+    """Server-wide ceiling for one model: at most `per_hour` processed images in any sliding hour.
 
     Protects a small shared server whatever the traffic looks like. Only images
     that reach inference are recorded, so invalid uploads do not use it up.

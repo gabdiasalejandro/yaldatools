@@ -7,7 +7,7 @@ import pytest
 from PIL import Image, ImageDraw
 
 from yaldatools_api.config import Settings
-from yaldatools_api.models import MODELS, lite_filename
+from yaldatools_api.models import MODELS, model_filename
 from yaldatools_api.segmenter import OnnxSegmenter
 
 
@@ -34,7 +34,7 @@ def test_real_lite_model_segments_a_synthetic_image():
 @pytest.mark.slow
 @pytest.mark.parametrize("side", [768, 512])
 def test_real_exported_lite_model_segments_a_synthetic_image(side):
-    path = Settings.from_env().models_dir / lite_filename(side)
+    path = Settings.from_env().models_dir / model_filename("lite", side)
     if not path.exists():
         pytest.skip(f"{path} is not exported (scripts/export_birefnet.py)")
 

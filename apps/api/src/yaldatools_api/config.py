@@ -7,18 +7,22 @@ from dataclasses import dataclass
 from pathlib import Path
 
 DEFAULT_MODELS_DIR = "~/.cache/yaldatools/models"
-LITE_SIDES = (1024, 768, 512)  # 1024 is the rembg file; 768 and 512 come from scripts/export_birefnet.py
+MODEL_SIDES = (1024, 768, 512)  # 1024 is the rembg file; 768 and 512 come from scripts/export_birefnet.py
 
 
 def _bool(value: str) -> bool:
     return value.strip().lower() not in {"0", "false", "no", "off", ""}
 
 
-def _lite_side(value: str) -> int:
+def _side_error(variable: str) -> ValueError:
+    return ValueError(f"{variable} must be one of {', '.join(map(str, MODEL_SIDES))}")
+
+
+def _side(variable: str, value: str) -> int:
     try:
         return int(value)
     except ValueError:
-        raise ValueError(f"YALDA_LITE_SIDE must be one of {', '.join(map(str, LITE_SIDES))}") from None
+        raise _side_error(variable) from None
 
 
 @dataclass(frozen=True)
@@ -30,8 +34,11 @@ class Settings:
     threads: int = 0  # ONNX Runtime intra-op threads; 0 keeps the ORT default
     rate_per_minute: int = 4  # per client (IPv4 address or IPv6 /64); 0 disables
     rate_per_day: int = 40
-    global_per_hour: int = 25  # images processed per hour for everyone together; 0 disables
+    # Images each model processes per hour for everyone together; 0 disables.
+    lite_per_hour: int = 200
+    full_per_hour: int = 50
     lite_side: int = 1024  # input side of the lite model; smaller uses less RAM
+    full_side: int = 1024  # input side of the full model; smaller uses less RAM
     # ONNX Runtime's CPU arena keeps memory after each request (lite 1024 settles at ~12 GB);
     # off returns it between requests at ~10–20 % more time. Matters on a shared server.
     memory_arena: bool = False
@@ -40,10 +47,13 @@ class Settings:
         object.__setattr__(self, "models_dir", Path(self.models_dir).expanduser())
         if self.concurrency < 1:
             raise ValueError("YALDA_CONCURRENCY must be at least 1")
-        if min(self.max_waiting, self.threads, self.rate_per_minute, self.rate_per_day, self.global_per_hour) < 0:
-            raise ValueError("YALDA_MAX_WAITING, YALDA_THREADS and YALDA_RATE_* cannot be negative")
-        if self.lite_side not in LITE_SIDES:
-            raise ValueError(f"YALDA_LITE_SIDE must be one of {', '.join(map(str, LITE_SIDES))}")
+        counts = (self.max_waiting, self.threads, self.rate_per_minute, self.rate_per_day, self.lite_per_hour, self.full_per_hour)
+        if min(counts) < 0:
+            raise ValueError("YALDA_MAX_WAITING, YALDA_THREADS, YALDA_RATE_* and YALDA_*_PER_HOUR cannot be negative")
+        if self.lite_side not in MODEL_SIDES:
+            raise _side_error("YALDA_LITE_SIDE")
+        if self.full_side not in MODEL_SIDES:
+            raise _side_error("YALDA_FULL_SIDE")
 
     @classmethod
     def from_env(cls, env: dict[str, str] | None = None) -> Settings:
@@ -56,7 +66,9 @@ class Settings:
             threads=int(env.get("YALDA_THREADS", "0")),
             rate_per_minute=int(env.get("YALDA_RATE_PER_MINUTE", "4")),
             rate_per_day=int(env.get("YALDA_RATE_PER_DAY", "40")),
-            global_per_hour=int(env.get("YALDA_GLOBAL_PER_HOUR", "25")),
-            lite_side=_lite_side(env.get("YALDA_LITE_SIDE", "1024")),
+            lite_per_hour=int(env.get("YALDA_LITE_PER_HOUR", "200")),
+            full_per_hour=int(env.get("YALDA_FULL_PER_HOUR", "50")),
+            lite_side=_side("YALDA_LITE_SIDE", env.get("YALDA_LITE_SIDE", "1024")),
+            full_side=_side("YALDA_FULL_SIDE", env.get("YALDA_FULL_SIDE", "1024")),
             memory_arena=_bool(env.get("YALDA_MEMORY_ARENA", "false")),
         )

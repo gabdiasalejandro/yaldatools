@@ -45,9 +45,13 @@ MODELS: dict[str, ModelSpec] = {
 }
 
 
-def lite_filename(side: int) -> str:
-    """The lite ONNX file for an input side: rembg's 1024 file, or a local re-export."""
-    return MODELS["lite"].filename if side == 1024 else f"BiRefNet-lite-{side}.onnx"
+def model_filename(key: str, side: int) -> str:
+    """The ONNX file of a model for an input side: rembg's 1024 file, or a local re-export."""
+    return MODELS[key].filename if side == 1024 else f"BiRefNet-{key}-{side}.onnx"
+
+
+def model_side(key: str, settings: Settings) -> int:
+    return settings.lite_side if key == "lite" else settings.full_side
 
 
 def sha256_of(path: Path) -> str:
@@ -80,9 +84,9 @@ def main(argv: list[str]) -> None:
         if key not in MODELS:
             raise SystemExit(f"Unknown model {key!r}; choose from {', '.join(MODELS)}")
         print(fetch(MODELS[key], settings.models_dir))
-        if key == "lite" and settings.lite_side != 1024:
-            print(f"YALDA_LITE_SIDE={settings.lite_side} uses {lite_filename(settings.lite_side)}: "
-                  "create it with `uv run scripts/export_birefnet.py`.")
+        if (side := model_side(key, settings)) != 1024:
+            print(f"YALDA_{key.upper()}_SIDE={side} uses {model_filename(key, side)}: "
+                  f"create it with `uv run scripts/export_birefnet.py --model {key} --sides {side}`.")
 
 
 if __name__ == "__main__":

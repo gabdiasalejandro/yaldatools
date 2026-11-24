@@ -21,7 +21,7 @@ from .imaging import (
     encode_mask_png,
     fit_within,
 )
-from .models import MODELS, lite_filename
+from .models import MODELS, model_filename, model_side
 from .queue import AdmissionQueue, Busy
 from .ratelimit import GlobalCap, RateLimiter, client_key
 from .segmenter import OnnxSegmenter, Segmenter
@@ -48,11 +48,9 @@ def error(status: int, code: str, headers: dict[str, str] | None = None) -> JSON
 def default_segmenters(settings: Settings) -> dict[str, Segmenter]:
     """Segmenters for the cached model files. Nothing is loaded until the first request."""
     segmenters: dict[str, Segmenter] = {}
-    for key, spec in MODELS.items():
-        filename, side = spec.filename, MODEL_SIDE
-        if key == "lite":
-            filename, side = lite_filename(settings.lite_side), settings.lite_side
-        path = settings.models_dir / filename
+    for key in MODELS:
+        side = model_side(key, settings)
+        path = settings.models_dir / model_filename(key, side)
         if path.exists():
             segmenters[key] = OnnxSegmenter(path, threads=settings.threads, side=side, memory_arena=settings.memory_arena)
     return segmenters
@@ -78,7 +76,7 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
         segmenters.pop("full", None)
     queue = AdmissionQueue(settings.concurrency, settings.max_waiting)
     limiter = RateLimiter(settings.rate_per_minute, settings.rate_per_day)
-    hourly_cap = GlobalCap(settings.global_per_hour)
+    hourly_caps = {"lite": GlobalCap(settings.lite_per_hour), "full": GlobalCap(settings.full_per_hour)}
 
     def unavailable(model: str, wait: float) -> JSONResponse:
         log.info("model=%s status=503 reason=hourly_cap", model)
@@ -110,6 +108,7 @@ def create_app(settings: Settings | None = None, segmenters: Mapping[str, Segmen
         if wait is not None:
             log.info("model=%s status=429", model)
             return error(429, "rate_limited", {"Retry-After": str(max(1, round(wait)))})
+        hourly_cap = hourly_caps[model]
         cap_wait = hourly_cap.wait()
         if cap_wait is not None:
             return unavailable(model, cap_wait)
