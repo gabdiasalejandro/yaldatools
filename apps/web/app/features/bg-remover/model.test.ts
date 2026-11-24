@@ -52,13 +52,13 @@ describe("doubtfulRatio", () => {
 });
 
 describe("difficultyFor", () => {
-  it("starts with a 15 % threshold", () => {
-    expect(DOUBTFUL_THRESHOLD).toBe(0.15);
+  it("uses a 7 % threshold, calibrated with user-judged photos", () => {
+    expect(DOUBTFUL_THRESHOLD).toBe(0.07);
   });
 
   it("is easy with flood fill, medium or hard with the model", () => {
     expect(difficultyFor("floodFill", 0)).toBe("easy");
-    expect(difficultyFor("model", 0.1)).toBe("medium");
-    expect(difficultyFor("model", 0.2)).toBe("hard");
+    expect(difficultyFor("model", 0.05)).toBe("medium");
+    expect(difficultyFor("model", 0.08)).toBe("hard");
   });
 });

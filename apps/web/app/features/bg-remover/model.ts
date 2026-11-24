@@ -3,8 +3,8 @@ import type { TriageRoute } from "./triage";
 
 /** ISNet works on a fixed 1024×1024 input. */
 export const MODEL_SIDE = 1024;
-/** Starting point for "hard" images; to be calibrated with real photos. */
-export const DOUBTFUL_THRESHOLD = 0.15;
+/** Above this the image is "hard": calibrated on 10 user-judged photos, errs toward the server. */
+export const DOUBTFUL_THRESHOLD = 0.07;
 const DOUBT_LOW = 25;
 const DOUBT_HIGH = 230;
 
