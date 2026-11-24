@@ -136,6 +136,7 @@
     "downloadSvg": "Download SVG",
     "copy": "Copy",
     "copied": "Copied to the clipboard!",
+    "renderFailed": "The file could not be generated. Please try again.",
     "copyFailed": "Your browser does not allow copying images. Download the PNG instead.",
     "contrastWarning": "Low contrast: some phones will not be able to scan it. Use dark dots on a light background.",
     "tip": "This QR code is static: it never expires and never touches a server.",

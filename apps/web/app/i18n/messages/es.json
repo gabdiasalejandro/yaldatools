@@ -136,6 +136,7 @@
     "downloadSvg": "Descargar SVG",
     "copy": "Copiar",
     "copied": "¡Copiado al portapapeles!",
+    "renderFailed": "No se pudo generar el archivo. Inténtalo de nuevo.",
     "copyFailed": "Tu navegador no deja copiar imágenes. Descarga el PNG.",
     "contrastWarning": "Poco contraste: algunos móviles no podrán leerlo. Usa puntos oscuros sobre un fondo claro.",
     "tip": "Este QR es estático: nunca caduca y no pasa por ningún servidor.",
