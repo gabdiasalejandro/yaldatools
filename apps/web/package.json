@@ -4,14 +4,16 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build && cp build/client/__spa-fallback.html build/client/404.html",
+    "build": "react-router build && cp build/client/__spa-fallback.html build/client/404.html && rm -rf build/client/models build/client/wallpaper.png",
     "preview": "vite preview --outDir build/client",
     "typecheck": "react-router typegen && tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "fetch-model": "./scripts/fetch-model.sh"
   },
   "dependencies": {
     "@react-router/node": "^8.5.2",
     "isbot": "^5.1.36",
+    "onnxruntime-web": "^1.31.1",
     "qr-code-styling": "^1.9.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
