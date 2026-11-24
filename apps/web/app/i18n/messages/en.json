@@ -12,6 +12,10 @@
       "title": "Remove image background for free, without uploading — YaldaTools",
       "description": "Remove the background of your photos for free, in your browser: the image is never uploaded. Download a PNG with a transparent, white or colored background."
     },
+    "exif": {
+      "title": "Remove EXIF and GPS from photos for free, without uploading — YaldaTools",
+      "description": "See what your photo reveals (camera, date, GPS location) and remove it without losing quality. JPG, PNG and WebP, several at once, in your browser with no sign-up."
+    },
     "support": {
       "title": "Support the project — YaldaTools",
       "description": "YaldaTools is free and ad-free. Donations pay for the server and the time to build more tools."
@@ -271,6 +275,83 @@
     "statusSent": "{kb} KB sent to the server and deleted when done",
     "toolsFirst": "Before using the server, try “Tap to select” and then “Restore” to bring back anything missing: it is usually enough. The server is modest for now and may be slow or busy."
   },
+  "exif": {
+    "windowTitle": "Remove EXIF — YaldaTools",
+    "taskLabel": "Remove EXIF",
+    "dropTitle": "Drop your photos here",
+    "dropHint": "or paste them with Ctrl+V · JPG, PNG or WebP up to 25 MB each",
+    "choose": "Choose photos…",
+    "addMore": "Add photos…",
+    "dropLabel": "Area to drop or choose photos",
+    "working": "Reading and cleaning the photos…",
+    "mascotWorkingAlt": "The rat mascot erasing the photos' data",
+    "mascotIdleAlt": "The rat mascot waiting for your photos",
+    "errors": {
+      "unsupportedType": "That format is not supported. Use JPG, PNG or WebP.",
+      "tooLarge": "The photo is larger than 25 MB.",
+      "unreadable": "The file could not be read. Is it damaged?",
+      "notDecodable": "After cleaning, the image could not be opened, so it is not offered for download."
+    },
+    "results": "Photos",
+    "resultsAnnounce": "{done} of {total} photos ready.",
+    "fields": {
+      "camera": "Camera",
+      "date": "Date",
+      "software": "Software",
+      "author": "Author",
+      "copyright": "Copyright",
+      "location": "Location"
+    },
+    "gpsWarning": "This photo reveals where it was taken.",
+    "gpsNoCoordinates": "It carries GPS location data.",
+    "otherTags": "And {count} more technical details (exposure, lens, size…).",
+    "blocks": "It also carries: {list}.",
+    "blockNames": {
+      "xmp": "XMP",
+      "iptc": "IPTC",
+      "comment": "comment",
+      "text": "text notes",
+      "time": "modification date"
+    },
+    "nothingFound": "No metadata found.",
+    "kept": "Only the color profile and the orientation are kept.",
+    "sizes": "{before} → {after}",
+    "download": "Download",
+    "downloadLabel": "Download {name}",
+    "remove": "Remove",
+    "removeLabel": "Remove {name} from the list",
+    "downloadAll": "Download all (ZIP)",
+    "clearAll": "Clear list",
+    "zipName": "photos-no-exif.zip",
+    "suffix": "-no-exif",
+    "statusLocal": "Processed on your device · 0 bytes sent",
+    "statusFile": "1 file · {size}",
+    "statusFiles": "{count} files · {size}",
+    "tip": "Your photos never leave your device: they are read and cleaned right here, in the browser.",
+    "helpTitle": "Readme.txt",
+    "help": [
+      {
+        "q": "What is EXIF?",
+        "a": "Data that the camera or phone stores inside the photo: model, date and time, settings and often the GPS location. You cannot see it in the picture, but it travels with it when you share it."
+      },
+      {
+        "q": "Why does GPS matter?",
+        "a": "With the coordinates anyone can tell where the photo was taken: your home, your workplace or your children's school. Remove them before posting or selling something online."
+      },
+      {
+        "q": "Is quality lost?",
+        "a": "No: nothing is recompressed. Only the data blocks are removed from the file; the pixels stay identical."
+      },
+      {
+        "q": "Is anything uploaded?",
+        "a": "No. Everything happens in your browser and the status bar shows it: 0 bytes sent."
+      },
+      {
+        "q": "What is kept?",
+        "a": "The color profile, so colors do not change, and the orientation, so the photo does not end up sideways."
+      }
+    ]
+  },
   "support": {
     "windowTitle": "Support.txt",
     "taskLabel": "Support",
@@ -301,7 +382,7 @@
     "privacy": "Local tools send nothing: your files stay on your device. We do not use cookies.",
     "creditsTitle": "Credits",
     "creditWallpaper": "Desktop illustration: No Copyright Girl (ノーコピーライトガール).",
-    "creditLibraries": "Libraries: React, React Router and qr-code-styling (MIT license).",
+    "creditLibraries": "Libraries: React, React Router, qr-code-styling, exifr and fflate (MIT license).",
     "creditFonts": "Fonts: Pixelify Sans and VT323 (Google Fonts, OFL license)."
   },
   "notFound": {

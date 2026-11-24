@@ -21,7 +21,7 @@ export const DESKTOP_APPS: readonly DesktopApp[] = [
   { id: "compress", icon: "img", kind: "tool", soon: true },
   { id: "mergePdf", icon: "pdf", kind: "tool", soon: true },
   { id: "passwords", icon: "lock", kind: "tool", soon: true },
-  { id: "exif", icon: "exif", kind: "tool", soon: true },
+  { id: "exif", icon: "exif", kind: "tool", page: "exif" },
   { id: "readme", icon: "note", kind: "file", page: "readme" },
   { id: "support", icon: "heart", kind: "file", page: "support" },
 ];

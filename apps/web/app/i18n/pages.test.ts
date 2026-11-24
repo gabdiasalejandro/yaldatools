@@ -7,6 +7,8 @@ describe("pathFor", () => {
     expect(pathFor("qr", "en")).toBe("/en/qr-code");
     expect(pathFor("removeBg", "es")).toBe("/es/quitar-fondo");
     expect(pathFor("removeBg", "en")).toBe("/en/remove-background");
+    expect(pathFor("exif", "es")).toBe("/es/quitar-exif");
+    expect(pathFor("exif", "en")).toBe("/en/remove-exif");
     expect(pathFor("support", "es")).toBe("/es/apoyar");
     expect(pathFor("support", "en")).toBe("/en/support");
   });
@@ -28,6 +30,7 @@ describe("alternatePath", () => {
   it("leads to the same tool in the other language", () => {
     expect(alternatePath("/es/qr", "en")).toBe("/en/qr-code");
     expect(alternatePath("/en/remove-background", "es")).toBe("/es/quitar-fondo");
+    expect(alternatePath("/es/quitar-exif", "en")).toBe("/en/remove-exif");
   });
 
   it("falls back to the home page of the target language", () => {
@@ -49,6 +52,8 @@ describe("prerenderPaths", () => {
     const paths = prerenderPaths();
     expect(paths).toContain("/es/qr");
     expect(paths).toContain("/en/qr-code");
+    expect(paths).toContain("/es/quitar-exif");
+    expect(paths).toContain("/en/remove-exif");
     expect(new Set(paths).size).toBe(paths.length);
   });
 });

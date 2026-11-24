@@ -28,6 +28,6 @@ describe("searchApps", () => {
 
 describe("toolStats", () => {
   it("counts tools only, not the readme or support files", () => {
-    expect(toolStats(DESKTOP_APPS)).toEqual({ total: 6, ready: 2 });
+    expect(toolStats(DESKTOP_APPS)).toEqual({ total: 6, ready: 3 });
   });
 });

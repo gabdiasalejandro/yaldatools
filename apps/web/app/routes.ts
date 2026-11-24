@@ -7,6 +7,7 @@ const MODULES: Record<PageId, string> = {
   home: "routes/home.tsx",
   qr: "routes/qr.tsx",
   removeBg: "routes/remove-background.tsx",
+  exif: "routes/remove-exif.tsx",
   support: "routes/support.tsx",
   readme: "routes/readme.tsx",
 };

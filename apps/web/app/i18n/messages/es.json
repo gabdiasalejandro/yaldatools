@@ -12,6 +12,10 @@
       "title": "Quitar fondo de una imagen gratis, sin subirla — YaldaTools",
       "description": "Quita el fondo de tus fotos gratis y en tu navegador: la imagen no se sube a ningún servidor. Descarga en PNG con fondo transparente, blanco o de color."
     },
+    "exif": {
+      "title": "Quitar EXIF y GPS de tus fotos gratis, sin subirlas — YaldaTools",
+      "description": "Mira qué datos esconde tu foto (cámara, fecha, ubicación GPS) y bórralos sin perder calidad. JPG, PNG y WebP, varias a la vez, en tu navegador y sin registro."
+    },
     "support": {
       "title": "Apoyar el proyecto — YaldaTools",
       "description": "YaldaTools es gratis y sin anuncios. Las donaciones pagan el servidor y el tiempo para crear más herramientas."
@@ -271,6 +275,83 @@
     "statusSent": "{kb} KB enviados al servidor y borrados al terminar",
     "toolsFirst": "Antes de usar el servidor, prueba «Tocar para seleccionar» y luego «Restaurar» para recuperar lo que falte: casi siempre basta. El servidor de momento es modesto y puede tardar o estar ocupado."
   },
+  "exif": {
+    "windowTitle": "Quitar EXIF — YaldaTools",
+    "taskLabel": "Quitar EXIF",
+    "dropTitle": "Suelta tus fotos aquí",
+    "dropHint": "o pégalas con Ctrl+V · JPG, PNG o WebP de hasta 25 MB cada una",
+    "choose": "Elegir fotos…",
+    "addMore": "Añadir fotos…",
+    "dropLabel": "Zona para soltar o elegir fotos",
+    "working": "Leyendo y limpiando las fotos…",
+    "mascotWorkingAlt": "La rata mascota borrando los datos de las fotos",
+    "mascotIdleAlt": "La rata mascota esperando tus fotos",
+    "errors": {
+      "unsupportedType": "Ese formato no está soportado. Usa JPG, PNG o WebP.",
+      "tooLarge": "La foto pesa más de 25 MB.",
+      "unreadable": "No se pudo leer el archivo. ¿Está dañado?",
+      "notDecodable": "Tras limpiarla, la imagen no se pudo abrir, así que no se ofrece para descargar."
+    },
+    "results": "Fotos",
+    "resultsAnnounce": "{done} de {total} fotos listas.",
+    "fields": {
+      "camera": "Cámara",
+      "date": "Fecha",
+      "software": "Programa",
+      "author": "Autor",
+      "copyright": "Copyright",
+      "location": "Ubicación"
+    },
+    "gpsWarning": "Esta foto revela dónde se tomó.",
+    "gpsNoCoordinates": "Lleva datos de ubicación GPS.",
+    "otherTags": "Y {count} datos técnicos más (exposición, objetivo, tamaño…).",
+    "blocks": "También lleva: {list}.",
+    "blockNames": {
+      "xmp": "XMP",
+      "iptc": "IPTC",
+      "comment": "comentario",
+      "text": "textos",
+      "time": "fecha de modificación"
+    },
+    "nothingFound": "No se encontraron metadatos.",
+    "kept": "Se conservan el perfil de color y la orientación; nada más.",
+    "sizes": "{before} → {after}",
+    "download": "Descargar",
+    "downloadLabel": "Descargar {name}",
+    "remove": "Quitar",
+    "removeLabel": "Quitar {name} de la lista",
+    "downloadAll": "Descargar todo (ZIP)",
+    "clearAll": "Vaciar lista",
+    "zipName": "fotos-sin-exif.zip",
+    "suffix": "-sin-exif",
+    "statusLocal": "Procesado en tu dispositivo · 0 bytes enviados",
+    "statusFile": "1 archivo · {size}",
+    "statusFiles": "{count} archivos · {size}",
+    "tip": "Tus fotos no salen de tu dispositivo: se leen y se limpian aquí mismo, en el navegador.",
+    "helpTitle": "Léeme.txt",
+    "help": [
+      {
+        "q": "¿Qué es EXIF?",
+        "a": "Son datos que la cámara o el móvil guardan dentro de la foto: modelo, fecha y hora, ajustes y, a menudo, la ubicación GPS. No se ven en la imagen, pero viajan con ella cuando la compartes."
+      },
+      {
+        "q": "¿Por qué importa el GPS?",
+        "a": "Con las coordenadas cualquiera puede saber dónde se tomó la foto: tu casa, tu trabajo o el colegio de tus hijos. Quítalas antes de publicar o vender algo por internet."
+      },
+      {
+        "q": "¿Se pierde calidad?",
+        "a": "No: no se vuelve a comprimir. Solo se borran los bloques de datos del archivo; los píxeles quedan idénticos."
+      },
+      {
+        "q": "¿Se sube algo?",
+        "a": "No. Todo ocurre en tu navegador y la barra de estado lo muestra: 0 bytes enviados."
+      },
+      {
+        "q": "¿Qué se conserva?",
+        "a": "El perfil de color, para que los colores no cambien, y la orientación, para que la foto no salga girada."
+      }
+    ]
+  },
   "support": {
     "windowTitle": "Apoyar.txt",
     "taskLabel": "Apoyar",
@@ -301,7 +382,7 @@
     "privacy": "Las herramientas locales no envían nada: tus archivos se quedan en tu dispositivo. No usamos cookies.",
     "creditsTitle": "Créditos",
     "creditWallpaper": "Ilustración del escritorio: ノーコピーライトガール (No Copyright Girl).",
-    "creditLibraries": "Librerías: React, React Router y qr-code-styling (licencia MIT).",
+    "creditLibraries": "Librerías: React, React Router, qr-code-styling, exifr y fflate (licencia MIT).",
     "creditFonts": "Fuentes: Pixelify Sans y VT323 (Google Fonts, licencia OFL)."
   },
   "notFound": {
