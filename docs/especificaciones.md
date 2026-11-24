@@ -56,7 +56,7 @@ Cada idioma tiene sus propias URLs, así Google indexa las dos versiones por sep
 - **Selector:** el botón ES | EN de la bandeja del taskbar lleva a la misma herramienta en el otro idioma.
 - **SEO:** etiquetas `hreflang` entre pares, y título y descripción propios por página e idioma.
 - **Textos:** un archivo JSON por idioma (`es.json`, `en.json`) con claves por herramienta. Los diálogos de la mascota también se traducen.
-- **Implementación:** el i18n de rutas nativo de Astro, sin librería extra.
+- **Implementación:** rutas propias de React Router (una ruta por página e idioma, generada desde `app/i18n/pages.ts`), sin librería de i18n. Como el sitio es estático, la elección inicial en `/` se hace en el navegador con `navigator.languages`, que es la misma lista que envía `Accept-Language`.
 
 ## Sistema visual: Windows 95 + anime
 
@@ -75,7 +75,7 @@ El estilo es un escritorio retro con ventanas biseladas, iconos pixel art por pr
 - **Iconos:** pixel art de 16×16 escalado a 48 px, con contorno negro para leerse sobre el wallpaper.
 - **Wallpaper:** una ilustración anime en WebP de menos de 100 KB, con `background-size: cover` y color de reserva. Ver [`fondo-de-pantalla.md`](fondo-de-pantalla.md).
 - **Tipografía:** Pixelify Sans para títulos, Tahoma o Verdana del sistema para la interfaz (14–15 px) y VT323 para el reloj.
-- **Base CSS:** `98.css` (MIT) como punto de partida, personalizada con los tokens de arriba.
+- **Base CSS:** CSS propio con los biseles y tokens del mockup. Se descartó `98.css` porque su paquete incluye la fuente MS Sans Serif, y aquí no se usan fuentes de Microsoft.
 - **Legal:** nada de logos, nombres ni fuentes de Microsoft. El botón Inicio dice "Yalda" y lleva un icono propio.
 - **Accesibilidad:** objetivos táctiles de al menos 44 px, contraste AA y `prefers-reduced-motion` para pausar las animaciones.
 - **Móvil:** una sola ventana a pantalla completa, el taskbar abajo y la lista de herramientas como botones grandes.
@@ -118,12 +118,12 @@ Plan propuesto: lanzar con huecos de placeholder o con un paquete CC0, y encarga
 
 ## Arquitectura y despliegue
 
-El sitio es estático (Astro) y se sirve gratis desde Cloudflare Pages en `yaldatools.yaldapika.com`. El VPS solo entra en la fase 3, para los recortes difíciles.
+El sitio es estático (React + TypeScript con React Router en modo framework sobre Vite, con todas las páginas prerenderizadas) y se sirve gratis desde Cloudflare Pages en `yaldatools.yaldapika.com`. El VPS solo entra en la fase 3, para los recortes difíciles.
 
 ```mermaid
 flowchart TB
   subgraph Navegador["Navegador del usuario: lo fácil y lo medio, gratis"]
-    A["Páginas Astro ES/EN"]
+    A["Páginas React prerenderizadas ES/EN"]
     B["Código QR (qr-code-styling)"]
     C["Quitar fondo: triage + modelo ONNX ligero"]
   end
@@ -133,7 +133,7 @@ flowchart TB
     F["Turnstile: captcha"]
   end
   subgraph VPS["VPS propio (fase 3)"]
-    G["Caddy + FastAPI"] --> H["Cola (Redis)"] --> I["Worker BiRefNet (ONNX en CPU)"]
+    G["Caddy"] --> H["FastAPI + cola en memoria"] --> I["BiRefNet (ONNX Runtime en CPU)"]
   end
   Navegador <-- "páginas y modelos ONNX" --> CF
   Navegador <-- "solo imágenes difíciles" --> CF
@@ -144,11 +144,17 @@ Si el VPS está saturado o caído, la web avisa y se queda con el resultado del 
 
 | Pieza | Tecnología | Licencia |
 | --- | --- | --- |
-| Web | Astro + TypeScript, `98.css` | MIT |
+| Web | React + TypeScript, React Router (modo framework, prerender) y Vite; CSS propio | MIT |
 | QR | `qr-code-styling` | MIT |
 | Recorte en el navegador | `onnxruntime-web`, OpenCV.js, ISNet o MODNet | MIT / Apache 2.0 |
-| Recorte en el servidor | FastAPI, ONNX Runtime, BiRefNet | MIT |
+| Recorte en el servidor | FastAPI, ONNX Runtime, BiRefNet (Python, gestionado con uv) | MIT |
 | Infraestructura | Cloudflare Pages + Docker Compose en el VPS | — |
+
+### Backend: por qué FastAPI y sin Redis
+
+- **Python + FastAPI:** BiRefNet y ONNX Runtime tienen su mejor soporte en Python, y el pre y posprocesado de imágenes (NumPy, Pillow) es directo. Un backend en Node o Go obligaría a reescribir ese procesado.
+- **Cola en memoria en vez de Redis:** en un solo VPS, el límite real es la CPU: solo cabe uno o dos recortes a la vez. Una cola `asyncio` con concurrencia limitada y un tope de peticiones en espera (si se llena, responde 503 y la web se queda con el resultado del navegador) basta. Redis solo compensa con varios procesos o máquinas, y añade un servicio más que mantener.
+- **Sin estado:** la imagen vive solo en memoria durante el proceso y no se escribe a disco, lo que cumple la promesa de borrarla al terminar.
 
 ## Donaciones, privacidad, accesibilidad y SEO
 

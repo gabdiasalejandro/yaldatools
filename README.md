@@ -7,7 +7,22 @@ La primera versión incluye:
 - **Quitar fondo:** estima la dificultad de la imagen y elige el método. Lo fácil y lo medio se procesa en el navegador; lo difícil, en un servidor propio.
 - **Código QR:** códigos estáticos que nunca caducan, para URL, WiFi, contacto, WhatsApp y email.
 
-El proyecto está en fase de diseño; todavía no hay código.
+La fase 1 está en marcha: base del sitio, ES/EN, portada y Código QR.
+
+## Desarrollo
+
+La web está en [`apps/web`](apps/web): React + TypeScript con React Router en modo framework sobre Vite. Todas las páginas se prerenderizan a HTML estático.
+
+```sh
+cd apps/web
+pnpm install
+pnpm dev        # servidor de desarrollo
+pnpm test       # tests (Vitest)
+pnpm typecheck
+pnpm build      # sitio estático en build/client
+```
+
+El fondo de pantalla no está en el repo porque su licencia prohíbe redistribuirlo. Para verlo en local, copia el archivo a `apps/web/public/wallpaper.webp`; sin él se usa un color de reserva. Ver [`docs/fondo-de-pantalla.md`](docs/fondo-de-pantalla.md).
 
 ## Documentación
 
