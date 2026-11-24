@@ -22,7 +22,15 @@ pnpm typecheck
 pnpm build      # sitio estático en build/client
 ```
 
-El quitafondos necesita el modelo ISNet, que no está en el repo por su tamaño. `pnpm fetch-model` lo descarga de la release de rembg, lo cuantiza a int8 (hace falta `uv`) y lo deja en `public/models/`, que solo usa el servidor de desarrollo. El build no lo incluye: en producción, `VITE_BG_MODEL_URL` apunta a donde esté alojado.
+El quitafondos necesita los modelos del navegador (ISNet y SlimSAM), que no están en el repo por su tamaño. `pnpm fetch-model` los descarga (ISNet de la release de rembg, cuantizado aquí a int8 con `uv`; SlimSAM de Hugging Face) y los deja en `public/models/`, que solo usa el servidor de desarrollo. El build no lo incluye: en producción, `VITE_BG_MODEL_URL` y `VITE_SAM_MODEL_BASE` apuntan a donde estén alojados.
+
+El botón «Mejorar en el servidor» usa la API de [`apps/api`](apps/api) (FastAPI + BiRefNet). En desarrollo, Vite reenvía `/api` al puerto 8000:
+
+```sh
+cd apps/api
+uv sync
+uv run uvicorn yaldatools_api.app:app --port 8000
+```
 
 Para comparar el modelo del navegador con BiRefNet (el que usará el servidor en la fase 3) sobre tus propias fotos:
 
