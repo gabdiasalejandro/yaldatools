@@ -50,3 +50,12 @@ def test_fit_within_downscales_longest_side():
     assert fit_within(Image.new("RGB", (1000, 4096))).size == (500, 2048)
     small = Image.new("RGB", (100, 50))
     assert fit_within(small) is small
+
+
+def test_fit_within_keeps_at_least_one_pixel_on_very_long_images():
+    from PIL import Image
+
+    from yaldatools_api.imaging import fit_within
+
+    resized = fit_within(Image.new("RGB", (100_000, 1)))
+    assert resized.size == (2048, 1)

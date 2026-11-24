@@ -68,7 +68,15 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 
 1. La primera petición al servidor usa BiRefNet lite: más rápido y con menos memoria.
 2. Si la persona no queda conforme y lo vuelve a pedir, la web usa el modelo completo (`model=full`).
-3. Cada modelo se carga en memoria con su primera petición, nunca al arrancar. El completo necesita unos 3–4 GB de RAM; en un VPS pequeño conviene `YALDA_ENABLE_FULL=false`, y la API responde `400 model_unavailable` a `model=full`.
+3. Cada modelo se carga en memoria con su primera petición, nunca al arrancar. Los modelos se quedan en memoria mientras el proceso vive. Memoria medida (RSS del proceso con una imagen de 3000×2000):
+
+   | Modelos cargados | RAM |
+   | --- | --- |
+   | Solo lite (`YALDA_ENABLE_FULL=false`) | unos 7–7,5 GB |
+   | Solo completo | unos 9 GB |
+   | Lite y completo a la vez (`YALDA_CONCURRENCY=2`) | unos 16 GB |
+
+   El gasto viene de procesar a 1024×1024, no del archivo del modelo; desactivar el *arena* de memoria de ONNX Runtime apenas lo baja (7,4 → 6,9 GB). Un VPS de 8 GB solo da para el lite; para ofrecer el completo hacen falta unos 12 GB con `YALDA_CONCURRENCY=1`. Con el completo desactivado, la API responde `400 model_unavailable` a `model=full`.
 
 ## Privacidad
 

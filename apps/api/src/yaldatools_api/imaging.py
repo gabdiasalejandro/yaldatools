@@ -69,7 +69,9 @@ def fit_within(image: Image.Image, max_side: int = MAX_SIDE) -> Image.Image:
     scale = min(1.0, max_side / max(image.size))
     if scale == 1.0:
         return image
-    return image.resize((round(image.width * scale), round(image.height * scale)), Image.LANCZOS)
+    # Very elongated images would round their short side to 0 px.
+    size = (max(1, round(image.width * scale)), max(1, round(image.height * scale)))
+    return image.resize(size, Image.LANCZOS)
 
 
 def preprocess(image: Image.Image, side: int = MODEL_SIDE) -> np.ndarray:
