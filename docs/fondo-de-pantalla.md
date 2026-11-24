@@ -4,7 +4,7 @@
 
 | Campo | Dato |
 | --- | --- |
-| Obra | Ilustración `kahunntotatakau` |
+| Obra | 「花粉とたたかう人たち」 ("Los que luchan contra el polen"), publicada el 24-02-2020 |
 | Artista | 春 (Haru) / ノーコピーライトガール |
 | Página de la obra | https://fromtheasia.com/illustration/kahunntotatakau |
 | Condiciones de uso | https://fromtheasia.com/usagerules |
@@ -32,9 +32,16 @@ Las condiciones se copiaron de la página de reglas de uso el 24 de noviembre de
 
 ### Pendiente
 
-- [ ] Confirmar en la página de la obra que no tiene el aviso 「フリーイラストではありません」 y que es un personaje original.
+- [x] La página de la obra no lleva el aviso 「フリーイラストではありません」 y el personaje es la chica propia de NCG (lleva "NCG" en los auriculares), no un fanart.
 - [ ] Guardar una captura de las condiciones de uso con fecha, por si cambian más adelante.
-- [ ] Preparar el archivo: al menos 1920×1080 en WebP o AVIF de menos de 150 KB, más un recorte vertical para móvil.
+- [x] Archivo para el mockup: original de 2000×1200 reducido a 1600×960, en WebP calidad 80 (unos 33 KB).
+- [ ] Archivo de producción: WebP o AVIF a 2000×1200 de menos de 80 KB, más un recorte vertical para móvil.
+
+### Notas de uso
+
+- El fondo de la ilustración es gris claro (#eceeee), que se usa también como color de reserva.
+- La chica está en la mitad derecha. En escritorio la imagen se alinea a la izquierda (`left center / cover`) y la ventana de bienvenida va junto a los iconos, para que no la tape. En móvil se encuadra al 78 %.
+- Las pistolas de rayos llevan escritas marcas reales de antialérgicos (Allegra y Claritin). Es parte del chiste de la ilustración y no afecta al uso, pero mejor no recortar ese detalle para usarlo como logo o imagen destacada.
 
 ## Descartado: «Supra» de Seafh (2011)
 
