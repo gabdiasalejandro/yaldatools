@@ -7,4 +7,5 @@
 /build/
 
 # Wallpaper: its license forbids redistribution, keep it local only
-/public/wallpaper.webp
+/public/wallpaper.*
+/public/wallpaper-mobile.*

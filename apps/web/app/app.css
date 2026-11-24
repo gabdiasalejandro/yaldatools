@@ -413,7 +413,9 @@ textarea.field {
 
 @media (max-width: 720px) {
   .desktop {
-    background-position: 78% center;
+    /* Vertical crop centered on the character, generated from the same file. */
+    background-image: url("/wallpaper-mobile.webp");
+    background-position: center top;
     background-attachment: scroll;
   }
 

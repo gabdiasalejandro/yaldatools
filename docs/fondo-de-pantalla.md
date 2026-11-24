@@ -35,12 +35,12 @@ Las condiciones se copiaron de la página de reglas de uso el 24 de noviembre de
 - [x] La página de la obra no lleva el aviso 「フリーイラストではありません」 y el personaje es la chica propia de NCG (lleva "NCG" en los auriculares), no un fanart.
 - [ ] Guardar una captura de las condiciones de uso con fecha, por si cambian más adelante.
 - [x] Archivo para el mockup: original de 2000×1200 reducido a 1600×960, en WebP calidad 80 (unos 33 KB).
-- [ ] Archivo de producción: WebP o AVIF a 2000×1200 de menos de 80 KB, más un recorte vertical para móvil.
+- [x] Archivo de producción: `wallpaper.webp` a 2000×1200 (calidad 82, unos 47 KB) y `wallpaper-mobile.webp`, un recorte vertical de 720×1200 (unos 28 KB). Se generan con `sharp` a partir del PNG original y no se suben al repo.
 
 ### Notas de uso
 
 - El fondo de la ilustración es gris claro (#eceeee), que se usa también como color de reserva.
-- La chica está en la mitad derecha. En escritorio la imagen se alinea a la izquierda (`left center / cover`) y la ventana de bienvenida va junto a los iconos, para que no la tape. En móvil se encuadra al 78 %.
+- La chica está en la mitad derecha. En escritorio la imagen se alinea a la izquierda (`left center / cover`) y la ventana de bienvenida va junto a los iconos, para que no la tape. En móvil se usa el recorte vertical, centrado en el 68,5 % del ancho (x ≈ 1370 px del original), para que entren la cara, los auriculares y la mochila. El 78 % que se estimó antes cortaba la cara.
 - Las pistolas de rayos llevan escritas marcas reales de antialérgicos (Allegra y Claritin). Es parte del chiste de la ilustración y no afecta al uso, pero mejor no recortar ese detalle para usarlo como logo o imagen destacada.
 
 ## Descartado: «Supra» de Seafh (2011)
@@ -51,6 +51,7 @@ Las condiciones se copiaron de la página de reglas de uso el 24 de noviembre de
 
 ## Requisitos técnicos
 
-- El mockup carga el fondo desde `design/mockup/assets/wallpaper.webp`, que está en `.gitignore`. Si no existe, se ve un color de reserva.
+- La web carga `/wallpaper.webp` en escritorio y `/wallpaper-mobile.webp` por debajo de 720 px, desde `apps/web/public/`. Los archivos `wallpaper.*` y `wallpaper-mobile.*` de esa carpeta están en `.gitignore`; sin ellos se ve el color de reserva. El despliegue tendrá que añadirlos al build.
+- El mockup carga el fondo desde `design/mockup/assets/wallpaper.webp`, que también está en `.gitignore`.
 - El personaje debería quedar en la zona izquierda o central, para que no lo tape la ventana de bienvenida, que va a la derecha.
 - Los textos blancos de los iconos del escritorio tienen que leerse encima; si no, se añade un velo oscuro.
