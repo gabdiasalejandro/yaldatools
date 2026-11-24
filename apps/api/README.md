@@ -22,6 +22,10 @@ uv run python -m yaldatools_api.models lite   # solo lite
 | --- | --- | --- |
 | `lite` | `BiRefNet-general-bb_swin_v1_tiny-epoch_232.onnx` | 224 MB |
 | `full` | `BiRefNet-general-epoch_244.onnx` | 973 MB |
+| `lite` a 768 px | `BiRefNet-lite-768.onnx` | 205 MB |
+| `lite` a 512 px | `BiRefNet-lite-512.onnx` | 192 MB |
+
+Los dos últimos no se descargan: se generan en local con el script de exportación (ver [Lite a menor resolución](#lite-a-menor-resolución)).
 
 ## Ejecución
 
@@ -37,6 +41,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 | --- | --- | --- |
 | `YALDA_MODELS_DIR` | `~/.cache/yaldatools/models` | Carpeta de los `.onnx`. Un modelo sin archivo se informa como no disponible. |
 | `YALDA_ENABLE_FULL` | `true` | `false` desactiva el modelo completo (VPS con poca RAM). |
+| `YALDA_LITE_SIDE` | `1024` | Resolución de entrada del lite: `1024` (archivo de rembg), `768` o `512` (exportados en local). Otro valor impide arrancar. |
 | `YALDA_CONCURRENCY` | `1` | Inferencias simultáneas. |
 | `YALDA_MAX_WAITING` | `4` | Peticiones en espera; por encima se responde 503. |
 | `YALDA_THREADS` | `0` | Hilos intra-op de ONNX Runtime; `0` usa el valor por defecto de ONNX Runtime. |
@@ -75,11 +80,38 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 
    | Modelos cargados | RAM |
    | --- | --- |
-   | Solo lite (`YALDA_ENABLE_FULL=false`) | unos 7–7,5 GB |
+   | Solo lite (`YALDA_ENABLE_FULL=false`) | unos 7,5 GB tras la primera petición, 12 GB desde la segunda (a 512 px: 2,2 y 3,4 GB) |
    | Solo completo | unos 9 GB |
    | Lite y completo a la vez (`YALDA_CONCURRENCY=2`) | unos 16 GB |
 
-   El gasto viene de procesar a 1024×1024, no del archivo del modelo; desactivar el *arena* de memoria de ONNX Runtime apenas lo baja (7,4 → 6,9 GB). Un VPS de 8 GB solo da para el lite; para ofrecer el completo hacen falta unos 12 GB con `YALDA_CONCURRENCY=1`. Con el completo desactivado, la API responde `400 model_unavailable` a `model=full`.
+   El gasto viene de procesar a 1024×1024, no del archivo del modelo; desactivar el *arena* de memoria de ONNX Runtime apenas baja el pico (7,4 → 6,9 GB a 1024), pero en una prueba aparte (fuera de la API, que aún no ofrece esa opción) evitó el salto de la segunda petición y devolvió la memoria entre peticiones: unos 0,5–1 GB en reposo, con picos de 6,9 GB a 1024, 4 GB a 768 y 2,1 GB a 512. Un VPS de 8 GB solo da para el lite a menor resolución (`YALDA_LITE_SIDE`); para ofrecer el completo hacen falta unos 12 GB con `YALDA_CONCURRENCY=1`. Con el completo desactivado, la API responde `400 model_unavailable` a `model=full`.
+
+## Lite a menor resolución
+
+El archivo lite de rembg tiene la entrada fija en 1×3×1024×1024. Los mismos pesos, exportados a 768 o 512 px, gastan mucha menos memoria y tardan menos, con una máscara casi igual.
+
+Medido con la API real (`YALDA_ENABLE_FULL=false`), una JPEG de 3000×2000, CPU de 16 hilos. La RSS sube en la primera petición, sube otra vez en la segunda y luego se mantiene (seis peticiones seguidas):
+
+| `YALDA_LITE_SIDE` | RSS tras la 1.ª petición | RSS estable (2.ª en adelante) | Segundos (1.ª / siguientes) | Diferencia media de máscara frente a 1024 |
+| --- | --- | --- | --- | --- |
+| `1024` | 7,5 GB | 12,1 GB | 6,1 / 4,8–5,9 | — |
+| `768` | 4,2 GB | 6,9 GB | 3,8 / 2,8–3,0 | 0,23 / 255 |
+| `512` | 2,2 GB | 3,4 GB | 2,1–2,4 / 1,2–1,4 | 0,67 / 255 |
+
+La diferencia de máscara se midió con `scripts/compare_models.py` sobre cuatro imágenes sintéticas (retrato, taza, planta); los píxeles que cambian de lado al umbral del 50 % fueron menos del 0,06 % a 768 y menos del 0,6 % a 512. A 512 se pierde algo de detalle en bordes finos (hojas, pelo); la zona dudosa sube unos puntos.
+
+Para usarlo:
+
+```sh
+uv run scripts/export_birefnet.py          # crea BiRefNet-lite-768.onnx y BiRefNet-lite-512.onnx en ~/.cache/yaldatools/models
+YALDA_LITE_SIDE=512 uv run uvicorn yaldatools_api.app:app --port 8000
+```
+
+- El script descarga una vez PyTorch para CPU (~1 GB) y los pesos oficiales (`BiRefNet-general-bb_swin_v1_tiny-epoch_232.pth`, 178 MB, con verificación sha256), el mismo punto de control que el archivo de rembg. Código y pesos: [ZhengPeng7/BiRefNet](https://github.com/ZhengPeng7/BiRefNet), licencia MIT.
+- `deform_conv2d` de torchvision no se exporta a ONNX por sí solo; el script lo registra con `deform_conv2d_onnx_exporter` (MIT), como el cuaderno oficial `tutorials/BiRefNet_pth2onnx.ipynb`, y compara la salida ONNX con PyTorch antes de guardar.
+- Exportado a 1024 con el mismo script, el resultado coincide con el archivo de rembg (diferencia media de máscara de 0,01–0,03 / 255).
+- Si el archivo del tamaño elegido no existe, `/api/health` informa el lite como no disponible.
+- `--sides` y `--out` permiten otros tamaños (múltiplos de 32) u otra carpeta, pero la API solo acepta 1024, 768 y 512.
 
 ## Límite de peticiones
 
@@ -91,7 +123,7 @@ En producción va detrás de Caddy en el mismo origen que la web, así que no ha
 
 ## Servidor compartido
 
-Con solo el lite, el proceso ocupa unos 7 GB y no los libera. En un VPS de 8 GB con otras aplicaciones, eso las deja sin memoria. Mientras no se reduzca ese consumo, conviene limitar la API para que el sistema la detenga a ella y no a las demás aplicaciones (por ejemplo `MemoryMax=` en systemd o `mem_limit` en Docker), con `YALDA_ENABLE_FULL=false` y `YALDA_CONCURRENCY=1`.
+Con solo el lite a 1024, el proceso llega a unos 12 GB tras la segunda petición y no los libera. En un VPS de 8 GB con otras aplicaciones, eso no cabe: usa `YALDA_LITE_SIDE=512` (unos 3,4 GB estables) o, si sobra memoria, `768` (unos 7 GB). En cualquier caso, conviene limitar la API para que el sistema la detenga a ella y no a las demás aplicaciones (por ejemplo `MemoryMax=` en systemd o `mem_limit` en Docker), con `YALDA_ENABLE_FULL=false` y `YALDA_CONCURRENCY=1`.
 
 ## Privacidad
 

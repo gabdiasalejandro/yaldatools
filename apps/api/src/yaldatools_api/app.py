@@ -14,13 +14,14 @@ from .config import Settings
 from .imaging import (
     ACCEPTED_CONTENT_TYPES,
     MAX_UPLOAD_BYTES,
+    MODEL_SIDE,
     InvalidImage,
     UnsupportedFormat,
     decode,
     encode_mask_png,
     fit_within,
 )
-from .models import MODELS
+from .models import MODELS, lite_filename
 from .queue import AdmissionQueue, Busy
 from .ratelimit import RateLimiter, client_key
 from .segmenter import OnnxSegmenter, Segmenter
@@ -48,9 +49,12 @@ def default_segmenters(settings: Settings) -> dict[str, Segmenter]:
     """Segmenters for the cached model files. Nothing is loaded until the first request."""
     segmenters: dict[str, Segmenter] = {}
     for key, spec in MODELS.items():
-        path = settings.models_dir / spec.filename
+        filename, side = spec.filename, MODEL_SIDE
+        if key == "lite":
+            filename, side = lite_filename(settings.lite_side), settings.lite_side
+        path = settings.models_dir / filename
         if path.exists():
-            segmenters[key] = OnnxSegmenter(path, threads=settings.threads)
+            segmenters[key] = OnnxSegmenter(path, threads=settings.threads, side=side)
     return segmenters
 
 

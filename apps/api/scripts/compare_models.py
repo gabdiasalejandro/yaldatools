@@ -11,6 +11,8 @@ uses to call an image hard). Models are downloaded once to a local cache.
 Usage:
     uv run apps/api/scripts/compare_models.py --images ~/fotos --out /tmp/compare
     uv run apps/api/scripts/compare_models.py --images ~/fotos --out /tmp/compare --models isnet-q8,birefnet-lite
+    uv run apps/api/scripts/compare_models.py --images ~/fotos --out /tmp/compare \
+        --models birefnet-lite,birefnet-lite-768,birefnet-lite-512
 """
 
 from __future__ import annotations
@@ -45,7 +47,7 @@ class ModelSpec:
     description: str
     mean: tuple[float, float, float]
     std: tuple[float, float, float]
-    source: str  # local path inside the repo, or a URL to download
+    source: str  # local path inside the repo, a URL to download, or "cache:<file>" already in the cache
     side: int = 1024
 
 
@@ -71,10 +73,33 @@ MODELS = {
         IMAGENET_STD,
         f"{REMBG}/BiRefNet-general-epoch_244.onnx",
     ),
+    # Re-exports of the lite weights at smaller inputs (scripts/export_birefnet.py).
+    "birefnet-lite-768": ModelSpec(
+        "birefnet-lite-768",
+        "BiRefNet general lite (Swin tiny), fp32, 768 px input",
+        IMAGENET_MEAN,
+        IMAGENET_STD,
+        "cache:BiRefNet-lite-768.onnx",
+        side=768,
+    ),
+    "birefnet-lite-512": ModelSpec(
+        "birefnet-lite-512",
+        "BiRefNet general lite (Swin tiny), fp32, 512 px input",
+        IMAGENET_MEAN,
+        IMAGENET_STD,
+        "cache:BiRefNet-lite-512.onnx",
+        side=512,
+    ),
 }
+DEFAULT_MODELS = ("isnet-q8", "birefnet-lite", "birefnet")
 
 
 def model_path(spec: ModelSpec) -> Path:
+    if spec.source.startswith("cache:"):
+        path = CACHE / spec.source.removeprefix("cache:")
+        if not path.exists():
+            raise SystemExit(f"{path} is missing: run `uv run apps/api/scripts/export_birefnet.py` first.")
+        return path
     if not spec.source.startswith("http"):
         path = REPO / spec.source
         if not path.exists():
@@ -156,7 +181,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--images", type=Path, required=True, help="folder with JPG, PNG or WebP photos")
     parser.add_argument("--out", type=Path, required=True, help="folder for the report (created if missing)")
-    parser.add_argument("--models", default=",".join(MODELS), help=f"comma-separated, from: {', '.join(MODELS)}")
+    parser.add_argument(
+        "--models", default=",".join(DEFAULT_MODELS), help=f"comma-separated, from: {', '.join(MODELS)}"
+    )
     args = parser.parse_args()
 
     names = [name.strip() for name in args.models.split(",") if name.strip()]
